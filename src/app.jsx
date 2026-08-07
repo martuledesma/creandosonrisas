@@ -277,19 +277,18 @@ function App() {
                     <h2 id="pillars-title">Nuestros proyectos</h2>
                   </div>
                   <div className="home-pillars-grid">
-                    {pilares.slice(0, 3).map((pillar, index) => (
-                      <Link className="home-pillar-card" to="/proyectos" key={pillar.id || index}>
+                    {pilares.slice(0, 3).map((pillar, index) => {
+                      const pillarNames = ['Acompañamiento escolar', 'Merendero', 'Recreación'];
+                      return (
+                      <Link className={`home-pillar-card home-pillar-tone-${index + 1}`} to="/proyectos" key={pillar.id || index}>
                         <div className="home-pillar-image">
-                          {pillar.imagen && <img src={pillar.imagen} alt={pillar.titulo} loading="lazy" decoding="async" />}
-                          <span>0{index + 1}</span>
+                          {pillar.imagen && <img src={pillar.imagen} alt={pillarNames[index]} loading="lazy" decoding="async" />}
                         </div>
                         <div className="home-pillar-content">
-                          <h3>{pillar.titulo}</h3>
-                          <p>{pillar.desc}</p>
-                          <strong>Ver proyecto →</strong>
+                          <h3>{pillarNames[index]}</h3>
                         </div>
                       </Link>
-                    ))}
+                    )})}
                   </div>
                 </section>
 
