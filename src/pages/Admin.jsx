@@ -13,8 +13,6 @@ import {
   saveSumateContent,
   subscribeProyectosContent,
   saveProyectosContent,
-  subscribeCursosContent,
-  saveCursosContent,
 } from '../firebase';
 
 const statusOptions = ['Activo', 'Últimos cupos', 'Finalizado'];
@@ -32,7 +30,6 @@ const Admin = ({ user, content, loading, onSave }) => {
   const [nosotrosContent, setNosotrosContent] = useState({});
   const [sumateContent, setSumateContent] = useState({});
   const [proyectosContent, setProyectosContent] = useState({});
-  const [cursosContent, setCursosContent] = useState({});
 
   useEffect(() => {
     if (content) {
@@ -62,18 +59,10 @@ const Admin = ({ user, content, loading, onSave }) => {
       (error) => console.error('Proyectos content error:', error)
     );
 
-    const unsubscribeCursos = subscribeCursosContent(
-      (snapshot) => {
-        setCursosContent(snapshot.exists() ? snapshot.data() : { items: [] });
-      },
-      (error) => console.error('Cursos content error:', error)
-    );
-
     return () => {
       unsubscribeNosotros();
       unsubscribeSumate();
       unsubscribeProyectos();
-      unsubscribeCursos();
     };
   }, []);
 
@@ -108,8 +97,6 @@ const Admin = ({ user, content, loading, onSave }) => {
       setSumateContent((prev) => ({ ...prev, [field]: value }));
     } else if (page === 'proyectos') {
       setProyectosContent((prev) => ({ ...prev, [field]: value }));
-    } else if (page === 'cursos') {
-      setCursosContent((prev) => ({ ...prev, [field]: value }));
     }
   };
 
@@ -164,29 +151,6 @@ const Admin = ({ user, content, loading, onSave }) => {
         idx === index ? { ...item, [field]: value } : item
       ),
     }));
-  };
-
-  const updateCurso = (index, field, value) => {
-    setCursosContent((prev) => ({
-      ...prev,
-      items: (prev.items || []).map((item, idx) =>
-        idx === index ? { ...item, [field]: value } : item
-      ),
-    }));
-  };
-
-  const getCursosGalleryImages = (content = cursosContent) => (
-    Array.from({ length: 3 }, (_, index) => (
-      content.galleryImages?.[index] || { id: `gallery-${index + 1}`, url: '', alt: '' }
-    ))
-  );
-
-  const updateCursosGalleryImage = (index, field, value) => {
-    setCursosContent((prev) => {
-      const galleryImages = getCursosGalleryImages(prev);
-      galleryImages[index] = { ...galleryImages[index], [field]: value };
-      return { ...prev, galleryImages };
-    });
   };
 
   const getItemKey = (section, item, index) => `${section}-${item?.id || index}`;
@@ -333,18 +297,6 @@ const Admin = ({ user, content, loading, onSave }) => {
     openItem('proyectos-items', newProject);
   };
 
-  const addNewCurso = () => {
-    const newCourse = { id: Date.now(), nombre: '', descripcion: '', imagen: '', fecha: '', lugar: '', estado: 'Activo', link: '' };
-    setCursosContent((prev) => ({
-      ...prev,
-      items: [
-        newCourse,
-        ...(prev.items || []),
-      ],
-    }));
-    openItem('cursos-items', newCourse);
-  };
-
   const deleteCard = async (index) => {
     const cards = (formState.cards || []).filter((_, idx) => idx !== index);
     await saveSiteContent({ cards });
@@ -375,12 +327,6 @@ const Admin = ({ user, content, loading, onSave }) => {
     setProyectosContent((prev) => ({ ...prev, items }));
   };
 
-  const deleteCurso = async (index) => {
-    const items = (cursosContent.items || []).filter((_, idx) => idx !== index);
-    await saveCursosContent({ items });
-    setCursosContent((prev) => ({ ...prev, items }));
-  };
-
   const handleSave = async () => {
     setError('');
     setSuccessMessage('');
@@ -394,8 +340,6 @@ const Admin = ({ user, content, loading, onSave }) => {
         await saveSumateContent(sumateContent);
       } else if (activeTab === 'proyectos') {
         await saveProyectosContent(proyectosContent);
-      } else if (activeTab === 'cursos') {
-        await saveCursosContent(cursosContent);
       }
       setSuccessMessage('Se ha guardado correctamente.');
     } catch (err) {
@@ -906,205 +850,6 @@ const Admin = ({ user, content, loading, onSave }) => {
           </>
         );
 
-      case 'cursos':
-        return (
-          <>
-            <div className="editor-block">
-              <h3>Contenido de la página "Cursos y Talleres"</h3>
-              <label>
-                Texto pequeño de portada
-                <input
-                  type="text"
-                  value={cursosContent?.heroEyebrow || ''}
-                  onChange={(e) => updateField('heroEyebrow', e.target.value, 'cursos')}
-                />
-              </label>
-              <label>
-                Título principal
-                <input
-                  type="text"
-                  value={cursosContent?.title || ''}
-                  onChange={(e) => updateField('title', e.target.value, 'cursos')}
-                />
-              </label>
-              {renderHeroImageField(cursosContent, 'cursos')}
-              <label>
-                Subtítulo de portada
-                <input
-                  type="text"
-                  value={cursosContent?.heroSubtitle || ''}
-                  onChange={(e) => updateField('heroSubtitle', e.target.value, 'cursos')}
-                />
-              </label>
-              <label>
-                Texto pequeño de la tarjeta de portada
-                <input
-                  type="text"
-                  value={cursosContent?.heroCardEyebrow || ''}
-                  onChange={(e) => updateField('heroCardEyebrow', e.target.value, 'cursos')}
-                />
-              </label>
-              <label>
-                Texto principal de la tarjeta de portada
-                <textarea
-                  rows="3"
-                  value={cursosContent?.heroCardText || ''}
-                  onChange={(e) => updateField('heroCardText', e.target.value, 'cursos')}
-                />
-              </label>
-            </div>
-
-            <div className="editor-block">
-              <h3>Listado de cursos y talleres</h3>
-              <label>
-                Texto pequeño sobre el carrusel
-                <input
-                  type="text"
-                  value={cursosContent?.carouselEyebrow || ''}
-                  onChange={(e) => updateField('carouselEyebrow', e.target.value, 'cursos')}
-                />
-              </label>
-              <label>
-                Título del carrusel
-                <input
-                  type="text"
-                  value={cursosContent?.carouselTitle || ''}
-                  onChange={(e) => updateField('carouselTitle', e.target.value, 'cursos')}
-                />
-              </label>
-              <label>
-                Texto del botón de inscripción
-                <input
-                  type="text"
-                  value={cursosContent?.enrollmentLabel || ''}
-                  onChange={(e) => updateField('enrollmentLabel', e.target.value, 'cursos')}
-                />
-              </label>
-              <button className="btn-nav" onClick={addNewCurso}>
-                Agregar
-              </button>
-              {cursosContent?.items?.map((item, index) => renderEditableItem({
-                section: 'cursos-items',
-                item,
-                index,
-                title: item.nombre || `Curso/Taller ${index + 1}`,
-                summary: [item.estado, item.fecha, item.lugar].filter(Boolean).join(' · ') || 'Sin fecha ni lugar cargados',
-                onSave: () => saveCursosContent({ items: cursosContent.items || [] }),
-                onDelete: () => deleteCurso(index),
-                children: (
-                  <>
-                  <label>
-                    Nombre
-                    <input
-                      type="text"
-                      value={item.nombre || ''}
-                      onChange={(e) => updateCurso(index, 'nombre', e.target.value)}
-                    />
-                  </label>
-                  <label>
-                    Descripción
-                    <textarea
-                      value={item.descripcion || ''}
-                      onChange={(e) => updateCurso(index, 'descripcion', e.target.value)}
-                    />
-                  </label>
-                  <label>
-                    Fecha o frecuencia
-                    <input
-                      type="text"
-                      placeholder="Sábados, Próximamente, 12/06..."
-                      value={item.fecha || ''}
-                      onChange={(e) => updateCurso(index, 'fecha', e.target.value)}
-                    />
-                  </label>
-                  <label>
-                    Lugar
-                    <input
-                      type="text"
-                      value={item.lugar || ''}
-                      onChange={(e) => updateCurso(index, 'lugar', e.target.value)}
-                    />
-                  </label>
-                  <label>
-                    Estado
-                    <select
-                      value={item.estado || ''}
-                      onChange={(e) => updateCurso(index, 'estado', e.target.value)}
-                    >
-                      <option value="">Seleccionar estado</option>
-                      {statusOptions.map((status) => (
-                        <option key={status} value={status}>
-                          {status}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                  <label>
-                    Link de inscripción
-                    <input
-                      type="url"
-                      placeholder="https://..."
-                      value={item.link || ''}
-                      onChange={(e) => updateCurso(index, 'link', e.target.value)}
-                    />
-                  </label>
-                  <ImageUploadField
-                    value={item.imagen || ''}
-                    onChange={(value) => updateCurso(index, 'imagen', value)}
-                    previewAlt="Preview curso"
-                  />
-                  </>
-                ),
-              }))}
-            </div>
-
-            <div className="editor-block">
-              <h3>Carrusel de fotos</h3>
-              <p className="admin-note">Podés cargar hasta tres imágenes para mostrar debajo de los cursos.</p>
-              <label>
-                Texto pequeño sobre las fotos
-                <input
-                  type="text"
-                  value={cursosContent?.galleryEyebrow || ''}
-                  onChange={(e) => updateField('galleryEyebrow', e.target.value, 'cursos')}
-                />
-              </label>
-              <label>
-                Título del carrusel de fotos
-                <input
-                  type="text"
-                  value={cursosContent?.galleryTitle || ''}
-                  onChange={(e) => updateField('galleryTitle', e.target.value, 'cursos')}
-                />
-              </label>
-              {getCursosGalleryImages().map((image, index) => (
-                <div className="editor-card is-open" key={image.id || index}>
-                  <div className="editor-item-header">
-                    <div className="editor-item-title">
-                      <h4>Imagen {index + 1}</h4>
-                    </div>
-                  </div>
-                  <div className="editor-item-body">
-                    <ImageUploadField
-                      value={image.url || ''}
-                      onChange={(value) => updateCursosGalleryImage(index, 'url', value)}
-                      previewAlt={`Preview galería ${index + 1}`}
-                    />
-                    <label>
-                      Descripción accesible de la imagen
-                      <input
-                        type="text"
-                        value={image.alt || ''}
-                        onChange={(e) => updateCursosGalleryImage(index, 'alt', e.target.value)}
-                      />
-                    </label>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </>
-        );
-
       default:
         return null;
     }
@@ -1146,12 +891,6 @@ const Admin = ({ user, content, loading, onSave }) => {
           onClick={() => setActiveTab('proyectos')}
         >
           Proyectos
-        </button>
-        <button
-          className={`tab-button ${activeTab === 'cursos' ? 'active' : ''}`}
-          onClick={() => setActiveTab('cursos')}
-        >
-          Cursos
         </button>
       </div>
 

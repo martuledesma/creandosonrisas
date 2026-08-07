@@ -5,22 +5,22 @@ import useHeroImageReady from '../hooks/useHeroImageReady';
 const defaultProjects = [
   {
     id: 1,
-    titulo: 'Enfocados',
-    descripcion: 'Atención visual integral y gratuita, con acceso a anteojos recetados a costo social.',
+    titulo: 'Merendero comunitario',
+    descripcion: 'Meriendas y almuerzos compartidos con niños, niñas y familias de la comunidad.',
     imagen: '',
     estado: 'Activo',
   },
   {
     id: 2,
-    titulo: 'Escuela de oficios',
-    descripcion: 'Cursos y talleres de oficios activos durante todo el año para abrir oportunidades concretas.',
+    titulo: 'Apoyo escolar',
+    descripcion: 'Acompañamiento educativo para fortalecer el aprendizaje y las trayectorias escolares.',
     imagen: '',
     estado: 'Activo',
   },
   {
     id: 3,
-    titulo: 'Jornadas de bienestar animal',
-    descripcion: 'Vacunación y desparasitación para mascotas, acercando cuidado preventivo a la comunidad.',
+    titulo: 'Recreación y comunidad',
+    descripcion: 'Pintura, juegos, deportes, festejos especiales y acciones solidarias.',
     imagen: '',
     estado: 'Activo',
   },
@@ -28,20 +28,20 @@ const defaultProjects = [
 
 const projectAreas = [
   {
-    title: 'Educación e infraestructura',
-    text: 'Fichas médicas escolares, escuelas refaccionadas y acompañamiento a instituciones educativas.',
+    title: 'Educación',
+    text: 'Apoyo escolar y acompañamiento para niños, niñas y adolescentes.',
   },
   {
-    title: 'Oficios y oportunidades',
-    text: 'Escuela de oficios y cursos durante todo el año para fortalecer la autonomía de jóvenes y adultos.',
+    title: 'Alimentación',
+    text: 'Meriendas y almuerzos que también crean un espacio de encuentro y contención.',
   },
   {
-    title: 'Salud visual',
-    text: 'Proyecto Enfocados: atención visual integral y gratuita, más anteojos recetados a costo social.',
+    title: 'Salud y acompañamiento',
+    text: 'Acciones que acercan cuidado y acompañamiento a las familias de la comunidad.',
   },
   {
-    title: 'Bienestar animal',
-    text: 'Jornadas de vacunación y desparasitación para mascotas en el territorio.',
+    title: 'Recreación',
+    text: 'Pintura, juegos, deportes y festejos de fechas especiales para compartir y aprender.',
   },
 ];
 
@@ -195,7 +195,7 @@ const Proyectos = () => {
 
       <section className="page-intro">
         <p>
-          {content.introText || 'Somos una fundación que transforma necesidades concretas en proyectos: cursos de oficios, jornadas de vacunación y desparasitación para mascotas, atención visual gratuita y acompañamiento a escuelas.'}
+          {content.introText || 'Transformamos necesidades concretas en oportunidades mediante educación, alimentación, acompañamiento y acciones comunitarias.'}
         </p>
       </section>
 

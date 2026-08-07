@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../Assets/logo.png';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,7 +21,8 @@ const Navbar = () => {
         <nav className={`navbar ${hasScrolled ? 'navbar-scrolled' : ''}`}>
             <div className="logo-container">
                 <Link to="/" onClick={closeMenu}>
-                    <img src={logo} alt="Logo Fundación" className="logo-img" />
+                    <span className="brand-mark" aria-hidden="true">☺</span>
+                    <span className="brand-name">Creando Sonrisas</span>
                 </Link>
             </div>
 
@@ -42,7 +42,6 @@ const Navbar = () => {
             <ul id="main-navigation" className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
                 <li><Link to="/nosotros" onClick={closeMenu}>Nosotros</Link></li>
                 <li><Link to="/proyectos" onClick={closeMenu}>Proyectos</Link></li>
-                <li><Link to="/cursos" onClick={closeMenu}>Cursos</Link></li>
                 <li><Link to="/sumate" onClick={closeMenu}>Sumate</Link></li>
                 <li><Link to="/admin" className="btn-nav" onClick={closeMenu}>Admin</Link></li>
             </ul>

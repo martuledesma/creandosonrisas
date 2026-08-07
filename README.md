@@ -1,6 +1,8 @@
-# Fundación Construir Juntos
+# Fundación Creando Sonrisas
 
-Sitio web de la Fundación Construir Juntos en Yerba Buena, Tucumán.
+Sitio web de la Fundación Creando Sonrisas en Tucumán.
+
+Incluye Inicio con próximos eventos destacados, Nosotros, Proyectos, Sumate y un panel de administración. Los espacios de imágenes comienzan vacíos para que la fundación cargue sus fotografías desde el administrador.
 
 ## Funcionalidades
 

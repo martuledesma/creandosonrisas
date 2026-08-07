@@ -6,7 +6,6 @@ const Sumate = () => {
   const [content, setContent] = useState({});
   const [contentLoaded, setContentLoaded] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
-  const [isFormOpen, setIsFormOpen] = useState(false);
   const editableCarouselImages = (content.carouselImages || [])
     .filter((image) => image?.url)
     .map((image, index) => ({
@@ -48,24 +47,6 @@ const Sumate = () => {
     }
   }, [activeSlide, visibleCarouselImages.length]);
 
-  useEffect(() => {
-    if (!isFormOpen) {
-      return undefined;
-    }
-
-    const handleEscape = (event) => {
-      if (event.key === 'Escape') {
-        setIsFormOpen(false);
-      }
-    };
-
-    document.addEventListener('keydown', handleEscape);
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-    };
-  }, [isFormOpen]);
-
   const heroImage = content.heroImage || visibleCarouselImages[0]?.src || '';
   const heroReady = useHeroImageReady(heroImage, !contentLoaded);
 
@@ -90,7 +71,7 @@ const Sumate = () => {
             <span className="page-eyebrow">Sumate</span>
             <h1>{content.title || 'Sumate a la Fundación'}</h1>
             <p>
-              {content.heroSubtitle || 'Tu tiempo, tu ayuda o tu aporte pueden transformar una realidad cercana.'}
+              {content.heroSubtitle || 'Tu tiempo, una donación o la difusión de nuestro trabajo pueden crear nuevas oportunidades.'}
             </p>
           </div>
           <div className="page-hero-card">
@@ -108,9 +89,9 @@ const Sumate = () => {
           {content.content ? (
             <p className="sumate-highlight-text">{content.content}</p>
           ) : (
-            <p className="sumate-highlight-text" aria-label="Tu ayuda es fundamental para seguir transformando Yerba Buena.">
+            <p className="sumate-highlight-text" aria-label="Tu ayuda es fundamental para seguir transformando Tucumán.">
               <span className="sumate-highlight-line sumate-highlight-blue">
-                Tu ayuda es fundamental para seguir transformando Yerba Buena.
+                Tu ayuda es fundamental para seguir transformando Tucumán.
               </span>
             </p>
           )}
@@ -168,45 +149,21 @@ const Sumate = () => {
           </h2>
           <div className="sumate-participation-tags" aria-label="Formas de participar">
             <span>Voluntariado</span>
-            <span>Donaciones</span>
+            <span>Donaciones · Alias: CREANDOSONRISASTUC</span>
             <span>Difusión</span>
           </div>
           <p>Completá tus datos y nos pondremos en contacto para coordinar cómo podés sumarte.</p>
-          <button type="button" className="btn-nav sumate-form-button" onClick={() => setIsFormOpen(true)}>
-            Completar formulario
-          </button>
+          <a
+            className="btn-nav sumate-form-button"
+            href="https://www.instagram.com/creandosonrisas.tuc/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Contactar por Instagram
+          </a>
         </div>
       </section>
 
-      {isFormOpen && (
-        <div className="form-modal" role="dialog" aria-modal="true" aria-labelledby="sumate-form-title">
-          <div className="form-modal-backdrop" onClick={() => setIsFormOpen(false)} />
-          <div className="form-modal-content">
-            <button
-              type="button"
-              className="form-modal-close"
-              onClick={() => setIsFormOpen(false)}
-              aria-label="Cerrar formulario"
-            >
-              ×
-            </button>
-            <h2 id="sumate-form-title">Formulario de Inscripción</h2>
-            <div className="form-container modal-form-container">
-              <iframe
-                src="https://docs.google.com/forms/d/e/1FAIpQLSdAJZBc6HjZr7HJBFH4cGfKiOHR00rD_cVbP07BwireSUuyDA/viewform?embedded=true"
-                width="640"
-                height="1211"
-                frameBorder="0"
-                marginHeight="0"
-                marginWidth="0"
-                title="Formulario de inscripción Fundación Construir Juntos"
-              >
-                Cargando…
-              </iframe>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

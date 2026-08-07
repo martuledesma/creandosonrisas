@@ -9,7 +9,6 @@ import useHeroImageReady from './hooks/useHeroImageReady';
 import Nosotros from './pages/Nosotros';
 import Sumate from './pages/Sumate';
 import Proyectos from './pages/Proyectos';
-import Cursos from './pages/Cursos';
 
 import {
   onAuthStateChangedListener,
@@ -18,33 +17,30 @@ import {
 } from './firebase';
 
 const defaultContent = {
-  heroTitle: 'Fundación Construir Juntos',
-  heroSubtitle: 'Transformando realidades en Yerba Buena, Tucumán',
+  heroTitle: 'Fundación Creando Sonrisas',
+  heroSubtitle: 'Jóvenes tucumanos transformando realidades con educación, contención y trabajo solidario.',
   cards: [
     {
       id: 1,
-      titulo: 'Campaña Útiles Escolares',
-      desc: 'Entrega de kits para el inicio de clases en Yerba Buena.',
+      titulo: 'Apoyo escolar',
+      desc: 'Acompañamiento educativo para niños y niñas de nuestra comunidad.',
     },
     {
       id: 2,
-      titulo: 'Colecta Tucumán',
-      desc: 'Recaudación de alimentos y ropa para familias.',
+      titulo: 'Merendero comunitario',
+      desc: 'Meriendas, almuerzos y un espacio de encuentro para las familias.',
     },
     {
       id: 3,
-      titulo: 'Talleres Comunitarios',
-      desc: 'Espacios de aprendizaje y contención en Lola Mora y Brasil.',
+      titulo: 'Actividades recreativas',
+      desc: 'Pintura, juegos, deportes y festejos de fechas especiales.',
     },
   ],
   events: [
-    { id: 101, fecha: '2026-03-25', titulo: 'Taller de Reciclado', lugar: 'Sede Fundación' },
-    { id: 102, fecha: '2026-04-10', titulo: 'Colecta Yerba Buena', lugar: 'Plaza Principal' },
-    { id: 103, fecha: '2026-04-18', titulo: 'Huerta Orgánica', lugar: 'Vivero Municipal' },
-    { id: 104, fecha: '2026-04-28', titulo: 'Charla Comunitaria', lugar: 'Centro Vecinal' },
+    { id: 101, fecha: '2026-08-15', titulo: 'Próxima actividad', lugar: 'Lugar a confirmar' },
   ],
-  contactAddress: 'Lola Mora y Brasil, Yerba Buena',
-  footerText: '© 2026 Fundación Construir Juntos - Yerba Buena, Tucumán',
+  contactAddress: 'San Miguel de Tucumán, Tucumán',
+  footerText: '© 2026 Fundación Creando Sonrisas - Tucumán, Argentina',
 };
 
 const parseLocalDate = (dateString) => {
@@ -70,7 +66,8 @@ const WhatsAppIcon = () => (
   </svg>
 );
 
-const whatsappHref = 'https://wa.me/5493816384353';
+const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '5493816384353';
+const whatsappHref = `https://wa.me/${whatsappNumber}`;
 
 const WhatsAppButton = ({ className = '', label = 'WhatsApp' }) => {
   const accessibleLabel = label === 'WhatsApp' ? 'Abrir WhatsApp' : `${label} por WhatsApp`;
@@ -88,30 +85,6 @@ const WhatsAppButton = ({ className = '', label = 'WhatsApp' }) => {
       <span>{label}</span>
     </a>
   );
-};
-
-const DescendingCounter = ({ start, end, suffix = '' }) => {
-  const [value, setValue] = useState(start);
-
-  useEffect(() => {
-    setValue(start);
-
-    const duration = 1600;
-    const startedAt = Date.now();
-    const interval = window.setInterval(() => {
-      const progress = Math.min((Date.now() - startedAt) / duration, 1);
-      const next = Math.round(start - ((start - end) * progress));
-      setValue(next);
-
-      if (progress >= 1) {
-        window.clearInterval(interval);
-      }
-    }, 28);
-
-    return () => window.clearInterval(interval);
-  }, [start, end]);
-
-  return <>{value}{suffix}</>;
 };
 
 function App() {
@@ -225,7 +198,7 @@ function App() {
                 } : undefined}
               >
                 <div className="home-hero-content">
-                  <span className="home-eyebrow">Yerba Buena, Tucumán</span>
+                  <span className="home-eyebrow">San Miguel de Tucumán</span>
                   <h1>{content.heroTitle || defaultContent.heroTitle}</h1>
                   <p>{content.heroSubtitle || defaultContent.heroSubtitle}</p>
                   <div className="home-hero-actions">
@@ -238,33 +211,42 @@ function App() {
               <main className="home-shell">
                 <section className="home-action-bar" aria-label="Accesos destacados">
                   <div className="home-action-item">
-                    <span>Fichas escolares</span>
-                    <strong>400 gratuitas</strong>
+                    <span>Educación</span>
+                    <strong>Apoyo escolar</strong>
                   </div>
                   <div className="home-action-item">
-                    <span>Escuelas</span>
-                    <strong>3 refaccionadas</strong>
+                    <span>Comunidad</span>
+                    <strong>Merendero</strong>
                   </div>
                   <div className="home-action-item">
-                    <span>Salud visual</span>
-                    <strong>300+ vecinos atendidos</strong>
+                    <span>Infancias</span>
+                    <strong>Juegos y deportes</strong>
                   </div>
                   <WhatsAppButton className="home-action-button" label="Contactar" />
                 </section>
 
-                <section className="home-stats" aria-label="Resumen de impacto">
-                  <article>
-                    <strong><DescendingCounter start={560} end={400} /></strong>
-                    <p>Fichas médicas escolares gratuitas para acompañar trayectorias educativas.</p>
-                  </article>
-                  <article>
-                    <strong><DescendingCounter start={18} end={3} /></strong>
-                    <p>Escuelas refaccionadas junto a la comunidad educativa.</p>
-                  </article>
-                  <article>
-                    <strong><DescendingCounter start={480} end={300} suffix="+" /></strong>
-                    <p>Vecinos atendidos en salud visual integral y gratuita.</p>
-                  </article>
+                <section className="home-events-panel home-events-feature" aria-labelledby="home-events-title">
+                  <div className="home-section-heading">
+                    <h2 id="home-events-title" className="display-subtitle">
+                      <span className="title-line title-line-blue">Próximos</span>
+                      <span className="title-line title-line-orange">eventos</span>
+                    </h2>
+                    <WhatsAppButton className="home-more-link" label="Consultar" />
+                  </div>
+                  <div className="home-events-grid">
+                    {(visibleEventos.length ? visibleEventos : eventosData.slice(0, 4)).map((ev) => (
+                      <article key={ev.id} className="evento-item-mini">
+                        <div className="evento-fecha-mini">
+                          <span className="ev-dia">{formatEventDay(ev.fecha)}</span>
+                          <span className="ev-mes">{formatEventMonth(ev.fecha)}</span>
+                        </div>
+                        <div className="evento-info">
+                          <h4>{ev.titulo}</h4>
+                          <p>{ev.lugar}</p>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
                 </section>
 
                 <section id="novedades" className="home-feature-section">
@@ -343,16 +325,16 @@ function App() {
                   <div className="home-dark-info">
                     <span>Territorio</span>
                     <h2 className="display-subtitle display-subtitle-dark">
-                      <span className="title-line title-line-blue">Construimos comunidad</span>
+                      <span className="title-line title-line-blue">Creamos oportunidades</span>
                       <span className="title-line title-line-white">desde el encuentro cotidiano</span>
                     </h2>
                     <p>
                       Nos encontramos en {content.contactAddress || defaultContent.contactAddress}.
-                      Desde allí coordinamos campañas, talleres y actividades abiertas.
+                      Desde allí coordinamos el merendero, el apoyo escolar y las actividades comunitarias.
                     </p>
                     <ul className="home-benefits">
                       <li>Campañas solidarias</li>
-                      <li>Talleres y acompañamiento</li>
+                      <li>Apoyo escolar y acompañamiento</li>
                       <li>Agenda comunitaria</li>
                     </ul>
                   </div>
@@ -361,8 +343,8 @@ function App() {
                     style={heroBackground ? { backgroundImage: `url('${heroBackground}')` } : undefined}
                   >
                     <iframe
-                      title="Mapa de ubicación Fundación Construir Juntos"
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3560.9956103419063!2d-65.2839311!3d-26.808268400000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94225d00545ffb23%3A0x1970281e6399f6cc!2sFundaci%C3%B3n%20Construir%20Juntos!5e0!3m2!1ses!2sar!4v1783967262872!5m2!1ses!2sar"
+                      title="Mapa de San Miguel de Tucumán"
+                      src="https://www.google.com/maps?q=San+Miguel+de+Tucuman,+Argentina&output=embed"
                       width="100%"
                       height="400"
                       style={{ border: 0 }}
@@ -377,29 +359,6 @@ function App() {
                   </div>
                 </div>
 
-                <div className="home-events-panel">
-                  <div className="home-section-heading home-section-heading-light">
-                    <h2 className="display-subtitle">
-                      <span className="title-line title-line-blue">Próximos</span>
-                      <span className="title-line title-line-white">eventos</span>
-                    </h2>
-                    <WhatsAppButton className="home-more-link" label="Consultar" />
-                  </div>
-                  <div className="home-events-grid">
-                    {(visibleEventos.length ? visibleEventos : eventosData.slice(0, 4)).map((ev) => (
-                      <article key={ev.id} className="evento-item-mini">
-                        <div className="evento-fecha-mini">
-                          <span className="ev-dia">{formatEventDay(ev.fecha)}</span>
-                          <span className="ev-mes">{formatEventMonth(ev.fecha)}</span>
-                        </div>
-                        <div className="evento-info">
-                          <h4>{ev.titulo}</h4>
-                          <p>{ev.lugar}</p>
-                        </div>
-                      </article>
-                    ))}
-                  </div>
-                </div>
               </section>
             </>
           }
@@ -408,7 +367,6 @@ function App() {
         {/* OTRAS PÁGINAS */}
         <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/proyectos" element={<Proyectos />} />
-        <Route path="/cursos" element={<Cursos />} />
         <Route path="/sumate" element={<Sumate />} />
         <Route path="/contacto" element={<Navigate to="/" replace />} />
         <Route path="/admin" element={<Admin user={user} content={content} loading={loading} onSave={handleSaveContent} />} />

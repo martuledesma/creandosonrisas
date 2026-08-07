@@ -31,13 +31,14 @@ export const signIn = (email, password) => signInWithEmailAndPassword(auth, emai
 export const logout = () => signOut(auth);
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
 
-const siteContentRef = doc(db, 'siteContent', 'homepage');
+// Este sitio usa documentos propios para mantener sus contenidos independientes.
+const siteContentRef = doc(db, 'siteContent', 'creandoSonrisas-homepage');
 export const subscribeSiteContent = (callback, errorCallback, options = {}) => (
   onSnapshot(siteContentRef, options, callback, errorCallback)
 );
 export const saveSiteContent = async (data) => setDoc(siteContentRef, data, { merge: true });
 
-const nosotrosContentRef = doc(db, 'siteContent', 'nosotros');
+const nosotrosContentRef = doc(db, 'siteContent', 'creandoSonrisas-nosotros');
 export const subscribeNosotrosContent = (callback, errorCallback) => onSnapshot(nosotrosContentRef, callback, errorCallback);
 export const getNosotrosContent = async () => {
   const snapshot = await getDoc(nosotrosContentRef);
@@ -45,7 +46,7 @@ export const getNosotrosContent = async () => {
 };
 export const saveNosotrosContent = async (data) => setDoc(nosotrosContentRef, data, { merge: true });
 
-const sumateContentRef = doc(db, 'siteContent', 'sumate');
+const sumateContentRef = doc(db, 'siteContent', 'creandoSonrisas-sumate');
 export const subscribeSumateContent = (callback, errorCallback) => onSnapshot(sumateContentRef, callback, errorCallback);
 export const getSumateContent = async () => {
   const snapshot = await getDoc(sumateContentRef);
@@ -53,7 +54,7 @@ export const getSumateContent = async () => {
 };
 export const saveSumateContent = async (data) => setDoc(sumateContentRef, data, { merge: true });
 
-const proyectosContentRef = doc(db, 'siteContent', 'proyectos');
+const proyectosContentRef = doc(db, 'siteContent', 'creandoSonrisas-proyectos');
 export const subscribeProyectosContent = (callback, errorCallback) => onSnapshot(proyectosContentRef, callback, errorCallback);
 export const getProyectosContent = async () => {
   const snapshot = await getDoc(proyectosContentRef);
@@ -61,13 +62,6 @@ export const getProyectosContent = async () => {
 };
 export const saveProyectosContent = async (data) => setDoc(proyectosContentRef, data, { merge: true });
 
-const cursosContentRef = doc(db, 'siteContent', 'cursos');
-export const subscribeCursosContent = (callback, errorCallback) => onSnapshot(cursosContentRef, callback, errorCallback);
-export const getCursosContent = async () => {
-  const snapshot = await getDoc(cursosContentRef);
-  return snapshot.exists() ? snapshot.data() : null;
-};
-export const saveCursosContent = async (data) => setDoc(cursosContentRef, data, { merge: true });
 
 export const uploadImage = async (file, path) => {
   const storageRef = ref(storage, path);

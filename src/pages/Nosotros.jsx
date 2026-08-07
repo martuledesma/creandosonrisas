@@ -84,14 +84,14 @@ function Nosotros() {
         <div className="nosotros-hero-content">
           <div className="page-hero-copy">
             <span className="page-eyebrow">Nosotros</span>
-            <h1>{content.title || 'Sobre la Fundación'}</h1>
+            <h1>{content.title || 'Quiénes somos'}</h1>
             <p>
-              {content.heroSubtitle || 'Construimos comunidad con compromiso, cercanía y trabajo compartido.'}
+              {content.heroSubtitle || 'Jóvenes tucumanos que transforman realidades con educación y trabajo territorial.'}
             </p>
           </div>
           <div className="page-hero-card">
-            <span>Fundación Construir Juntos</span>
-            <strong>Cercanía, compromiso y trabajo territorial.</strong>
+            <span>Fundación Creando Sonrisas</span>
+            <strong>Educación, solidaridad y compromiso comunitario.</strong>
           </div>
         </div>
       </header>
@@ -123,7 +123,7 @@ function Nosotros() {
           <article className="team-carousel-intro">
             <span>Sobre nosotros</span>
             <p>
-              {content.content || 'Somos un grupo de vecinos de Yerba Buena trabajando por el bien común...'}
+              {content.content || 'Somos una organización civil impulsada por jóvenes tucumanos. A través del merendero, el apoyo escolar, el acompañamiento en salud y distintas acciones solidarias, generamos oportunidades para niños, adolescentes y familias.'}
             </p>
             {content.additionalText && <p>{content.additionalText}</p>}
           </article>
