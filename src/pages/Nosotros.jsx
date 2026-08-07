@@ -20,8 +20,7 @@ const defaultAlliances = [
   },
 ];
 
-function Nosotros() {
-  const content = {};
+function Nosotros({ content = {} }) {
   const [expandedMembers, setExpandedMembers] = useState({});
   const teamTrackRef = useRef(null);
 

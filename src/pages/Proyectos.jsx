@@ -82,8 +82,7 @@ const getProjectCategory = (project = {}) => {
   return 'recreativos';
 };
 
-const Proyectos = () => {
-  const content = {};
+const Proyectos = ({ content = {} }) => {
   const [expandedProjects, setExpandedProjects] = useState({});
   const [activeFilter, setActiveFilter] = useState('todos');
   const areasTrackRef = useRef(null);

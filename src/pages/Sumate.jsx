@@ -5,8 +5,7 @@ import fotoFestejo from '../Assets/creando-sonrisas-festejo.jpg';
 import fotoActividades from '../Assets/creando-sonrisas-actividades.jpg';
 import fotoInfancias from '../Assets/creando-sonrisas-infancias.jpg';
 
-const Sumate = () => {
-  const content = {};
+const Sumate = ({ content = {} }) => {
   const [activeSlide, setActiveSlide] = useState(0);
   const galleryImages = [
     { src: fotoComunidad, alt: 'Voluntarios, niños y familias de Creando Sonrisas' },
@@ -140,13 +139,13 @@ const Sumate = () => {
           </h2>
           <div className="sumate-participation-tags" aria-label="Formas de participar">
             <span>Voluntariado</span>
-            <span>Donaciones · Alias: CREANDOSONRISASTUC</span>
+            <span>Donaciones · Alias: {content.donationAlias || 'CREANDOSONRISASTUC'}</span>
             <span>Difusión</span>
           </div>
           <p>Completá tus datos y nos pondremos en contacto para coordinar cómo podés sumarte.</p>
           <a
             className="btn-nav sumate-form-button"
-            href="https://www.instagram.com/creandosonrisas.tuc/"
+            href={content.instagramUrl || 'https://www.instagram.com/creandosonrisas.tuc/'}
             target="_blank"
             rel="noreferrer"
           >

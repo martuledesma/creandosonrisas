@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link, Navigate, Routes, Route } from 'react-router-dom';
 import './index.css';
 import Navbar from './components/navbar';
+import Admin from './pages/Admin';
 import useHeroImageReady from './hooks/useHeroImageReady';
+import useSiteContent from './hooks/useSiteContent';
 
 // Importación de Páginas
 import Nosotros from './pages/Nosotros';
@@ -13,7 +15,7 @@ import fotoFestejo from './Assets/creando-sonrisas-festejo.jpg';
 import fotoActividades from './Assets/creando-sonrisas-actividades.jpg';
 import fotoInfancias from './Assets/creando-sonrisas-infancias.jpg';
 
-const defaultContent = {
+const defaultHomeContent = {
   heroTitle: 'Fundación Creando Sonrisas',
   heroSubtitle: 'Jóvenes tucumanos transformando realidades con educación, contención y trabajo solidario.',
   heroImage: fotoComunidad,
@@ -48,6 +50,39 @@ const defaultContent = {
   ],
   contactAddress: 'San Miguel de Tucumán, Tucumán',
   footerText: '© 2026 Fundación Creando Sonrisas - Tucumán, Argentina',
+};
+
+const defaultSiteContent = {
+  home: defaultHomeContent,
+  nosotros: {
+    title: 'Quiénes somos',
+    heroSubtitle: 'Jóvenes tucumanos que transforman realidades con educación y trabajo territorial.',
+    content: 'Somos una organización civil impulsada por jóvenes tucumanos. A través del merendero, el apoyo escolar, el acompañamiento en salud y distintas acciones solidarias, generamos oportunidades para niños, adolescentes y familias.',
+    additionalText: '',
+    teamCards: [],
+  },
+  proyectos: {
+    heroSubtitle: 'Impulsamos respuestas concretas en educación, alimentación, salud y recreación.',
+    introText: 'Transformamos necesidades concretas en oportunidades mediante educación, alimentación, acompañamiento y acciones comunitarias.',
+    items: [
+      { id: 1, titulo: 'Merendero comunitario', descripcion: 'Meriendas y almuerzos compartidos con niños, niñas y familias de la comunidad.', imagen: fotoFestejo, estado: 'Activo' },
+      { id: 2, titulo: 'Apoyo escolar', descripcion: 'Acompañamiento educativo para fortalecer el aprendizaje y las trayectorias escolares.', imagen: fotoActividades, estado: 'Activo' },
+      { id: 3, titulo: 'Recreación y comunidad', descripcion: 'Pintura, juegos, deportes, festejos especiales y acciones solidarias.', imagen: fotoInfancias, estado: 'Activo' },
+    ],
+  },
+  sumate: {
+    title: 'Sumate a la Fundación',
+    heroSubtitle: 'Tu tiempo, una donación o la difusión de nuestro trabajo pueden crear nuevas oportunidades.',
+    content: 'Tu ayuda es fundamental para seguir transformando Tucumán.',
+    donationAlias: 'CREANDOSONRISASTUC',
+    instagramUrl: 'https://www.instagram.com/creandosonrisas.tuc/',
+    carouselImages: [
+      { id: 1, url: fotoComunidad, alt: 'Voluntarios, niños y familias de Creando Sonrisas' },
+      { id: 2, url: fotoFestejo, alt: 'Festejo comunitario junto a niños y voluntarios' },
+      { id: 3, url: fotoActividades, alt: 'Actividades recreativas con niños de la comunidad' },
+      { id: 4, url: fotoInfancias, alt: 'Un niño sonriendo durante una actividad de la fundación' },
+    ],
+  },
 };
 
 const parseLocalDate = (dateString) => {
@@ -95,17 +130,18 @@ const WhatsAppButton = ({ className = '', label = 'WhatsApp' }) => {
 };
 
 function App() {
-  const content = defaultContent;
+  const { content: siteContent, loading: contentLoading, save: saveContent } = useSiteContent(defaultSiteContent);
+  const content = siteContent.home || defaultHomeContent;
   const [activeSlide, setActiveSlide] = useState(0);
 
-  const acciones = content.cards || defaultContent.cards;
-  const eventosData = content.events || defaultContent.events;
+  const acciones = content.cards || defaultHomeContent.cards;
+  const eventosData = content.events || defaultHomeContent.events;
   const novedadesSlides = acciones.map((item, index) => ({
     ...item,
     imagen: item.imagen || '',
   }));
   const heroBackground = content.heroImage || novedadesSlides.find((item) => item.imagen)?.imagen || '';
-  const heroReady = useHeroImageReady(heroBackground, false);
+  const heroReady = useHeroImageReady(heroBackground, contentLoading);
 
   // Mostrar eventos de hoy en adelante
   const hoy = new Date();
@@ -169,8 +205,8 @@ function App() {
               >
                 <div className="home-hero-content">
                   <span className="home-eyebrow">San Miguel de Tucumán</span>
-                  <h1>{content.heroTitle || defaultContent.heroTitle}</h1>
-                  <p>{content.heroSubtitle || defaultContent.heroSubtitle}</p>
+                  <h1>{content.heroTitle || defaultHomeContent.heroTitle}</h1>
+                  <p>{content.heroSubtitle || defaultHomeContent.heroSubtitle}</p>
                   <div className="home-hero-actions">
                     <Link className="home-primary-link" to="/sumate">Sumate</Link>
                     <Link className="home-secondary-link" to="/proyectos">Ver proyectos</Link>
@@ -299,7 +335,7 @@ function App() {
                       <span className="title-line title-line-white">desde el encuentro cotidiano</span>
                     </h2>
                     <p>
-                      Nos encontramos en {content.contactAddress || defaultContent.contactAddress}.
+                      Nos encontramos en {content.contactAddress || defaultHomeContent.contactAddress}.
                       Desde allí coordinamos el merendero, el apoyo escolar y las actividades comunitarias.
                     </p>
                     <ul className="home-benefits">
@@ -324,7 +360,7 @@ function App() {
                     ></iframe>
                     <div className="home-map-label">
                       <span>Dirección</span>
-                      <strong>{content.contactAddress || defaultContent.contactAddress}</strong>
+                      <strong>{content.contactAddress || defaultHomeContent.contactAddress}</strong>
                     </div>
                   </div>
                 </div>
@@ -335,16 +371,17 @@ function App() {
         />
 
         {/* OTRAS PÁGINAS */}
-        <Route path="/nosotros" element={<Nosotros />} />
-        <Route path="/proyectos" element={<Proyectos />} />
-        <Route path="/sumate" element={<Sumate />} />
+        <Route path="/nosotros" element={<Nosotros content={siteContent.nosotros} />} />
+        <Route path="/proyectos" element={<Proyectos content={siteContent.proyectos} />} />
+        <Route path="/sumate" element={<Sumate content={siteContent.sumate} />} />
         <Route path="/contacto" element={<Navigate to="/" replace />} />
+        <Route path="/admin" element={<Admin content={siteContent} onSave={saveContent} />} />
       </Routes>
 
       <WhatsAppButton className="whatsapp-floating-button" />
 
       <footer className="footer">
-        <p>{content.footerText || defaultContent.footerText}</p>
+        <p>{content.footerText || defaultHomeContent.footerText}</p>
       </footer>
     </div>
   );

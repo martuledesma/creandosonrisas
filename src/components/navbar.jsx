@@ -44,6 +44,7 @@ const Navbar = () => {
                 <li><Link to="/proyectos" onClick={closeMenu}>Proyectos</Link></li>
                 <li><Link to="/sumate" onClick={closeMenu}>Sumate</Link></li>
                 <li><Link to="/sumate" className="btn-nav" onClick={closeMenu}>Colaborar</Link></li>
+                <li><Link to="/admin" className="admin-access-link" onClick={closeMenu}>Acceso</Link></li>
             </ul>
         </nav>
     );
