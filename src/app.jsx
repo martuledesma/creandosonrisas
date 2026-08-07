@@ -70,7 +70,6 @@ const defaultHomeContent = {
   impactTitle: 'Siempre elegimos ver esperanza',
   impactText: 'Cada encuentro, cada merienda y cada aprendizaje compartido pueden abrir una nueva posibilidad para niños, niñas y familias.',
   impactImage: fotoComunidad,
-  contactAddress: 'San Miguel de Tucumán, Tucumán',
   footerText: '© 2026 Fundación Creando Sonrisas - Tucumán, Argentina',
 };
 
@@ -357,50 +356,6 @@ function App() {
 
               </main>
 
-              <section id="contacto" className="home-dark-section">
-                <div className="home-dark-card">
-                  <div className="home-dark-info">
-                    <span>Territorio</span>
-                    <h2 className="display-subtitle display-subtitle-dark">
-                      <span className="title-line title-line-blue">Creamos oportunidades</span>
-                      <span className="title-line title-line-white">desde el encuentro cotidiano</span>
-                    </h2>
-                    <p>
-                      Nos encontramos en {content.contactAddress || defaultHomeContent.contactAddress}.
-                      Desde allí coordinamos el merendero, el apoyo escolar y las actividades comunitarias.
-                    </p>
-                    <ul className="home-benefits">
-                      <li>Campañas solidarias</li>
-                      <li>Apoyo escolar y acompañamiento</li>
-                      <li>Agenda comunitaria</li>
-                    </ul>
-                    <div className="home-territory-actions">
-                      <WhatsAppButton label="Escribinos" />
-                      <Link to="/sumate">Cómo colaborar</Link>
-                    </div>
-                  </div>
-                  <div
-                    className="home-dark-map"
-                    style={heroBackground ? { backgroundImage: `url('${heroBackground}')` } : undefined}
-                  >
-                    <iframe
-                      title="Mapa de San Miguel de Tucumán"
-                      src="https://www.google.com/maps?q=San+Miguel+de+Tucuman,+Argentina&output=embed"
-                      width="100%"
-                      height="400"
-                      style={{ border: 0 }}
-                      allowFullScreen=""
-                      loading="lazy"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                    ></iframe>
-                    <div className="home-map-label">
-                      <span>Dirección</span>
-                      <strong>{content.contactAddress || defaultHomeContent.contactAddress}</strong>
-                    </div>
-                  </div>
-                </div>
-
-              </section>
             </>
           }
         />
