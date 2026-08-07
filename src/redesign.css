@@ -1048,40 +1048,23 @@ h3,
 
 .home-feature-section {
   position: relative;
-  isolation: isolate;
-  overflow: visible;
-}
-
-.home-feature-section::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: -118px;
-  z-index: 0;
-  width: 230px;
-  height: 72%;
-  border-radius: 0 999px 999px 0;
-  background: linear-gradient(160deg, #b83f3f, var(--cs-red));
-  box-shadow: 20px 0 80px rgba(217, 93, 75, 0.42);
-  transform: translateY(-50%);
-}
-
-.home-feature-section::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: -42px;
-  z-index: 0;
-  width: 100px;
-  height: 52%;
-  border-radius: 0 999px 999px 0;
-  background: rgba(255, 255, 255, 0.14);
-  transform: translateY(-50%);
+  overflow: hidden;
+  border: 1px solid var(--cs-border);
+  border-top: 4px solid var(--cs-red);
+  border-radius: var(--cs-radius);
+  background: var(--cs-paper);
+  box-shadow: 0 18px 46px rgba(6, 26, 49, 0.08);
 }
 
 .home-feature-section > * {
   position: relative;
   z-index: 1;
+}
+
+.home-feature-section .home-carousel-frame {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .home-events-feature {
@@ -1090,6 +1073,8 @@ h3,
   overflow: hidden;
   margin-top: 8px;
   border: 1px solid rgba(18, 59, 109, 0.13);
+  border-top: 4px solid var(--cs-yellow);
+  border-radius: var(--cs-radius);
   background-position: center;
   background-size: cover;
   box-shadow: var(--cs-shadow);
@@ -1104,19 +1089,6 @@ h3,
     linear-gradient(100deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.82)),
     rgba(255, 255, 255, 0.9);
   backdrop-filter: grayscale(0.3) brightness(1.18);
-}
-
-.home-events-feature::after {
-  content: "";
-  position: absolute;
-  right: -80px;
-  bottom: -120px;
-  z-index: 0;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background: rgba(244, 191, 69, 0.18);
-  filter: blur(30px);
 }
 
 .home-events-feature > * {
@@ -1268,11 +1240,6 @@ h3,
 @media (max-width: 768px) {
   .home-pillars-grid {
     grid-template-columns: 1fr;
-  }
-
-  .home-feature-section::before {
-    left: -62px;
-    width: 120px;
   }
 
   .nosotros-history-section {
