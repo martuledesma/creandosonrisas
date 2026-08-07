@@ -198,6 +198,42 @@ function App() {
 
   const activeSlideIndex = novedadesSlides.length ? activeSlide % novedadesSlides.length : 0;
   const activeNovedad = novedadesSlides[activeSlideIndex];
+  const eventsSection = (
+    <section
+      className="home-events-panel home-events-feature"
+      aria-labelledby="home-events-title"
+      style={{ backgroundImage: `url('${heroBackground}')` }}
+    >
+      <div className="home-section-heading">
+        <h2 id="home-events-title" className="display-subtitle">
+          <span className="title-line title-line-blue">Próximos</span>
+          <span className="title-line title-line-orange">eventos</span>
+        </h2>
+        <WhatsAppButton className="home-more-link" label="Consultar" />
+      </div>
+      {visibleEventos.length ? (
+        <div className="home-events-grid">
+          {visibleEventos.map((ev) => (
+            <article key={ev.id} className="evento-item-mini">
+              <div className="evento-fecha-mini">
+                <span className="ev-dia">{formatEventDay(ev.fecha)}</span>
+                <span className="ev-mes">{formatEventMonth(ev.fecha)}</span>
+              </div>
+              <div className="evento-info">
+                <h4>{ev.titulo}</h4>
+                <p>{ev.lugar}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div className="home-events-empty">
+          <span>Agenda en preparación</span>
+          <p>Muy pronto publicaremos las próximas actividades. Consultanos por WhatsApp para participar.</p>
+        </div>
+      )}
+    </section>
+  );
 
   return (
     <div className="App">
@@ -227,37 +263,6 @@ function App() {
               </header>
 
               <main className="home-shell">
-                <section className="home-events-panel home-events-feature" aria-labelledby="home-events-title">
-                  <div className="home-section-heading">
-                    <h2 id="home-events-title" className="display-subtitle">
-                      <span className="title-line title-line-blue">Próximos</span>
-                      <span className="title-line title-line-orange">eventos</span>
-                    </h2>
-                    <WhatsAppButton className="home-more-link" label="Consultar" />
-                  </div>
-                  {visibleEventos.length ? (
-                    <div className="home-events-grid">
-                    {visibleEventos.map((ev) => (
-                      <article key={ev.id} className="evento-item-mini">
-                        <div className="evento-fecha-mini">
-                          <span className="ev-dia">{formatEventDay(ev.fecha)}</span>
-                          <span className="ev-mes">{formatEventMonth(ev.fecha)}</span>
-                        </div>
-                        <div className="evento-info">
-                          <h4>{ev.titulo}</h4>
-                          <p>{ev.lugar}</p>
-                        </div>
-                      </article>
-                    ))}
-                    </div>
-                  ) : (
-                    <div className="home-events-empty">
-                      <span>Agenda en preparación</span>
-                      <p>Muy pronto publicaremos las próximas actividades. Consultanos por WhatsApp para participar.</p>
-                    </div>
-                  )}
-                </section>
-
                 <section className="home-pillars-section" aria-labelledby="pillars-title">
                   <div className="home-section-heading home-pillars-heading">
                     <div>
@@ -355,6 +360,8 @@ function App() {
                     </div>
                   )}
                 </section>
+
+                {eventsSection}
 
               </main>
 

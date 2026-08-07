@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import fotoFestejo from '../Assets/creando-sonrisas-festejo.jpg';
 import fotoActividades from '../Assets/creando-sonrisas-actividades.jpg';
 import fotoInfancias from '../Assets/creando-sonrisas-infancias.jpg';
@@ -108,25 +108,6 @@ const Proyectos = ({ content = {} }) => {
     ? projects
     : projects.filter((project) => getProjectCategory(project) === activeFilter);
   const heroImage = content.heroImage || projects.find((project) => project.imagen)?.imagen || '';
-
-  useEffect(() => {
-    const track = areasTrackRef.current;
-    if (!track) return undefined;
-
-    const interval = window.setInterval(() => {
-      const maxScroll = track.scrollWidth - track.clientWidth;
-      if (maxScroll <= 0) return;
-
-      if (track.scrollLeft >= maxScroll - 8) {
-        track.scrollTo({ left: 0, behavior: 'smooth' });
-        return;
-      }
-
-      track.scrollBy({ left: 4, behavior: 'auto' });
-    }, 1400);
-
-    return () => window.clearInterval(interval);
-  }, []);
 
   return (
     <div className="proyectos-page">
