@@ -5351,3 +5351,64 @@ h3,
         text-align: left;
     }
 }
+/* Carrusel de novedades: foto protagonista y texto liviano */
+.home-carousel-frame::after {
+    background: linear-gradient(180deg, transparent 42%, rgba(7, 29, 54, 0.24) 100%);
+}
+
+.home-carousel-caption {
+    left: 32px;
+    bottom: 30px;
+    width: min(470px, calc(100% - 64px));
+    padding: 24px 26px;
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.94);
+    color: var(--texto-oscuro);
+    box-shadow: 0 14px 34px rgba(7, 29, 54, 0.16);
+    backdrop-filter: blur(8px);
+}
+
+.home-carousel-caption span {
+    margin-bottom: 10px;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--celeste-logo);
+    letter-spacing: 0.1em;
+}
+
+.home-carousel-caption h3 {
+    color: var(--azul-principal);
+    font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.35rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+
+.home-carousel-caption p {
+    margin-bottom: 18px;
+    color: #526274;
+}
+
+@media (max-width: 768px) {
+    .home-carousel-frame,
+    .home-carousel-image {
+        min-height: 470px;
+        height: 470px;
+    }
+
+    .home-carousel-caption {
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
+        width: auto;
+        padding: 18px;
+    }
+
+    .home-carousel-caption p {
+        margin-bottom: 14px;
+        font-size: 0.9rem;
+        line-height: 1.45;
+    }
+}
