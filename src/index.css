@@ -5179,13 +5179,43 @@ h3,
 .nosotros-hero h1,
 .sumate-hero h1 {
     max-width: 760px;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(2.7rem, 6vw, 5rem);
-    font-weight: 600;
-    letter-spacing: -0.025em;
-    line-height: 1.02;
+    font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: clamp(2.55rem, 5.6vw, 4.7rem);
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 1.06;
     text-transform: none;
+    color: #ffffff;
+    -webkit-text-fill-color: #ffffff;
+    -webkit-text-stroke: 0;
     text-shadow: none;
+}
+
+.home-hero h1 {
+    max-width: 850px;
+}
+
+.home-eyebrow,
+.page-eyebrow {
+    display: inline-flex;
+    padding: 0 0 10px;
+    border-bottom: 2px solid #8db9dc;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    color: #c9deef;
+    font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    letter-spacing: 0.16em;
+}
+
+.home-hero p,
+.page-hero p,
+.nosotros-hero p,
+.sumate-hero p {
+    font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.65;
 }
 
 .home-hero p,
