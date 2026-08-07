@@ -45,6 +45,26 @@ const defaultHomeContent = {
       imagen: fotoComunidad,
     },
   ],
+  pillars: [
+    {
+      id: 11,
+      titulo: 'Educación',
+      desc: 'Acompañamos las trayectorias escolares con apoyo, escucha y herramientas para aprender.',
+      imagen: fotoActividades,
+    },
+    {
+      id: 12,
+      titulo: 'Merendero',
+      desc: 'Compartimos meriendas, almuerzos y un espacio cotidiano de encuentro con las familias.',
+      imagen: fotoFestejo,
+    },
+    {
+      id: 13,
+      titulo: 'Recreación',
+      desc: 'Creamos momentos de juego, deporte, arte y celebración para niños y niñas.',
+      imagen: fotoInfancias,
+    },
+  ],
   events: [
     { id: 101, fecha: '2026-08-15', titulo: 'Próxima actividad', lugar: 'Lugar a confirmar' },
   ],
@@ -135,6 +155,7 @@ function App() {
   const [activeSlide, setActiveSlide] = useState(0);
 
   const acciones = content.cards || defaultHomeContent.cards;
+  const pilares = content.pillars?.length ? content.pillars : defaultHomeContent.pillars;
   const eventosData = content.events || defaultHomeContent.events;
   const novedadesSlides = acciones.map((item, index) => ({
     ...item,
@@ -152,7 +173,7 @@ function App() {
     if (!fechaEv) return false;
     fechaEv.setHours(0, 0, 0, 0);
     return fechaEv >= hoy;
-  });
+  }).sort((a, b) => parseLocalDate(a.fecha) - parseLocalDate(b.fecha));
   const visibleEventos = eventosProximos.slice(0, 4);
 
   useEffect(() => {
@@ -200,7 +221,7 @@ function App() {
               <header
                 className="home-hero"
                 style={heroBackground ? {
-                  backgroundImage: `linear-gradient(90deg, rgba(13, 76, 111, 0.52), rgba(255, 255, 255, 0.08) 46%, rgba(246, 189, 79, 0.16)), url('${heroBackground}')`,
+                  backgroundImage: `url('${heroBackground}')`,
                 } : undefined}
               >
                 <div className="home-hero-content">
@@ -215,22 +236,6 @@ function App() {
               </header>
 
               <main className="home-shell">
-                <section className="home-action-bar" aria-label="Accesos destacados">
-                  <div className="home-action-item">
-                    <span>Educación</span>
-                    <strong>Apoyo escolar</strong>
-                  </div>
-                  <div className="home-action-item">
-                    <span>Comunidad</span>
-                    <strong>Merendero</strong>
-                  </div>
-                  <div className="home-action-item">
-                    <span>Infancias</span>
-                    <strong>Juegos y deportes</strong>
-                  </div>
-                  <WhatsAppButton className="home-action-button" label="Contactar" />
-                </section>
-
                 <section className="home-events-panel home-events-feature" aria-labelledby="home-events-title">
                   <div className="home-section-heading">
                     <h2 id="home-events-title" className="display-subtitle">
@@ -239,8 +244,9 @@ function App() {
                     </h2>
                     <WhatsAppButton className="home-more-link" label="Consultar" />
                   </div>
-                  <div className="home-events-grid">
-                    {(visibleEventos.length ? visibleEventos : eventosData.slice(0, 4)).map((ev) => (
+                  {visibleEventos.length ? (
+                    <div className="home-events-grid">
+                    {visibleEventos.map((ev) => (
                       <article key={ev.id} className="evento-item-mini">
                         <div className="evento-fecha-mini">
                           <span className="ev-dia">{formatEventDay(ev.fecha)}</span>
@@ -251,6 +257,38 @@ function App() {
                           <p>{ev.lugar}</p>
                         </div>
                       </article>
+                    ))}
+                    </div>
+                  ) : (
+                    <div className="home-events-empty">
+                      <span>Agenda en preparación</span>
+                      <p>Muy pronto publicaremos las próximas actividades. Consultanos por WhatsApp para participar.</p>
+                    </div>
+                  )}
+                </section>
+
+                <section className="home-pillars-section" aria-labelledby="pillars-title">
+                  <div className="home-section-heading home-pillars-heading">
+                    <div>
+                      <span className="home-section-kicker">Nuestro trabajo cotidiano</span>
+                      <h2 id="pillars-title" className="display-subtitle">
+                        <span className="title-line title-line-blue">Tres maneras de</span>
+                        <span className="title-line title-line-orange">crear oportunidades</span>
+                      </h2>
+                    </div>
+                    <Link className="home-more-link" to="/proyectos">Ver proyectos</Link>
+                  </div>
+                  <div className="home-pillars-grid">
+                    {pilares.slice(0, 3).map((pillar, index) => (
+                      <Link className="home-pillar-card" to="/proyectos" key={pillar.id || index}>
+                        {pillar.imagen && <img src={pillar.imagen} alt={pillar.titulo} loading="lazy" decoding="async" />}
+                        <div>
+                          <span>0{index + 1}</span>
+                          <h3>{pillar.titulo}</h3>
+                          <p>{pillar.desc}</p>
+                          <strong>Conocer más <span aria-hidden="true">→</span></strong>
+                        </div>
+                      </Link>
                     ))}
                   </div>
                 </section>
@@ -271,21 +309,23 @@ function App() {
                       </div>
                     )}
                   </div>
-                  {novedadesSlides.length > 0 && (
+                  {novedadesSlides.length > 0 ? (
                     <div className="home-carousel" aria-label="Carrusel de novedades">
-                      <div className="home-carousel-frame">
-                        {activeNovedad?.imagen && (
+                      <div className={`home-carousel-frame ${activeNovedad?.imagen ? '' : 'without-image'}`}>
+                        <div className="home-carousel-media">
+                          {activeNovedad?.imagen ? (
                           <img
                             src={activeNovedad.imagen}
                             alt={activeNovedad?.titulo}
                             className="home-carousel-image"
                           />
-                        )}
+                          ) : <span>Imagen pendiente</span>}
+                        </div>
                         <div className="home-carousel-caption">
                           <span>Novedad destacada</span>
                           <h3>{activeNovedad?.titulo}</h3>
                           <p>{activeNovedad?.desc}</p>
-                          <Link to="/sumate">Participar</Link>
+                          <Link to="/proyectos">Conocer proyectos</Link>
                         </div>
                       </div>
                       <div className="home-carousel-dots" aria-label="Seleccionar novedad">
@@ -300,30 +340,14 @@ function App() {
                         ))}
                       </div>
                     </div>
+                  ) : (
+                    <div className="home-news-empty">
+                      <span>Próximamente</span>
+                      <p>Estamos preparando nuevas historias para compartir.</p>
+                    </div>
                   )}
                 </section>
 
-                <section className="home-services-section" aria-labelledby="acciones-title">
-                  <div className="home-section-heading">
-                    <h2 id="acciones-title" className="display-subtitle">
-                      <span className="title-line title-line-blue">Acciones</span>
-                      <span className="title-line title-line-orange">comunitarias</span>
-                    </h2>
-                    <Link className="home-more-link" to="/proyectos">Ver más</Link>
-                  </div>
-                  <div className="home-services-grid">
-                    {novedadesSlides.slice(0, 3).map((item, index) => (
-                      <article className="home-service-card" key={item.id || index}>
-                        {item.imagen && <img src={item.imagen} alt={item.titulo} loading="lazy" decoding="async" />}
-                        <div>
-                          <span>{String(index + 1).padStart(2, '0')}</span>
-                          <h3>{item.titulo}</h3>
-                          <p>{item.desc}</p>
-                        </div>
-                      </article>
-                    ))}
-                  </div>
-                </section>
               </main>
 
               <section id="contacto" className="home-dark-section">
@@ -343,6 +367,10 @@ function App() {
                       <li>Apoyo escolar y acompañamiento</li>
                       <li>Agenda comunitaria</li>
                     </ul>
+                    <div className="home-territory-actions">
+                      <WhatsAppButton label="Escribinos" />
+                      <Link to="/sumate">Cómo colaborar</Link>
+                    </div>
                   </div>
                   <div
                     className="home-dark-map"

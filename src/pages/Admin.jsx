@@ -178,6 +178,17 @@ export default function Admin({ content, onSave }) {
               <TextField label="Texto del pie" value={home.footerText} onChange={(value) => updatePage('home', 'footerText', value)} />
             </div>
             <div className="admin-block">
+              <div className="admin-block-title"><h2>Educación, Merendero y Recreación</h2></div>
+              <p className="admin-help-text">Estos tres ejes aparecen debajo de los próximos eventos en la página de inicio.</p>
+              {(home.pillars || []).map((item, index) => (
+                <article className="admin-item" key={item.id || index}>
+                  <TextField label={`Título del eje ${index + 1}`} value={item.titulo} onChange={(value) => updateItem('home', 'pillars', index, 'titulo', value)} />
+                  <TextField label="Descripción" value={item.desc} onChange={(value) => updateItem('home', 'pillars', index, 'desc', value)} multiline />
+                  <ImageField label="Imagen" value={item.imagen} onChange={(value) => updateItem('home', 'pillars', index, 'imagen', value)} />
+                </article>
+              ))}
+            </div>
+            <div className="admin-block">
               <div className="admin-block-title"><h2>Novedades</h2><button type="button" onClick={() => addItem('home', 'cards', { titulo: '', desc: '', imagen: '' })}>Agregar</button></div>
               {(home.cards || []).map((item, index) => (
                 <article className="admin-item" key={item.id || index}>

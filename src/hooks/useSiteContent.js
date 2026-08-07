@@ -10,7 +10,16 @@ export default function useSiteContent(defaultContent) {
     let active = true;
     getSiteContent()
       .then((remoteContent) => {
-        if (active && remoteContent) setContent({ ...defaultContent, ...remoteContent });
+        if (active && remoteContent) {
+          setContent({
+            ...defaultContent,
+            ...remoteContent,
+            home: { ...defaultContent.home, ...(remoteContent.home || {}) },
+            nosotros: { ...defaultContent.nosotros, ...(remoteContent.nosotros || {}) },
+            proyectos: { ...defaultContent.proyectos, ...(remoteContent.proyectos || {}) },
+            sumate: { ...defaultContent.sumate, ...(remoteContent.sumate || {}) },
+          });
+        }
       })
       .catch((loadError) => {
         console.error('Supabase content error:', loadError);
