@@ -67,6 +67,9 @@ const defaultHomeContent = {
   events: [
     { id: 101, fecha: '2026-08-15', titulo: 'Próxima actividad', lugar: 'Lugar a confirmar' },
   ],
+  impactTitle: 'Siempre elegimos ver esperanza',
+  impactText: 'Cada encuentro, cada merienda y cada aprendizaje compartido pueden abrir una nueva posibilidad para niños, niñas y familias.',
+  impactImage: fotoComunidad,
   contactAddress: 'San Miguel de Tucumán, Tucumán',
   footerText: '© 2026 Fundación Creando Sonrisas - Tucumán, Argentina',
 };
@@ -273,10 +276,27 @@ function App() {
                           <span>0{index + 1}</span>
                           <h3>{pillar.titulo}</h3>
                           <p>{pillar.desc}</p>
-                          <strong>Conocer más <span aria-hidden="true">→</span></strong>
                         </div>
                       </Link>
                     ))}
+                  </div>
+                </section>
+
+                <section id="impacto" className="home-impact-section" aria-labelledby="impact-title">
+                  <div
+                    className="home-impact-photo"
+                    role="img"
+                    aria-label="La comunidad de Creando Sonrisas compartiendo una actividad"
+                    style={{ backgroundImage: `url('${content.impactImage || defaultHomeContent.impactImage}')` }}
+                  />
+                  <div className="home-impact-copy">
+                    <span>Nuestro motor</span>
+                    <h2 id="impact-title">{content.impactTitle || defaultHomeContent.impactTitle}</h2>
+                    <blockquote>
+                      <span aria-hidden="true">“</span>
+                      <p>{content.impactText || defaultHomeContent.impactText}</p>
+                      <span aria-hidden="true">”</span>
+                    </blockquote>
                   </div>
                 </section>
 

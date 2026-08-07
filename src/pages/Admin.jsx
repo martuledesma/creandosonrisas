@@ -174,6 +174,9 @@ export default function Admin({ content, onSave }) {
               <TextField label="Título principal" value={home.heroTitle} onChange={(value) => updatePage('home', 'heroTitle', value)} />
               <TextField label="Subtítulo" value={home.heroSubtitle} onChange={(value) => updatePage('home', 'heroSubtitle', value)} multiline />
               <ImageField label="Imagen de portada" value={home.heroImage} onChange={(value) => updatePage('home', 'heroImage', value)} />
+              <TextField label="Título de la franja de impacto" value={home.impactTitle} onChange={(value) => updatePage('home', 'impactTitle', value)} />
+              <TextField label="Mensaje de la franja de impacto" value={home.impactText} onChange={(value) => updatePage('home', 'impactText', value)} multiline />
+              <ImageField label="Imagen de la franja de impacto" value={home.impactImage} onChange={(value) => updatePage('home', 'impactImage', value)} />
               <TextField label="Dirección" value={home.contactAddress} onChange={(value) => updatePage('home', 'contactAddress', value)} />
               <TextField label="Texto del pie" value={home.footerText} onChange={(value) => updatePage('home', 'footerText', value)} />
             </div>
