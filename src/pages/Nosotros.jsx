@@ -48,7 +48,7 @@ function Nosotros({ content = {} }) {
       <header
         className="nosotros-hero page-hero-photo"
         style={heroImage ? {
-          backgroundImage: `linear-gradient(90deg, rgba(13, 76, 111, 0.54), rgba(255, 255, 255, 0.08) 46%, rgba(246, 189, 79, 0.16)), url('${heroImage}')`,
+          backgroundImage: `url('${heroImage}')`,
         } : undefined}
       >
         <div className="nosotros-hero-content">
@@ -67,7 +67,7 @@ function Nosotros({ content = {} }) {
       </header>
 
       {/* Sección del equipo */}
-      <section className="team-section team-carousel-section">
+      <section id="equipo" className="team-section team-carousel-section">
         <div className="team-carousel-header">
           <div>
             <span>Nosotros</span>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Navigate, Routes, Route } from 'react-router-dom';
 import './index.css';
+import './redesign.css';
 import Navbar from './components/navbar';
 import Admin from './pages/Admin';
 import useSiteContent from './hooks/useSiteContent';
@@ -77,6 +78,7 @@ const defaultSiteContent = {
   home: defaultHomeContent,
   nosotros: {
     title: 'Quiénes somos',
+    heroImage: fotoComunidad,
     heroSubtitle: 'Jóvenes tucumanos que transforman realidades con educación y trabajo territorial.',
     content: 'Somos una organización civil impulsada por jóvenes tucumanos. A través del merendero, el apoyo escolar, el acompañamiento en salud y distintas acciones solidarias, generamos oportunidades para niños, adolescentes y familias.',
     additionalText: '',

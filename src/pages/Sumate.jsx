@@ -43,7 +43,7 @@ const Sumate = ({ content = {} }) => {
       <header
         className="sumate-hero page-hero-photo"
         style={heroImage ? {
-          backgroundImage: `linear-gradient(90deg, rgba(13, 76, 111, 0.54), rgba(255, 255, 255, 0.08) 46%, rgba(246, 189, 79, 0.16)), url('${heroImage}')`,
+          backgroundImage: `url('${heroImage}')`,
         } : undefined}
       >
         <div className="sumate-hero-content">
@@ -83,7 +83,7 @@ const Sumate = ({ content = {} }) => {
         </div>
       </section>
 
-      <section className="sumate-gallery" aria-label="Fotos de la fundación">
+      <section id="formas-de-participar" className="sumate-gallery" aria-label="Fotos de la fundación">
         {visibleCarouselImages.length > 0 && (
           <div className="sumate-carousel">
             <button
