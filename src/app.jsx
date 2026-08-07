@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link, Navigate, Routes, Route } from 'react-router-dom';
 import './index.css';
 import './redesign.css';
@@ -155,7 +155,6 @@ const WhatsAppButton = ({ className = '', label = 'WhatsApp' }) => {
 function App() {
   const { content: siteContent, save: saveContent } = useSiteContent(defaultSiteContent);
   const content = siteContent.home || defaultHomeContent;
-  const [activeSlide, setActiveSlide] = useState(0);
 
   const acciones = content.cards || defaultHomeContent.cards;
   const pilares = content.pillars?.length ? content.pillars : defaultHomeContent.pillars;
@@ -178,26 +177,6 @@ function App() {
   }).sort((a, b) => parseLocalDate(a.fecha) - parseLocalDate(b.fecha));
   const visibleEventos = eventosProximos.slice(0, 4);
 
-  useEffect(() => {
-    if (novedadesSlides.length <= 1) return undefined;
-
-    const timer = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % novedadesSlides.length);
-    }, 3000);
-
-    return () => clearInterval(timer);
-  }, [novedadesSlides.length]);
-
-  const moveSlide = (direction) => {
-    setActiveSlide((prev) => {
-      const total = novedadesSlides.length;
-      if (!total) return 0;
-      return (prev + direction + total) % total;
-    });
-  };
-
-  const activeSlideIndex = novedadesSlides.length ? activeSlide % novedadesSlides.length : 0;
-  const activeNovedad = novedadesSlides[activeSlideIndex];
   const eventsSection = (
     <section
       className="home-events-panel home-events-feature"
@@ -246,13 +225,13 @@ function App() {
           element={
             <>
               <header
-                className="home-hero"
+                className="home-hero home-hero-template"
                 style={heroBackground ? {
                   backgroundImage: `url('${heroBackground}')`,
                 } : undefined}
               >
                 <div className="home-hero-content">
-                  <span className="home-eyebrow">San Miguel de Tucumán</span>
+                  <span className="home-eyebrow">Ayudanos a transformar realidades</span>
                   <h1>{content.heroTitle || defaultHomeContent.heroTitle}</h1>
                   <p>{content.heroSubtitle || defaultHomeContent.heroSubtitle}</p>
                   <div className="home-hero-actions">
@@ -262,107 +241,81 @@ function App() {
                 </div>
               </header>
 
-              <main className="home-shell">
-                <section className="home-pillars-section" aria-labelledby="pillars-title">
-                  <div className="home-section-heading home-pillars-heading">
-                    <div>
-                      <span className="home-section-kicker">Nuestro trabajo cotidiano</span>
-                      <h2 id="pillars-title" className="display-subtitle">
-                        <span className="title-line title-line-blue">Tres maneras de</span>
-                        <span className="title-line title-line-orange">crear oportunidades</span>
-                      </h2>
-                    </div>
-                    <Link className="home-more-link" to="/proyectos">Ver proyectos</Link>
+              <main className="home-template-shell">
+                <section className="home-quick-actions" aria-label="Formas de participar">
+                  <Link to="/sumate" className="home-quick-action">
+                    <span>01</span><h2>Ser voluntario</h2><p>Compartí tu tiempo y tus ganas de ayudar.</p>
+                  </Link>
+                  <Link to="/proyectos" className="home-quick-action">
+                    <span>02</span><h2>Conocer proyectos</h2><p>Descubrí cómo trabajamos junto a la comunidad.</p>
+                  </Link>
+                  <Link to="/sumate" className="home-quick-action">
+                    <span>03</span><h2>Hacer una donación</h2><p>Cada aporte ayuda a sostener nuestras actividades.</p>
+                  </Link>
+                </section>
+
+                <section id="impacto" className="home-mission-template" aria-labelledby="impact-title">
+                  <div className="home-mission-image">
+                    <img src={content.impactImage || defaultHomeContent.impactImage} alt="La comunidad de Creando Sonrisas" />
+                    <strong>Juntos creamos más oportunidades</strong>
+                  </div>
+                  <div className="home-mission-copy">
+                    <span className="template-kicker">Nuestra misión</span>
+                    <h2 id="impact-title">{content.impactTitle || defaultHomeContent.impactTitle}</h2>
+                    <p>{content.impactText || defaultHomeContent.impactText}</p>
+                    <ul>
+                      <li>Educación y apoyo escolar.</li>
+                      <li>Alimentación, recreación y acompañamiento.</li>
+                    </ul>
+                    <Link to="/nosotros" className="template-text-link">Conocé nuestra historia →</Link>
+                  </div>
+                </section>
+
+                <section className="home-causes-template" aria-labelledby="pillars-title">
+                  <div className="template-section-title">
+                    <span className="template-kicker">Ayudamos desde el territorio</span>
+                    <h2 id="pillars-title">Nuestros proyectos</h2>
                   </div>
                   <div className="home-pillars-grid">
                     {pilares.slice(0, 3).map((pillar, index) => (
                       <Link className="home-pillar-card" to="/proyectos" key={pillar.id || index}>
-                        {pillar.imagen && <img src={pillar.imagen} alt={pillar.titulo} loading="lazy" decoding="async" />}
-                        <div>
+                        <div className="home-pillar-image">
+                          {pillar.imagen && <img src={pillar.imagen} alt={pillar.titulo} loading="lazy" decoding="async" />}
                           <span>0{index + 1}</span>
+                        </div>
+                        <div className="home-pillar-content">
                           <h3>{pillar.titulo}</h3>
                           <p>{pillar.desc}</p>
+                          <strong>Ver proyecto →</strong>
                         </div>
                       </Link>
                     ))}
                   </div>
                 </section>
 
-                <section id="impacto" className="home-impact-section" aria-labelledby="impact-title">
-                  <div
-                    className="home-impact-photo"
-                    role="img"
-                    aria-label="La comunidad de Creando Sonrisas compartiendo una actividad"
-                    style={{ backgroundImage: `url('${content.impactImage || defaultHomeContent.impactImage}')` }}
-                  />
-                  <div className="home-impact-copy">
-                    <span>Nuestro motor</span>
-                    <h2 id="impact-title">{content.impactTitle || defaultHomeContent.impactTitle}</h2>
-                    <blockquote>
-                      <span aria-hidden="true">“</span>
-                      <p>{content.impactText || defaultHomeContent.impactText}</p>
-                      <span aria-hidden="true">”</span>
-                    </blockquote>
+                <section className="home-cta-band">
+                  <div><span>Tu ayuda transforma</span><h2>Hagamos crecer nuevas sonrisas</h2></div>
+                  <Link to="/sumate">Quiero colaborar</Link>
+                </section>
+
+                <section id="novedades" className="home-news-template" aria-labelledby="news-title">
+                  <div className="template-section-title centered">
+                    <span className="template-kicker">Historias recientes</span>
+                    <h2 id="news-title">Novedades</h2>
+                  </div>
+                  <div className="home-news-grid">
+                    {novedadesSlides.slice(0, 3).map((item, index) => (
+                      <article className="home-news-card" key={item.id || index}>
+                        <div className="home-news-image">
+                          {item.imagen ? <img src={item.imagen} alt={item.titulo} loading="lazy" /> : <span>Imagen pendiente</span>}
+                        </div>
+                        <div><span>Comunidad</span><h3>{item.titulo}</h3><p>{item.desc}</p></div>
+                      </article>
+                    ))}
                   </div>
                 </section>
 
-                <section id="novedades" className="home-feature-section">
-                  <div className="home-section-heading">
-                    <h2 className="display-subtitle">
-                      <span className="title-line title-line-blue">Novedades</span>
-                    </h2>
-                    {novedadesSlides.length > 1 && (
-                      <div className="home-heading-controls" aria-label="Controles de novedades">
-                        <button type="button" onClick={() => moveSlide(-1)} aria-label="Ver novedad anterior">
-                          ‹
-                        </button>
-                        <button type="button" onClick={() => moveSlide(1)} aria-label="Ver novedad siguiente">
-                          ›
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                  {novedadesSlides.length > 0 ? (
-                    <div className="home-carousel" aria-label="Carrusel de novedades">
-                      <div className={`home-carousel-frame ${activeNovedad?.imagen ? '' : 'without-image'}`}>
-                        <div className="home-carousel-media">
-                          {activeNovedad?.imagen ? (
-                          <img
-                            src={activeNovedad.imagen}
-                            alt={activeNovedad?.titulo}
-                            className="home-carousel-image"
-                          />
-                          ) : <span>Imagen pendiente</span>}
-                        </div>
-                        <div className="home-carousel-caption">
-                          <span>Novedad destacada</span>
-                          <h3>{activeNovedad?.titulo}</h3>
-                          <p>{activeNovedad?.desc}</p>
-                          <Link to="/proyectos">Conocer proyectos</Link>
-                        </div>
-                      </div>
-                      <div className="home-carousel-dots" aria-label="Seleccionar novedad">
-                        {novedadesSlides.map((slide, index) => (
-                          <button
-                            type="button"
-                            key={slide.id || index}
-                            className={`home-carousel-dot ${activeSlideIndex === index ? 'active' : ''}`}
-                            onClick={() => setActiveSlide(index)}
-                            aria-label={`Ver ${slide.titulo}`}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="home-news-empty">
-                      <span>Próximamente</span>
-                      <p>Estamos preparando nuevas historias para compartir.</p>
-                    </div>
-                  )}
-                </section>
-
-                {eventsSection}
-
+                <div className="home-events-template">{eventsSection}</div>
               </main>
 
             </>

@@ -1033,6 +1033,161 @@ h3,
   }
 }
 
+/* Inicio 2026 — composición institucional inspirada en campañas solidarias */
+.home-hero-template {
+  min-height: 720px;
+  display: grid;
+  place-items: center;
+  padding: 130px 24px 150px;
+  background-position: center 35%;
+}
+
+.home-hero-template::before {
+  background:
+    linear-gradient(90deg, rgba(6, 26, 49, 0.76), rgba(6, 26, 49, 0.28)),
+    linear-gradient(0deg, rgba(6, 26, 49, 0.48), transparent 55%);
+}
+
+.home-hero-template .home-hero-content {
+  width: min(1180px, 100%);
+  max-width: none;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.home-hero-template .home-eyebrow {
+  color: var(--cs-yellow);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+}
+
+.home-hero-template h1 {
+  max-width: 760px;
+  margin: 18px 0 22px;
+  font-size: clamp(4rem, 8vw, 7.4rem);
+  line-height: 0.88;
+}
+
+.home-hero-template p {
+  max-width: 610px;
+  margin: 0 0 30px;
+  font-size: clamp(1.05rem, 1.6vw, 1.28rem);
+}
+
+.home-template-shell {
+  position: relative;
+  background: #fbfaf7;
+}
+
+.home-quick-actions {
+  position: relative;
+  z-index: 3;
+  width: min(1080px, calc(100% - 48px));
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: -82px auto 0;
+  background: var(--cs-white);
+  box-shadow: 0 24px 70px rgba(6, 26, 49, 0.16);
+}
+
+.home-quick-action {
+  min-height: 205px;
+  padding: 38px 34px;
+  border-right: 1px solid var(--cs-border);
+  color: var(--cs-ink);
+  text-decoration: none;
+  transition: 180ms ease;
+}
+
+.home-quick-action:last-child { border-right: 0; }
+.home-quick-action:hover { background: var(--cs-blue-900); color: var(--cs-white); }
+.home-quick-action > span { color: var(--cs-red); font-size: 0.76rem; font-weight: 900; letter-spacing: 0.14em; }
+.home-quick-action h2 { margin: 17px 0 10px; color: inherit; font-size: 1.45rem; }
+.home-quick-action p { margin: 0; color: var(--cs-muted); font-size: 0.92rem; line-height: 1.65; }
+.home-quick-action:hover p { color: rgba(255,255,255,.72); }
+
+.home-mission-template {
+  width: min(1120px, calc(100% - 48px));
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+  align-items: center;
+  gap: clamp(50px, 8vw, 100px);
+  margin: 0 auto;
+  padding: 130px 0 120px;
+}
+
+.home-mission-image { position: relative; padding: 0 0 28px 28px; }
+.home-mission-image::before { content: ""; position: absolute; inset: 35px auto 0 0; width: 14px; background: var(--cs-yellow); }
+.home-mission-image img { width: 100%; height: 560px; display: block; object-fit: cover; box-shadow: var(--cs-shadow); }
+.home-mission-image strong { position: absolute; right: -24px; bottom: 0; max-width: 300px; padding: 24px 28px; background: var(--cs-blue-900); color: white; font-family: Georgia,serif; font-size: 1.2rem; line-height: 1.35; }
+
+.template-kicker { display: block; margin-bottom: 12px; color: var(--cs-red); font-size: .75rem; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+.home-mission-copy h2,
+.template-section-title h2 { margin: 0; color: var(--cs-blue-950); font-size: clamp(3rem, 5.4vw, 5.2rem); line-height: .94; letter-spacing: -.045em; }
+.home-mission-copy > p { margin: 28px 0 22px; color: var(--cs-muted); font-size: 1.05rem; line-height: 1.8; }
+.home-mission-copy ul { display: grid; gap: 12px; margin: 0 0 30px; padding: 0; list-style: none; }
+.home-mission-copy li::before { content: "✓"; margin-right: 12px; color: var(--cs-yellow); font-weight: 900; }
+.template-text-link { color: var(--cs-blue-800); font-weight: 850; text-decoration: none; }
+
+.home-causes-template { padding: 110px max(24px, calc((100vw - 1180px)/2)); background: var(--cs-white); }
+.template-section-title { margin-bottom: 45px; }
+.template-section-title.centered { text-align: center; }
+.home-causes-template .home-pillars-grid { gap: 24px; }
+.home-causes-template .home-pillar-card { display: block; overflow: hidden; border: 1px solid var(--cs-border); background: white; color: var(--cs-ink); text-decoration: none; box-shadow: 0 14px 36px rgba(6,26,49,.07); transition: 180ms ease; }
+.home-causes-template .home-pillar-card:hover { transform: translateY(-6px); box-shadow: var(--cs-shadow); }
+.home-pillar-image { position: relative; height: 270px; overflow: hidden; }
+.home-pillar-image img { width: 100%; height: 100%; object-fit: cover; transition: 400ms ease; }
+.home-pillar-card:hover .home-pillar-image img { transform: scale(1.04); }
+.home-pillar-image > span { position: absolute; right: 16px; bottom: 16px; display: grid; place-items: center; width: 48px; height: 48px; background: var(--cs-yellow); color: var(--cs-blue-950); font-weight: 900; }
+.home-pillar-content { padding: 28px; }
+.home-pillar-content h3 { margin: 0 0 12px; color: var(--cs-blue-950); font-size: 1.65rem; }
+.home-pillar-content p { min-height: 74px; margin: 0 0 20px; color: var(--cs-muted); line-height: 1.65; }
+.home-pillar-content strong { color: var(--cs-red); font-size: .82rem; text-transform: uppercase; letter-spacing: .08em; }
+
+.home-cta-band { min-height: 230px; display: flex; align-items: center; justify-content: space-between; gap: 30px; padding: 48px max(24px, calc((100vw - 1080px)/2)); background: linear-gradient(90deg, rgba(177,59,46,.93), rgba(217,93,75,.84)), url('./Assets/creando-sonrisas-comunidad.jpg') center/cover; color: white; }
+.home-cta-band span { color: var(--cs-yellow); font-size: .75rem; font-weight: 900; letter-spacing: .15em; text-transform: uppercase; }
+.home-cta-band h2 { max-width: 680px; margin: 10px 0 0; color: white; font-size: clamp(2.3rem, 4vw, 4rem); line-height: 1; }
+.home-cta-band a { flex: 0 0 auto; padding: 16px 24px; background: white; color: var(--cs-red); font-weight: 900; text-decoration: none; }
+
+.home-news-template { padding: 115px max(24px, calc((100vw - 1180px)/2)); background: #fbfaf7; }
+.home-news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.home-news-card { overflow: hidden; background: white; border: 1px solid var(--cs-border); }
+.home-news-image { height: 250px; background: var(--cs-blue-100); }
+.home-news-image img { width: 100%; height: 100%; object-fit: cover; }
+.home-news-card > div:last-child { padding: 26px; }
+.home-news-card span { color: var(--cs-red); font-size: .7rem; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
+.home-news-card h3 { margin: 12px 0; color: var(--cs-blue-950); font-size: 1.45rem; }
+.home-news-card p { margin: 0; color: var(--cs-muted); line-height: 1.65; }
+
+.home-events-template { padding: 0 max(24px, calc((100vw - 1180px)/2)) 120px; background: #fbfaf7; }
+.home-events-template .home-events-feature { margin: 0; padding: 56px; border-top: 5px solid var(--cs-yellow); }
+
+@media (max-width: 800px) {
+  .home-hero-template { min-height: 650px; padding-bottom: 120px; }
+  .home-quick-actions { grid-template-columns: 1fr; margin-top: -60px; }
+  .home-quick-action { min-height: 0; border-right: 0; border-bottom: 1px solid var(--cs-border); }
+  .home-mission-template { grid-template-columns: 1fr; padding: 90px 0; }
+  .home-mission-image img { height: 430px; }
+  .home-mission-image strong { right: 0; }
+  .home-causes-template .home-pillars-grid,
+  .home-news-grid { grid-template-columns: 1fr; }
+  .home-cta-band { align-items: flex-start; flex-direction: column; }
+  .home-events-template .home-events-feature { padding: 34px 22px; }
+}
+
+@media (max-width: 520px) {
+  .home-hero-template h1 { font-size: clamp(3.4rem, 18vw, 5rem); }
+  .home-quick-actions,
+  .home-mission-template { width: calc(100% - 28px); }
+  .home-quick-action { padding: 28px 24px; }
+  .home-mission-image { padding-left: 14px; }
+  .home-mission-image img { height: 360px; }
+  .home-mission-image strong { max-width: 250px; padding: 18px; font-size: 1rem; }
+  .home-causes-template,
+  .home-news-template { padding-left: 14px; padding-right: 14px; }
+}
+
 /* Ajustes editoriales: inicio, marca moderna y Nosotros simplificado */
 .brand-name {
   font-family: Inter, "Segoe UI", Arial, sans-serif !important;
