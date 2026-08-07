@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { isSupabaseConfigured, signIn, signOut, supabase, uploadSiteImage } from '../supabase';
+import { isSupabaseConfigured, signIn, signOut, supabase, supabaseConfigStatus, uploadSiteImage } from '../supabase';
 
 const tabs = [
   ['home', 'Inicio'],
@@ -114,7 +114,16 @@ export default function Admin({ content, onSave }) {
       <main className="admin-page admin-setup">
         <span className="admin-kicker">Configuración pendiente</span>
         <h1>Conectá Supabase para habilitar el panel</h1>
-        <p>Agregá <code>VITE_SUPABASE_URL</code> y <code>VITE_SUPABASE_PUBLISHABLE_KEY</code> en tu archivo <code>.env</code>, y ejecutá <code>supabase/schema.sql</code> en el editor SQL.</p>
+        <p>Este despliegue no recibió todas las variables necesarias durante la compilación.</p>
+        <ul className="admin-config-checklist">
+          <li className={supabaseConfigStatus.hasUrl ? 'is-ready' : 'is-missing'}>
+            <code>VITE_SUPABASE_URL</code>: {supabaseConfigStatus.hasUrl ? 'detectada' : 'falta'}
+          </li>
+          <li className={supabaseConfigStatus.hasKey ? 'is-ready' : 'is-missing'}>
+            <code>VITE_SUPABASE_PUBLISHABLE_KEY</code>: {supabaseConfigStatus.hasKey ? 'detectada' : 'falta'}
+          </li>
+        </ul>
+        <p>Corregí la variable que figure como “falta” en Vercel y volvé a desplegar el último commit.</p>
       </main>
     );
   }

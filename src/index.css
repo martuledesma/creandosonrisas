@@ -5052,11 +5052,11 @@ footer {
     --celeste-logo: #1d5d98;
     --celeste-logo-hover: #164b7d;
     --celeste-logo-rgb: 29, 93, 152;
-    --amarillo-logo: #2b6fa8;
-    --amarillo-logo-hover: #205b8c;
-    --amarillo-logo-rgb: 43, 111, 168;
-    --amarillo-texto: #ffffff;
-    --naranja-logo: #2b6fa8;
+    --amarillo-logo: #f2b94b;
+    --amarillo-logo-hover: #d89a28;
+    --amarillo-logo-rgb: 242, 185, 75;
+    --amarillo-texto: #172536;
+    --naranja-logo: #e66b55;
     --blanco: #ffffff;
     --crema-home: #f4f7fb;
     --gris-fondo: #eef3f8;
@@ -5066,7 +5066,10 @@ footer {
 }
 
 body {
-    background: #ffffff;
+    background:
+        radial-gradient(circle at 8% 24%, rgba(242, 185, 75, 0.12), transparent 24rem),
+        radial-gradient(circle at 92% 58%, rgba(230, 107, 85, 0.1), transparent 28rem),
+        #ffffff;
     color: var(--texto-oscuro);
     font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
@@ -5079,30 +5082,30 @@ h3,
     letter-spacing: -0.02em;
 }
 
-.navbar,
-.navbar.navbar-scrolled {
+.navbar {
     min-height: 76px;
     padding: 9px clamp(22px, 5vw, 72px);
-    background: rgba(255, 255, 255, 0.97);
-    border-bottom: 1px solid var(--institucional-borde);
-    box-shadow: 0 3px 14px rgba(17, 53, 91, 0.06);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid rgba(214, 224, 234, 0.72);
+    box-shadow: 0 3px 14px rgba(17, 53, 91, 0.04);
+    backdrop-filter: blur(14px) saturate(125%);
+    -webkit-backdrop-filter: blur(14px) saturate(125%);
 }
 
-.brand-mark {
-    width: 44px;
-    height: 44px;
-    border: 2px solid #d8e6f2;
-    border-radius: 8px;
-    background: #edf5fb;
-    overflow: hidden;
+.navbar.navbar-scrolled {
+    background: rgba(255, 255, 255, 0.62);
+    border-bottom-color: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 10px 34px rgba(18, 59, 109, 0.1);
+    backdrop-filter: blur(24px) saturate(150%);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
 }
 
-.brand-mark img {
-    width: 42px;
-    height: 42px;
+.brand-isotipo {
+    width: 48px;
+    height: 48px;
     object-fit: contain;
-    transform: scale(1.2);
+    transform: scale(1.16);
+    filter: drop-shadow(0 4px 8px rgba(18, 59, 109, 0.12));
 }
 
 .brand-name {
@@ -5663,6 +5666,59 @@ h3,
     padding: 2px 5px;
     border-radius: 4px;
     background: #e5edf5;
+}
+
+.admin-config-checklist {
+    width: min(560px, 100%);
+    margin: 22px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.admin-config-checklist li {
+    margin: 8px 0;
+    padding: 12px 14px;
+    border: 1px solid #d6e0ea;
+    border-radius: 6px;
+    background: #ffffff;
+}
+
+.admin-config-checklist .is-ready {
+    border-color: #8bc7a2;
+    background: #effaf3;
+    color: #24633b;
+}
+
+.admin-config-checklist .is-missing {
+    border-color: #e7afa5;
+    background: #fff3f0;
+    color: #9a3e2f;
+}
+
+/* Acentos cálidos para una identidad más humana y activa */
+.home-events-section,
+.alliances-section,
+.sumate-content {
+    background-image:
+        radial-gradient(circle at 12% 18%, rgba(var(--amarillo-logo-rgb), 0.14), transparent 18rem),
+        radial-gradient(circle at 88% 72%, rgba(230, 107, 85, 0.1), transparent 22rem);
+}
+
+.home-event-card:nth-child(3n + 1),
+.feature-card:nth-child(3n + 1),
+.alliance-card:nth-child(3n + 1) {
+    border-top-color: var(--amarillo-logo);
+}
+
+.home-event-card:nth-child(3n + 2),
+.feature-card:nth-child(3n + 2),
+.alliance-card:nth-child(3n + 2) {
+    border-top-color: var(--naranja-logo);
+}
+
+.page-eyebrow,
+.home-section-kicker {
+    color: #b94f3d;
 }
 
 @media (max-width: 760px) {

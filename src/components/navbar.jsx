@@ -22,9 +22,7 @@ const Navbar = () => {
         <nav className={`navbar ${hasScrolled ? 'navbar-scrolled' : ''}`}>
             <div className="logo-container">
                 <Link to="/" onClick={closeMenu}>
-                    <span className="brand-mark" aria-hidden="true">
-                        <img src={isotipo} alt="" />
-                    </span>
+                    <img className="brand-isotipo" src={isotipo} alt="" aria-hidden="true" />
                     <span className="brand-name">Creando Sonrisas</span>
                 </Link>
             </div>
