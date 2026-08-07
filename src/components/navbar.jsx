@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import isotipo from '../Assets/isotipo-creando-sonrisas.png';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,7 +22,9 @@ const Navbar = () => {
         <nav className={`navbar ${hasScrolled ? 'navbar-scrolled' : ''}`}>
             <div className="logo-container">
                 <Link to="/" onClick={closeMenu}>
-                    <span className="brand-mark" aria-hidden="true">☺</span>
+                    <span className="brand-mark" aria-hidden="true">
+                        <img src={isotipo} alt="" />
+                    </span>
                     <span className="brand-name">Creando Sonrisas</span>
                 </Link>
             </div>

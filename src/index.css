@@ -5094,9 +5094,15 @@ h3,
     height: 44px;
     border: 2px solid #d8e6f2;
     border-radius: 8px;
-    background: var(--azul-principal);
-    font-family: Georgia, serif;
-    font-size: 1.7rem;
+    background: #edf5fb;
+    overflow: hidden;
+}
+
+.brand-mark img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    transform: scale(1.2);
 }
 
 .brand-name {
