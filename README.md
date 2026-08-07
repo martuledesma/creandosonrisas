@@ -26,7 +26,7 @@ Abrí `http://127.0.0.1:5173/`.
 ```bash
 VITE_WHATSAPP_NUMBER=5493810000000
 VITE_SUPABASE_URL=https://tu-proyecto.supabase.co
-VITE_SUPABASE_ANON_KEY=tu_clave_anonima
+VITE_SUPABASE_PUBLISHABLE_KEY=tu_clave_publicable
 ```
 
 ## Configurar el panel

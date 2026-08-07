@@ -114,7 +114,7 @@ export default function Admin({ content, onSave }) {
       <main className="admin-page admin-setup">
         <span className="admin-kicker">Configuración pendiente</span>
         <h1>Conectá Supabase para habilitar el panel</h1>
-        <p>Agregá <code>VITE_SUPABASE_URL</code> y <code>VITE_SUPABASE_ANON_KEY</code> en tu archivo <code>.env</code>, y ejecutá <code>supabase/schema.sql</code> en el editor SQL.</p>
+        <p>Agregá <code>VITE_SUPABASE_URL</code> y <code>VITE_SUPABASE_PUBLISHABLE_KEY</code> en tu archivo <code>.env</code>, y ejecutá <code>supabase/schema.sql</code> en el editor SQL.</p>
       </main>
     );
   }
