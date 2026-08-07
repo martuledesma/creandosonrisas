@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import useHeroImageReady from '../hooks/useHeroImageReady';
 
 const defaultAlliances = [
   {
@@ -42,16 +41,7 @@ function Nosotros({ content = {} }) {
   };
 
   const heroImage = content.heroImage || '';
-  const heroReady = useHeroImageReady(heroImage, false);
   const alliances = content.alliances?.length ? content.alliances : defaultAlliances;
-
-  if (!heroReady) {
-    return (
-      <div className="page-loader">
-        <span>Cargando contenido...</span>
-      </div>
-    );
-  }
 
   return (
     <div className="nosotros-page">

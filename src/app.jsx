@@ -3,7 +3,6 @@ import { Link, Navigate, Routes, Route } from 'react-router-dom';
 import './index.css';
 import Navbar from './components/navbar';
 import Admin from './pages/Admin';
-import useHeroImageReady from './hooks/useHeroImageReady';
 import useSiteContent from './hooks/useSiteContent';
 
 // Importación de Páginas
@@ -150,7 +149,7 @@ const WhatsAppButton = ({ className = '', label = 'WhatsApp' }) => {
 };
 
 function App() {
-  const { content: siteContent, loading: contentLoading, save: saveContent } = useSiteContent(defaultSiteContent);
+  const { content: siteContent, save: saveContent } = useSiteContent(defaultSiteContent);
   const content = siteContent.home || defaultHomeContent;
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -162,7 +161,6 @@ function App() {
     imagen: item.imagen || '',
   }));
   const heroBackground = content.heroImage || novedadesSlides.find((item) => item.imagen)?.imagen || '';
-  const heroReady = useHeroImageReady(heroBackground, contentLoading);
 
   // Mostrar eventos de hoy en adelante
   const hoy = new Date();
@@ -196,17 +194,6 @@ function App() {
 
   const activeSlideIndex = novedadesSlides.length ? activeSlide % novedadesSlides.length : 0;
   const activeNovedad = novedadesSlides[activeSlideIndex];
-
-  if (!heroReady) {
-    return (
-      <div className="App">
-        <Navbar />
-        <div className="page-loader">
-          <span>Cargando contenido...</span>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="App">

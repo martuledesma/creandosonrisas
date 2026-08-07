@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import useHeroImageReady from '../hooks/useHeroImageReady';
 import fotoFestejo from '../Assets/creando-sonrisas-festejo.jpg';
 import fotoActividades from '../Assets/creando-sonrisas-actividades.jpg';
 import fotoInfancias from '../Assets/creando-sonrisas-infancias.jpg';
@@ -109,11 +108,8 @@ const Proyectos = ({ content = {} }) => {
     ? projects
     : projects.filter((project) => getProjectCategory(project) === activeFilter);
   const heroImage = content.heroImage || projects.find((project) => project.imagen)?.imagen || '';
-  const heroReady = useHeroImageReady(heroImage, false);
 
   useEffect(() => {
-    if (!heroReady) return undefined;
-
     const track = areasTrackRef.current;
     if (!track) return undefined;
 
@@ -130,15 +126,7 @@ const Proyectos = ({ content = {} }) => {
     }, 1400);
 
     return () => window.clearInterval(interval);
-  }, [heroReady]);
-
-  if (!heroReady) {
-    return (
-      <div className="page-loader">
-        <span>Cargando contenido...</span>
-      </div>
-    );
-  }
+  }, []);
 
   return (
     <div className="proyectos-page">

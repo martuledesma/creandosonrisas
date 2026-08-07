@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import useHeroImageReady from '../hooks/useHeroImageReady';
 import fotoComunidad from '../Assets/creando-sonrisas-comunidad.jpg';
 import fotoFestejo from '../Assets/creando-sonrisas-festejo.jpg';
 import fotoActividades from '../Assets/creando-sonrisas-actividades.jpg';
@@ -38,15 +37,6 @@ const Sumate = ({ content = {} }) => {
   }, [activeSlide, visibleCarouselImages.length]);
 
   const heroImage = content.heroImage || visibleCarouselImages[0]?.src || '';
-  const heroReady = useHeroImageReady(heroImage, false);
-
-  if (!heroReady) {
-    return (
-      <div className="page-loader">
-        <span>Cargando contenido...</span>
-      </div>
-    );
-  }
 
   return (
     <div className="sumate-page">
