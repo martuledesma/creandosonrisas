@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import useHeroImageReady from '../hooks/useHeroImageReady';
+import fotoComunidad from '../Assets/creando-sonrisas-comunidad.jpg';
+import fotoFestejo from '../Assets/creando-sonrisas-festejo.jpg';
+import fotoActividades from '../Assets/creando-sonrisas-actividades.jpg';
+import fotoInfancias from '../Assets/creando-sonrisas-infancias.jpg';
 
 const Sumate = () => {
   const content = {};
   const [activeSlide, setActiveSlide] = useState(0);
+  const galleryImages = [
+    { src: fotoComunidad, alt: 'Voluntarios, niños y familias de Creando Sonrisas' },
+    { src: fotoFestejo, alt: 'Festejo comunitario junto a niños y voluntarios' },
+    { src: fotoActividades, alt: 'Actividades recreativas con niños de la comunidad' },
+    { src: fotoInfancias, alt: 'Un niño sonriendo durante una actividad de la fundación' },
+  ];
   const editableCarouselImages = (content.carouselImages || [])
     .filter((image) => image?.url)
     .map((image, index) => ({
       src: image.url,
       alt: image.alt || `Foto ${index + 1} de la fundación`,
     }));
-  const visibleCarouselImages = editableCarouselImages;
+  const visibleCarouselImages = editableCarouselImages.length ? editableCarouselImages : galleryImages;
 
   const goToPreviousSlide = () => {
     if (!visibleCarouselImages.length) return;

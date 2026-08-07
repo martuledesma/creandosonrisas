@@ -1,26 +1,29 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useHeroImageReady from '../hooks/useHeroImageReady';
+import fotoFestejo from '../Assets/creando-sonrisas-festejo.jpg';
+import fotoActividades from '../Assets/creando-sonrisas-actividades.jpg';
+import fotoInfancias from '../Assets/creando-sonrisas-infancias.jpg';
 
 const defaultProjects = [
   {
     id: 1,
     titulo: 'Merendero comunitario',
     descripcion: 'Meriendas y almuerzos compartidos con niños, niñas y familias de la comunidad.',
-    imagen: '',
+    imagen: fotoFestejo,
     estado: 'Activo',
   },
   {
     id: 2,
     titulo: 'Apoyo escolar',
     descripcion: 'Acompañamiento educativo para fortalecer el aprendizaje y las trayectorias escolares.',
-    imagen: '',
+    imagen: fotoActividades,
     estado: 'Activo',
   },
   {
     id: 3,
     titulo: 'Recreación y comunidad',
     descripcion: 'Pintura, juegos, deportes, festejos especiales y acciones solidarias.',
-    imagen: '',
+    imagen: fotoInfancias,
     estado: 'Activo',
   },
 ];

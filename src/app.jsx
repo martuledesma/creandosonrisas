@@ -8,25 +8,39 @@ import useHeroImageReady from './hooks/useHeroImageReady';
 import Nosotros from './pages/Nosotros';
 import Sumate from './pages/Sumate';
 import Proyectos from './pages/Proyectos';
+import fotoComunidad from './Assets/creando-sonrisas-comunidad.jpg';
+import fotoFestejo from './Assets/creando-sonrisas-festejo.jpg';
+import fotoActividades from './Assets/creando-sonrisas-actividades.jpg';
+import fotoInfancias from './Assets/creando-sonrisas-infancias.jpg';
 
 const defaultContent = {
   heroTitle: 'Fundación Creando Sonrisas',
   heroSubtitle: 'Jóvenes tucumanos transformando realidades con educación, contención y trabajo solidario.',
+  heroImage: fotoComunidad,
   cards: [
     {
       id: 1,
       titulo: 'Apoyo escolar',
       desc: 'Acompañamiento educativo para niños y niñas de nuestra comunidad.',
+      imagen: fotoActividades,
     },
     {
       id: 2,
       titulo: 'Merendero comunitario',
       desc: 'Meriendas, almuerzos y un espacio de encuentro para las familias.',
+      imagen: fotoFestejo,
     },
     {
       id: 3,
       titulo: 'Actividades recreativas',
       desc: 'Pintura, juegos, deportes y festejos de fechas especiales.',
+      imagen: fotoInfancias,
+    },
+    {
+      id: 4,
+      titulo: 'Comunidad y voluntariado',
+      desc: 'Jóvenes, familias e instituciones trabajando juntos para crear oportunidades.',
+      imagen: fotoComunidad,
     },
   ],
   events: [
