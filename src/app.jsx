@@ -2,19 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Link, Navigate, Routes, Route } from 'react-router-dom';
 import './index.css';
 import Navbar from './components/navbar';
-import Admin from './pages/Admin';
 import useHeroImageReady from './hooks/useHeroImageReady';
 
 // Importación de Páginas
 import Nosotros from './pages/Nosotros';
 import Sumate from './pages/Sumate';
 import Proyectos from './pages/Proyectos';
-
-import {
-  onAuthStateChangedListener,
-  saveSiteContent,
-  subscribeSiteContent,
-} from './firebase';
 
 const defaultContent = {
   heroTitle: 'Fundación Creando Sonrisas',
@@ -88,41 +81,8 @@ const WhatsAppButton = ({ className = '', label = 'WhatsApp' }) => {
 };
 
 function App() {
-  const [user, setUser] = useState(null);
-  const [content, setContent] = useState(defaultContent);
-  const [loading, setLoading] = useState(true);
+  const content = defaultContent;
   const [activeSlide, setActiveSlide] = useState(0);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener((currentUser) => {
-      setUser(currentUser);
-    });
-    return unsubscribe;
-  }, []);
-
-  useEffect(() => {
-    const unsubscribe = subscribeSiteContent(
-      (snapshot) => {
-        if (snapshot.metadata.fromCache && !snapshot.metadata.hasPendingWrites) {
-          return;
-        }
-
-        if (snapshot.exists()) {
-          setContent({ ...defaultContent, ...snapshot.data() });
-        } else {
-          setContent(defaultContent);
-        }
-        setLoading(false);
-      },
-      (error) => {
-        console.error('Firebase content error:', error);
-        setLoading(false);
-      },
-      { includeMetadataChanges: true }
-    );
-
-    return unsubscribe;
-  }, []);
 
   const acciones = content.cards || defaultContent.cards;
   const eventosData = content.events || defaultContent.events;
@@ -131,7 +91,7 @@ function App() {
     imagen: item.imagen || '',
   }));
   const heroBackground = content.heroImage || novedadesSlides.find((item) => item.imagen)?.imagen || '';
-  const heroReady = useHeroImageReady(heroBackground, loading);
+  const heroReady = useHeroImageReady(heroBackground, false);
 
   // Mostrar eventos de hoy en adelante
   const hoy = new Date();
@@ -154,10 +114,6 @@ function App() {
 
     return () => clearInterval(timer);
   }, [novedadesSlides.length]);
-
-  const handleSaveContent = async (newContent) => {
-    await saveSiteContent(newContent);
-  };
 
   const moveSlide = (direction) => {
     setActiveSlide((prev) => {
@@ -369,7 +325,6 @@ function App() {
         <Route path="/proyectos" element={<Proyectos />} />
         <Route path="/sumate" element={<Sumate />} />
         <Route path="/contacto" element={<Navigate to="/" replace />} />
-        <Route path="/admin" element={<Admin user={user} content={content} loading={loading} onSave={handleSaveContent} />} />
       </Routes>
 
       <WhatsAppButton className="whatsapp-floating-button" />

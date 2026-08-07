@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { getNosotrosContent } from '../firebase';
+import React, { useRef, useState } from 'react';
 import useHeroImageReady from '../hooks/useHeroImageReady';
 
 const defaultAlliances = [
@@ -22,8 +21,7 @@ const defaultAlliances = [
 ];
 
 function Nosotros() {
-  const [content, setContent] = useState({});
-  const [contentLoaded, setContentLoaded] = useState(false);
+  const content = {};
   const [expandedMembers, setExpandedMembers] = useState({});
   const teamTrackRef = useRef(null);
 
@@ -44,25 +42,8 @@ function Nosotros() {
     });
   };
 
-  useEffect(() => {
-    const loadContent = async () => {
-      try {
-        const data = await getNosotrosContent();
-        if (data) {
-          setContent(data);
-        }
-      } catch (error) {
-        console.error('Error loading nosotros content:', error);
-      } finally {
-        setContentLoaded(true);
-      }
-    };
-
-    loadContent();
-  }, []);
-
   const heroImage = content.heroImage || '';
-  const heroReady = useHeroImageReady(heroImage, !contentLoaded);
+  const heroReady = useHeroImageReady(heroImage, false);
   const alliances = content.alliances?.length ? content.alliances : defaultAlliances;
 
   if (!heroReady) {

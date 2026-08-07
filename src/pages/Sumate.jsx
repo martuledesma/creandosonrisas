@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { getSumateContent } from '../firebase';
 import useHeroImageReady from '../hooks/useHeroImageReady';
 
 const Sumate = () => {
-  const [content, setContent] = useState({});
-  const [contentLoaded, setContentLoaded] = useState(false);
+  const content = {};
   const [activeSlide, setActiveSlide] = useState(0);
   const editableCarouselImages = (content.carouselImages || [])
     .filter((image) => image?.url)
@@ -25,30 +23,13 @@ const Sumate = () => {
   };
 
   useEffect(() => {
-    const loadContent = async () => {
-      try {
-        const data = await getSumateContent();
-        if (data) {
-          setContent(data);
-        }
-      } catch (error) {
-        console.error('Error loading sumate content:', error);
-      } finally {
-        setContentLoaded(true);
-      }
-    };
-
-    loadContent();
-  }, []);
-
-  useEffect(() => {
     if (activeSlide >= visibleCarouselImages.length) {
       setActiveSlide(0);
     }
   }, [activeSlide, visibleCarouselImages.length]);
 
   const heroImage = content.heroImage || visibleCarouselImages[0]?.src || '';
-  const heroReady = useHeroImageReady(heroImage, !contentLoaded);
+  const heroReady = useHeroImageReady(heroImage, false);
 
   if (!heroReady) {
     return (

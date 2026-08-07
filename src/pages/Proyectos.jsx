@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { getProyectosContent } from '../firebase';
 import useHeroImageReady from '../hooks/useHeroImageReady';
 
 const defaultProjects = [
@@ -81,8 +80,7 @@ const getProjectCategory = (project = {}) => {
 };
 
 const Proyectos = () => {
-  const [content, setContent] = useState({});
-  const [contentLoaded, setContentLoaded] = useState(false);
+  const content = {};
   const [expandedProjects, setExpandedProjects] = useState({});
   const [activeFilter, setActiveFilter] = useState('todos');
   const areasTrackRef = useRef(null);
@@ -104,42 +102,12 @@ const Proyectos = () => {
     });
   };
 
-  useEffect(() => {
-    let isMounted = true;
-    const fallbackTimer = window.setTimeout(() => {
-      if (isMounted) setContentLoaded(true);
-    }, 4500);
-
-    const loadContent = async () => {
-      try {
-        const data = await getProyectosContent();
-        if (isMounted && data) {
-          setContent(data);
-        }
-      } catch (error) {
-        console.error('Error loading proyectos content:', error);
-      } finally {
-        if (isMounted) {
-          window.clearTimeout(fallbackTimer);
-          setContentLoaded(true);
-        }
-      }
-    };
-
-    loadContent();
-
-    return () => {
-      isMounted = false;
-      window.clearTimeout(fallbackTimer);
-    };
-  }, []);
-
   const projects = content.items?.length ? content.items : defaultProjects;
   const visibleProjects = activeFilter === 'todos'
     ? projects
     : projects.filter((project) => getProjectCategory(project) === activeFilter);
   const heroImage = content.heroImage || projects.find((project) => project.imagen)?.imagen || '';
-  const heroReady = useHeroImageReady(heroImage, !contentLoaded);
+  const heroReady = useHeroImageReady(heroImage, false);
 
   useEffect(() => {
     if (!heroReady) return undefined;

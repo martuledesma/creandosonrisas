@@ -16,6 +16,7 @@
     --transicion: all 0.3s ease;
 }
 
+
 /* 2. RESET Y ESTILOS BASE */
 * {
     margin: 0;
@@ -5043,5 +5044,280 @@ footer {
         min-height: 34px;
         padding: 8px 11px;
         font-size: 0.8rem;
+    }
+}
+/* Identidad institucional Creando Sonrisas */
+:root {
+    --azul-principal: #123b6d;
+    --celeste-logo: #1d5d98;
+    --celeste-logo-hover: #164b7d;
+    --celeste-logo-rgb: 29, 93, 152;
+    --amarillo-logo: #2b6fa8;
+    --amarillo-logo-hover: #205b8c;
+    --amarillo-logo-rgb: 43, 111, 168;
+    --amarillo-texto: #ffffff;
+    --naranja-logo: #2b6fa8;
+    --blanco: #ffffff;
+    --crema-home: #f4f7fb;
+    --gris-fondo: #eef3f8;
+    --texto-oscuro: #172536;
+    --institucional-borde: #d6e0ea;
+    --institucional-suave: #e9f0f7;
+}
+
+body {
+    background: #ffffff;
+    color: var(--texto-oscuro);
+    font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+h1,
+h2,
+h3,
+.display-subtitle {
+    font-family: Georgia, "Times New Roman", serif;
+    letter-spacing: -0.02em;
+}
+
+.navbar,
+.navbar.navbar-scrolled {
+    min-height: 76px;
+    padding: 9px clamp(22px, 5vw, 72px);
+    background: rgba(255, 255, 255, 0.97);
+    border-bottom: 1px solid var(--institucional-borde);
+    box-shadow: 0 3px 14px rgba(17, 53, 91, 0.06);
+    backdrop-filter: blur(10px);
+}
+
+.brand-mark {
+    width: 44px;
+    height: 44px;
+    border: 2px solid #d8e6f2;
+    border-radius: 8px;
+    background: var(--azul-principal);
+    font-family: Georgia, serif;
+    font-size: 1.7rem;
+}
+
+.brand-name {
+    color: var(--azul-principal);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.15rem;
+    letter-spacing: 0.01em;
+}
+
+.nav-links {
+    gap: clamp(16px, 2.4vw, 34px);
+}
+
+.nav-links a {
+    color: #2d4055;
+    font-size: 0.93rem;
+    letter-spacing: 0.025em;
+}
+
+.btn-nav,
+.home-primary-link,
+.home-secondary-link,
+.home-action-button,
+.home-more-link,
+.home-carousel-caption a {
+    border: 1px solid var(--azul-principal);
+    border-radius: 5px;
+    background: var(--azul-principal);
+    color: #ffffff !important;
+    box-shadow: none;
+    font-weight: 700;
+}
+
+.home-secondary-link {
+    border-color: rgba(255, 255, 255, 0.72);
+    background: transparent;
+}
+
+.home-hero,
+.nosotros-hero,
+.sumate-hero,
+.page-hero {
+    min-height: 520px;
+    background:
+        linear-gradient(90deg, rgba(8, 39, 76, 0.98), rgba(18, 59, 109, 0.94)),
+        #123b6d;
+}
+
+.home-hero::before,
+.page-hero-photo::before {
+    background:
+        linear-gradient(90deg, transparent 0 74%, rgba(255,255,255,.06) 74% 74.15%, transparent 74.15%),
+        linear-gradient(0deg, transparent 0 22%, rgba(255,255,255,.05) 22% 22.15%, transparent 22.15%);
+    opacity: 1;
+}
+
+.home-hero-content,
+.page-hero-content,
+.nosotros-hero-content,
+.sumate-hero-content {
+    width: min(1160px, 100%);
+    max-width: 1160px;
+    text-align: left;
+}
+
+.home-eyebrow,
+.page-eyebrow,
+.project-section-heading > span,
+.alliances-header > span,
+.team-carousel-header > div > span {
+    color: #bcd4e9;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.home-hero h1,
+.page-hero h1,
+.nosotros-hero h1,
+.sumate-hero h1 {
+    max-width: 760px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2.7rem, 6vw, 5rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+    text-transform: none;
+    text-shadow: none;
+}
+
+.home-hero p,
+.page-hero p,
+.nosotros-hero p,
+.sumate-hero p {
+    max-width: 680px;
+    margin-left: 0;
+    color: #dbe8f3;
+    font-size: 1.15rem;
+}
+
+.page-hero-card {
+    border: 1px solid rgba(255,255,255,.24);
+    border-radius: 6px;
+    background: rgba(6, 33, 65, .34);
+    box-shadow: none;
+}
+
+.home-shell {
+    background: #ffffff;
+}
+
+.home-action-bar {
+    border: 1px solid var(--institucional-borde);
+    border-radius: 6px;
+    background: #ffffff;
+    box-shadow: 0 12px 30px rgba(25, 61, 97, 0.08);
+}
+
+.home-events-feature {
+    border: 1px solid var(--institucional-borde);
+    border-radius: 8px;
+    background: var(--gris-fondo);
+    box-shadow: none;
+}
+
+.home-events-feature .home-events-grid .evento-item-mini,
+.home-events-feature .home-events-grid .evento-fecha-mini {
+    border-color: #ccdae7;
+    border-radius: 5px;
+    background: #ffffff;
+}
+
+.home-events-feature .home-events-grid .evento-info h4,
+.home-events-feature .home-events-grid .evento-info p,
+.home-events-feature .home-events-grid .evento-fecha-mini,
+.home-events-feature .home-events-grid .ev-mes {
+    color: var(--texto-oscuro);
+}
+
+.home-feature-section,
+.home-services-section,
+.team-section,
+.alliances-section,
+.projects-list-section,
+.project-areas-section,
+.sumate-content,
+.sumate-gallery {
+    border-radius: 0;
+    background: #ffffff;
+}
+
+.title-line-blue,
+.title-line-orange,
+.title-line-white {
+    color: var(--azul-principal) !important;
+    -webkit-text-fill-color: var(--azul-principal) !important;
+    -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
+}
+
+.home-carousel-frame,
+.home-service-card,
+.feature-card,
+.team-carousel-intro,
+.team-carousel-card,
+.alliance-card,
+.project-area-card,
+.sumate-gallery-action {
+    border: 1px solid var(--institucional-borde);
+    border-radius: 7px;
+    box-shadow: 0 8px 22px rgba(25, 61, 97, 0.07);
+}
+
+.home-carousel-caption,
+.sumate-gallery-action,
+.project-area-card,
+.project-area-card:nth-child(2),
+.project-area-card:nth-child(3),
+.project-area-card:nth-child(4) {
+    background: var(--azul-principal);
+}
+
+.home-dark-section {
+    background: #0a294d;
+}
+
+.home-dark-card {
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 7px;
+    background: #ffffff;
+    box-shadow: none;
+}
+
+.home-map-label,
+.sumate-participation-tags span,
+.feature-status {
+    border-radius: 4px;
+}
+
+.footer {
+    border-top: 1px solid rgba(255,255,255,.14);
+    background: #071d36;
+}
+
+@media (max-width: 768px) {
+    .brand-name {
+        font-size: 1rem;
+    }
+
+    .home-hero,
+    .nosotros-hero,
+    .sumate-hero,
+    .page-hero {
+        min-height: 500px;
+    }
+
+    .home-hero-content,
+    .page-hero-content,
+    .nosotros-hero-content,
+    .sumate-hero-content {
+        text-align: left;
     }
 }
