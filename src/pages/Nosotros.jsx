@@ -33,6 +33,22 @@ function Nosotros({ content = {} }) {
       </header>
 
       <main>
+        <section className="nosotros-mission-section" aria-labelledby="mision-title">
+          <div className="nosotros-mission-image">
+            <img src={content.missionImage || fotoComunidad} alt="La comunidad de Creando Sonrisas" loading="lazy" decoding="async" />
+            <strong>Juntos creamos más oportunidades</strong>
+          </div>
+          <article className="nosotros-mission-copy">
+            <span>Nuestra misión</span>
+            <h2 id="mision-title">{content.missionTitle || 'Siempre elegimos ver esperanza'}</h2>
+            <p>{content.missionText || 'Cada encuentro, cada merienda y cada aprendizaje compartido pueden abrir una nueva posibilidad para niños, niñas y familias.'}</p>
+            <ul>
+              <li>Educación y apoyo escolar.</li>
+              <li>Alimentación, recreación y acompañamiento.</li>
+            </ul>
+          </article>
+        </section>
+
         <section className="nosotros-history-section" aria-labelledby="historia-title">
           <div className="nosotros-history-photo">
             <img src={fotoComunidad} alt="Comunidad de la Fundación Creando Sonrisas" loading="lazy" decoding="async" />

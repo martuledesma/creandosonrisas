@@ -71,6 +71,13 @@ const defaultHomeContent = {
   impactTitle: 'Siempre elegimos ver esperanza',
   impactText: 'Cada encuentro, cada merienda y cada aprendizaje compartido pueden abrir una nueva posibilidad para niños, niñas y familias.',
   impactImage: fotoComunidad,
+  sectionVisibility: {
+    quickActions: true,
+    projects: true,
+    cta: true,
+    news: true,
+    events: false,
+  },
   footerText: '© 2026 Fundación Creando Sonrisas - Tucumán, Argentina',
 };
 
@@ -82,6 +89,9 @@ const defaultSiteContent = {
     heroSubtitle: 'Jóvenes tucumanos que transforman realidades con educación y trabajo territorial.',
     content: 'Somos una organización civil impulsada por jóvenes tucumanos. A través del merendero, el apoyo escolar, el acompañamiento en salud y distintas acciones solidarias, generamos oportunidades para niños, adolescentes y familias.',
     additionalText: '',
+    missionTitle: 'Siempre elegimos ver esperanza',
+    missionText: 'Cada encuentro, cada merienda y cada aprendizaje compartido pueden abrir una nueva posibilidad para niños, niñas y familias.',
+    missionImage: fotoComunidad,
     teamCards: [],
   },
   proyectos: {
@@ -164,6 +174,10 @@ function App() {
     imagen: item.imagen || '',
   }));
   const heroBackground = content.heroImage || novedadesSlides.find((item) => item.imagen)?.imagen || '';
+  const sectionVisibility = {
+    ...defaultHomeContent.sectionVisibility,
+    ...(content.sectionVisibility || {}),
+  };
 
   // Mostrar eventos de hoy en adelante
   const hoy = new Date();
@@ -236,13 +250,12 @@ function App() {
                   <p>{content.heroSubtitle || defaultHomeContent.heroSubtitle}</p>
                   <div className="home-hero-actions">
                     <Link className="home-primary-link" to="/sumate">Sumate</Link>
-                    <Link className="home-secondary-link" to="/proyectos">Ver proyectos</Link>
                   </div>
                 </div>
               </header>
 
               <main className="home-template-shell">
-                <section className="home-quick-actions" aria-label="Formas de participar">
+                {sectionVisibility.quickActions && <section className="home-quick-actions" aria-label="Formas de participar">
                   <Link to="/sumate" className="home-quick-action">
                     <span>01</span><h2>Ser voluntario</h2><p>Compartí tu tiempo y tus ganas de ayudar.</p>
                   </Link>
@@ -252,26 +265,9 @@ function App() {
                   <Link to="/sumate" className="home-quick-action">
                     <span>03</span><h2>Hacer una donación</h2><p>Cada aporte ayuda a sostener nuestras actividades.</p>
                   </Link>
-                </section>
+                </section>}
 
-                <section id="impacto" className="home-mission-template" aria-labelledby="impact-title">
-                  <div className="home-mission-image">
-                    <img src={content.impactImage || defaultHomeContent.impactImage} alt="La comunidad de Creando Sonrisas" />
-                    <strong>Juntos creamos más oportunidades</strong>
-                  </div>
-                  <div className="home-mission-copy">
-                    <span className="template-kicker">Nuestra misión</span>
-                    <h2 id="impact-title">{content.impactTitle || defaultHomeContent.impactTitle}</h2>
-                    <p>{content.impactText || defaultHomeContent.impactText}</p>
-                    <ul>
-                      <li>Educación y apoyo escolar.</li>
-                      <li>Alimentación, recreación y acompañamiento.</li>
-                    </ul>
-                    <Link to="/nosotros" className="template-text-link">Conocé nuestra historia →</Link>
-                  </div>
-                </section>
-
-                <section className="home-causes-template" aria-labelledby="pillars-title">
+                {sectionVisibility.projects && <section className="home-causes-template" aria-labelledby="pillars-title">
                   <div className="template-section-title">
                     <span className="template-kicker">Ayudamos desde el territorio</span>
                     <h2 id="pillars-title">Nuestros proyectos</h2>
@@ -279,25 +275,26 @@ function App() {
                   <div className="home-pillars-grid">
                     {pilares.slice(0, 3).map((pillar, index) => {
                       const pillarNames = ['Acompañamiento escolar', 'Merendero', 'Recreación'];
+                      const displayName = index === 0 && pillar.titulo === 'Educación' ? pillarNames[0] : (pillar.titulo || pillarNames[index]);
                       return (
                       <Link className={`home-pillar-card home-pillar-tone-${index + 1}`} to="/proyectos" key={pillar.id || index}>
                         <div className="home-pillar-image">
-                          {pillar.imagen && <img src={pillar.imagen} alt={pillarNames[index]} loading="lazy" decoding="async" />}
+                          {pillar.imagen && <img src={pillar.imagen} alt={displayName} loading="lazy" decoding="async" />}
                         </div>
                         <div className="home-pillar-content">
-                          <h3>{pillarNames[index]}</h3>
+                          <h3>{displayName}</h3>
                         </div>
                       </Link>
                     )})}
                   </div>
-                </section>
+                </section>}
 
-                <section className="home-cta-band">
+                {sectionVisibility.cta && <section className="home-cta-band">
                   <div><span>Tu ayuda transforma</span><h2>Hagamos crecer nuevas sonrisas</h2></div>
                   <Link to="/sumate">Quiero colaborar</Link>
-                </section>
+                </section>}
 
-                <section id="novedades" className="home-news-template" aria-labelledby="news-title">
+                {sectionVisibility.news && <section id="novedades" className="home-news-template" aria-labelledby="news-title">
                   <div className="template-section-title centered">
                     <span className="template-kicker">Historias recientes</span>
                     <h2 id="news-title">Novedades</h2>
@@ -312,9 +309,9 @@ function App() {
                       </article>
                     ))}
                   </div>
-                </section>
+                </section>}
 
-                <div className="home-events-template">{eventsSection}</div>
+                {sectionVisibility.events && <div className="home-events-template">{eventsSection}</div>}
               </main>
 
             </>

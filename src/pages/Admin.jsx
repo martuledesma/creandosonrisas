@@ -19,6 +19,13 @@ const TextField = ({ label, value = '', onChange, multiline = false, type = 'tex
   </label>
 );
 
+const VisibilityField = ({ label, checked, onChange }) => (
+  <label className="admin-visibility-field">
+    <input type="checkbox" checked={checked} onChange={(event) => onChange(event.target.checked)} />
+    <span><strong>{label}</strong><small>{checked ? 'Visible en el sitio' : 'Oculta en el sitio'}</small></span>
+  </label>
+);
+
 const ImageField = ({ label, value = '', onChange }) => {
   const [uploading, setUploading] = useState(false);
 
@@ -75,6 +82,18 @@ export default function Admin({ content, onSave }) {
     const items = [...(draft[page]?.[collection] || [])];
     items[index] = { ...items[index], [key]: value };
     updatePage(page, collection, items);
+  };
+
+  const updateHomeVisibility = (section, value) => {
+    updatePage('home', 'sectionVisibility', {
+      quickActions: true,
+      projects: true,
+      cta: true,
+      news: true,
+      events: false,
+      ...(draft.home?.sectionVisibility || {}),
+      [section]: value,
+    });
   };
 
   const addItem = (page, collection, item) => {
@@ -174,19 +193,27 @@ export default function Admin({ content, onSave }) {
               <TextField label="Título principal" value={home.heroTitle} onChange={(value) => updatePage('home', 'heroTitle', value)} />
               <TextField label="Subtítulo" value={home.heroSubtitle} onChange={(value) => updatePage('home', 'heroSubtitle', value)} multiline />
               <ImageField label="Imagen de portada" value={home.heroImage} onChange={(value) => updatePage('home', 'heroImage', value)} />
-              <TextField label="Título de la franja de impacto" value={home.impactTitle} onChange={(value) => updatePage('home', 'impactTitle', value)} />
-              <TextField label="Mensaje de la franja de impacto" value={home.impactText} onChange={(value) => updatePage('home', 'impactText', value)} multiline />
-              <ImageField label="Imagen de la franja de impacto" value={home.impactImage} onChange={(value) => updatePage('home', 'impactImage', value)} />
               <TextField label="Texto del pie" value={home.footerText} onChange={(value) => updatePage('home', 'footerText', value)} />
             </div>
             <div className="admin-block">
-              <div className="admin-block-title"><h2>Educación, Merendero y Recreación</h2></div>
-              <p className="admin-help-text">Estos tres ejes aparecen debajo de los próximos eventos en la página de inicio.</p>
+              <h2>Mostrar u ocultar secciones</h2>
+              <div className="admin-visibility-grid">
+                <VisibilityField label="Accesos rápidos" checked={(home.sectionVisibility?.quickActions ?? true)} onChange={(value) => updateHomeVisibility('quickActions', value)} />
+                <VisibilityField label="Nuestros proyectos" checked={(home.sectionVisibility?.projects ?? true)} onChange={(value) => updateHomeVisibility('projects', value)} />
+                <VisibilityField label="Franja para colaborar" checked={(home.sectionVisibility?.cta ?? true)} onChange={(value) => updateHomeVisibility('cta', value)} />
+                <VisibilityField label="Novedades" checked={(home.sectionVisibility?.news ?? true)} onChange={(value) => updateHomeVisibility('news', value)} />
+                <VisibilityField label="Próximos eventos" checked={(home.sectionVisibility?.events ?? false)} onChange={(value) => updateHomeVisibility('events', value)} />
+              </div>
+            </div>
+            <div className="admin-block">
+              <div className="admin-block-title"><h2>Acompañamiento escolar, Merendero y Recreación</h2><button type="button" onClick={() => addItem('home', 'pillars', { titulo: '', desc: '', imagen: '' })}>Agregar</button></div>
+              <p className="admin-help-text">Estas tarjetas aparecen después de la portada. Podés editarlas, ocultar toda la sección o eliminar una tarjeta.</p>
               {(home.pillars || []).map((item, index) => (
                 <article className="admin-item" key={item.id || index}>
                   <TextField label={`Título del eje ${index + 1}`} value={item.titulo} onChange={(value) => updateItem('home', 'pillars', index, 'titulo', value)} />
                   <TextField label="Descripción" value={item.desc} onChange={(value) => updateItem('home', 'pillars', index, 'desc', value)} multiline />
                   <ImageField label="Imagen" value={item.imagen} onChange={(value) => updateItem('home', 'pillars', index, 'imagen', value)} />
+                  <button className="admin-delete-button" type="button" onClick={() => removeItem('home', 'pillars', index)}>Eliminar</button>
                 </article>
               ))}
             </div>
@@ -223,6 +250,10 @@ export default function Admin({ content, onSave }) {
             <TextField label="Presentación" value={nosotros.content} onChange={(value) => updatePage('nosotros', 'content', value)} multiline />
             <TextField label="Texto adicional" value={nosotros.additionalText} onChange={(value) => updatePage('nosotros', 'additionalText', value)} multiline />
             <ImageField label="Imagen de portada" value={nosotros.heroImage} onChange={(value) => updatePage('nosotros', 'heroImage', value)} />
+            <h2>Nuestra misión</h2>
+            <TextField label="Título de misión" value={nosotros.missionTitle} onChange={(value) => updatePage('nosotros', 'missionTitle', value)} />
+            <TextField label="Texto de misión" value={nosotros.missionText} onChange={(value) => updatePage('nosotros', 'missionText', value)} multiline />
+            <ImageField label="Imagen de misión" value={nosotros.missionImage} onChange={(value) => updatePage('nosotros', 'missionImage', value)} />
           </div>
         )}
 
