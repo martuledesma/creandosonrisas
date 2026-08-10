@@ -2930,3 +2930,125 @@ h3,
     min-height: 135px;
   }
 }
+
+/* Fondo vivo y valores compactos en Nosotros */
+.nosotros-page-without-hero .nosotros-intro-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.nosotros-page-without-hero .nosotros-intro-collage,
+.nosotros-page-without-hero .nosotros-intro-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.nosotros-background-words {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nosotros-background-words span {
+  position: absolute;
+  color: rgba(196, 57, 49, .34);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 4.2vw, 4.6rem);
+  font-weight: 700;
+  letter-spacing: -.04em;
+  filter: blur(1.4px);
+  opacity: .2;
+  animation: nosotros-word-pulse 6.5s ease-in-out infinite;
+}
+
+.nosotros-background-words span:nth-child(1) {
+  top: 8%;
+  left: 2%;
+}
+
+.nosotros-background-words span:nth-child(2) {
+  top: 17%;
+  right: 2%;
+  animation-delay: -1.8s;
+}
+
+.nosotros-background-words span:nth-child(3) {
+  bottom: 12%;
+  left: 11%;
+  animation-delay: -3.4s;
+}
+
+.nosotros-background-words span:nth-child(4) {
+  right: 5%;
+  bottom: 4%;
+  animation-delay: -5s;
+}
+
+@keyframes nosotros-word-pulse {
+  0%, 100% {
+    opacity: .09;
+    transform: scale(.96);
+  }
+  45%, 60% {
+    opacity: .36;
+    transform: scale(1.02);
+  }
+}
+
+.nosotros-page-without-hero .nosotros-values-section {
+  padding-top: clamp(48px, 5.5vw, 72px);
+  padding-bottom: clamp(52px, 6vw, 78px);
+}
+
+.nosotros-page-without-hero .nosotros-values-section > header {
+  margin-bottom: 28px;
+}
+
+.nosotros-page-without-hero .nosotros-values-section > header > span {
+  margin-bottom: 10px;
+  font-size: .68rem;
+}
+
+.nosotros-page-without-hero .nosotros-values-section h2 {
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
+}
+
+.nosotros-page-without-hero .nosotros-value-card {
+  min-height: 180px;
+  padding: 24px 26px;
+}
+
+.nosotros-page-without-hero .nosotros-value-card h3 {
+  margin: 14px 0 8px;
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+}
+
+.nosotros-page-without-hero .nosotros-value-card p {
+  font-size: .9rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 800px) {
+  .nosotros-background-words span {
+    font-size: clamp(1.7rem, 8vw, 3rem);
+  }
+
+  .nosotros-page-without-hero .nosotros-values-section {
+    padding: 44px 20px 50px;
+  }
+
+  .nosotros-page-without-hero .nosotros-value-card {
+    min-height: 0;
+    padding: 22px 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nosotros-background-words span {
+    animation: none;
+    opacity: .1;
+  }
+}
