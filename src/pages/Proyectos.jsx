@@ -77,31 +77,8 @@ const Proyectos = ({ content = {} }) => {
   const visibleProjects = activeFilter === 'todos'
     ? projects
     : projects.filter((project) => getProjectCategory(project) === activeFilter);
-  const heroImage = content.heroImage || projects.find((project) => project.imagen)?.imagen || '';
-
   return (
-    <div className="proyectos-page">
-      <header
-        className="page-hero page-hero-photo"
-        style={heroImage ? {
-          backgroundImage: `url('${heroImage}')`,
-        } : undefined}
-      >
-        <div className="page-hero-content">
-          <div className="page-hero-copy">
-            <span className="page-eyebrow">Proyectos</span>
-            <h1>Donde hay una necesidad nace un proyecto.</h1>
-            <p>
-              {content.heroSubtitle || 'Impulsamos respuestas concretas en educación, salud, oficios y cuidado comunitario.'}
-            </p>
-          </div>
-          <div className="page-hero-card">
-            <span>Impacto territorial</span>
-            <strong>Acciones sostenidas junto a escuelas, familias, vecinos e instituciones.</strong>
-          </div>
-        </div>
-      </header>
-
+    <div className="proyectos-page proyectos-page-without-hero">
       <section className="page-intro">
         <p>
           {content.introText || 'Transformamos necesidades concretas en oportunidades mediante educación, alimentación, acompañamiento y acciones comunitarias.'}

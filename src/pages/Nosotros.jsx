@@ -11,27 +11,8 @@ const groupPhotos = [
 ];
 
 function Nosotros({ content = {} }) {
-  const heroImage = content.heroImage || fotoComunidad;
-
   return (
-    <div className="nosotros-page">
-      <header
-        className="nosotros-hero page-hero-photo"
-        style={{ backgroundImage: `url('${heroImage}')` }}
-      >
-        <div className="nosotros-hero-content">
-          <div className="page-hero-copy">
-            <span className="page-eyebrow">Nosotros</span>
-            <h1>{content.title || 'Quiénes somos'}</h1>
-            <p>{content.heroSubtitle || 'Jóvenes tucumanos que transforman realidades con educación y trabajo territorial.'}</p>
-          </div>
-          <div className="page-hero-card">
-            <span>Fundación Creando Sonrisas</span>
-            <strong>Educación, solidaridad y compromiso comunitario.</strong>
-          </div>
-        </div>
-      </header>
-
+    <div className="nosotros-page nosotros-page-without-hero">
       <main>
         <section className="nosotros-mission-section" aria-labelledby="mision-title">
           <div className="nosotros-mission-image">

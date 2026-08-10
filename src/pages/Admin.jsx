@@ -249,7 +249,6 @@ export default function Admin({ content, onSave }) {
             <TextField label="Subtítulo" value={nosotros.heroSubtitle} onChange={(value) => updatePage('nosotros', 'heroSubtitle', value)} multiline />
             <TextField label="Presentación" value={nosotros.content} onChange={(value) => updatePage('nosotros', 'content', value)} multiline />
             <TextField label="Texto adicional" value={nosotros.additionalText} onChange={(value) => updatePage('nosotros', 'additionalText', value)} multiline />
-            <ImageField label="Imagen de portada" value={nosotros.heroImage} onChange={(value) => updatePage('nosotros', 'heroImage', value)} />
             <h2>Nuestra misión</h2>
             <TextField label="Título de misión" value={nosotros.missionTitle} onChange={(value) => updatePage('nosotros', 'missionTitle', value)} />
             <TextField label="Texto de misión" value={nosotros.missionText} onChange={(value) => updatePage('nosotros', 'missionText', value)} multiline />
@@ -263,7 +262,6 @@ export default function Admin({ content, onSave }) {
               <h2>Presentación de proyectos</h2>
               <TextField label="Subtítulo" value={proyectos.heroSubtitle} onChange={(value) => updatePage('proyectos', 'heroSubtitle', value)} multiline />
               <TextField label="Introducción" value={proyectos.introText} onChange={(value) => updatePage('proyectos', 'introText', value)} multiline />
-              <ImageField label="Imagen de portada" value={proyectos.heroImage} onChange={(value) => updatePage('proyectos', 'heroImage', value)} />
             </div>
             <div className="admin-block">
               <div className="admin-block-title"><h2>Listado de proyectos</h2><button type="button" onClick={() => addItem('proyectos', 'items', { titulo: '', descripcion: '', imagen: '', estado: 'Activo' })}>Agregar</button></div>

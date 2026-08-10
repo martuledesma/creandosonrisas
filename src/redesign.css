@@ -1544,6 +1544,20 @@ h3,
   .sumate-contact-band { align-items: flex-start; flex-direction: column; }
 }
 
+/* Páginas interiores sin portada fotográfica */
+.nosotros-page-without-hero,
+.proyectos-page-without-hero {
+  padding-top: 74px;
+}
+
+.proyectos-page-without-hero .page-intro {
+  padding-top: clamp(72px, 9vw, 120px);
+}
+
+.nosotros-page-without-hero .nosotros-mission-section {
+  padding-top: clamp(72px, 9vw, 120px);
+}
+
 /* Ajuste de portada compacta y misión trasladada a Nosotros */
 .home-hero-template {
   min-height: 560px;
