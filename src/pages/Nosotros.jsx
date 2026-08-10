@@ -45,11 +45,6 @@ function Nosotros({ content = {} }) {
             <span>Quiénes somos</span>
             <h2 id="nosotros-intro-title">{content.introTitle || 'Transformamos realidades creando oportunidades'}</h2>
             <p>{content.introPhrase || content.content || 'Somos una organización impulsada por jóvenes tucumanos que trabaja desde el encuentro, la educación y el compromiso con la comunidad.'}</p>
-            <ul>
-              <li>Educación y acompañamiento escolar.</li>
-              <li>Alimentación y espacios de encuentro.</li>
-              <li>Recreación, contención y comunidad.</li>
-            </ul>
           </article>
         </section>
 

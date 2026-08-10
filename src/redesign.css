@@ -1692,6 +1692,50 @@ h3,
   .nosotros-impact-strip article { min-height: 125px; padding: 22px 18px; }
 }
 
+/* Introducción compacta de Proyectos */
+.proyectos-page-without-hero .page-intro {
+  width: min(1080px, calc(100% - 48px));
+  margin: clamp(52px, 6vw, 78px) auto 0;
+  padding: 0;
+}
+
+.proyectos-page-without-hero .page-intro p {
+  margin: 0;
+  padding: 26px 30px;
+  border: 0;
+  border-left: 5px solid var(--cs-red);
+  border-radius: 0 6px 6px 0;
+  background: var(--cs-paper);
+  color: var(--cs-blue-900);
+  box-shadow: none;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  font-size: clamp(1rem, 1.5vw, 1.22rem);
+  font-weight: 600;
+  line-height: 1.65;
+  text-align: left;
+}
+
+.proyectos-page-without-hero .page-intro p::before,
+.proyectos-page-without-hero .page-intro p::after {
+  content: none;
+}
+
+.proyectos-page-without-hero .projects-list-section {
+  margin-top: clamp(36px, 5vw, 64px);
+  padding-top: clamp(62px, 7vw, 90px);
+}
+
+@media (max-width: 600px) {
+  .proyectos-page-without-hero .page-intro {
+    width: calc(100% - 28px);
+    margin-top: 34px;
+  }
+
+  .proyectos-page-without-hero .page-intro p {
+    padding: 20px;
+  }
+}
+
 /* Sumate comparte el sistema editorial del inicio */
 .sumate-hero-template {
   min-height: 560px;
