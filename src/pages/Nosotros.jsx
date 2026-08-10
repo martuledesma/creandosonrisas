@@ -53,31 +53,6 @@ function Nosotros({ content = {} }) {
           </article>
         </section>
 
-        <section className="nosotros-impact-strip" aria-label="Impacto de la fundación">
-          <article><strong>+150</strong><span>Niños acompañados</span></article>
-          <article><strong>Diaria</strong><span>Alimentación</span></article>
-          <article><strong>3</strong><span>Áreas de trabajo</span></article>
-          <article><strong>En red</strong><span>Jóvenes voluntarios</span></article>
-        </section>
-
-        {visibility.mission && (
-          <section className="nosotros-mission-section" aria-labelledby="mision-title">
-            <article className="nosotros-mission-copy">
-              <span>Nuestra misión</span>
-              <h2 id="mision-title">{content.missionTitle || 'Siempre elegimos ver esperanza'}</h2>
-              <p>{content.missionText || 'Cada encuentro, cada merienda y cada aprendizaje compartido pueden abrir una nueva posibilidad para niños, niñas y familias.'}</p>
-              <ul>
-                <li>Educación y apoyo escolar.</li>
-                <li>Alimentación, recreación y acompañamiento.</li>
-              </ul>
-            </article>
-            <div className="nosotros-mission-image">
-              <img src={content.missionImage || fotoComunidad} alt="La comunidad de Creando Sonrisas" loading="lazy" decoding="async" />
-              <strong>Juntos creamos más oportunidades</strong>
-            </div>
-          </section>
-        )}
-
         {visibility.values && (
           <section className="nosotros-values-section" aria-labelledby="valores-title">
             <header>

@@ -98,7 +98,6 @@ export default function Admin({ content, onSave }) {
 
   const updateNosotrosVisibility = (section, value) => {
     updatePage('nosotros', 'sectionVisibility', {
-      mission: true,
       values: true,
       gallery: true,
       ...(draft.nosotros?.sectionVisibility || {}),
@@ -262,16 +261,9 @@ export default function Admin({ content, onSave }) {
             <div className="admin-block">
               <h2>Mostrar u ocultar secciones</h2>
               <div className="admin-visibility-grid">
-                <VisibilityField label="Nuestra misión" checked={(nosotros.sectionVisibility?.mission ?? true)} onChange={(value) => updateNosotrosVisibility('mission', value)} />
                 <VisibilityField label="Nuestros valores" checked={(nosotros.sectionVisibility?.values ?? true)} onChange={(value) => updateNosotrosVisibility('values', value)} />
                 <VisibilityField label="Collage fotográfico" checked={(nosotros.sectionVisibility?.gallery ?? true)} onChange={(value) => updateNosotrosVisibility('gallery', value)} />
               </div>
-            </div>
-            <div className="admin-block">
-              <h2>Nuestra misión</h2>
-              <TextField label="Título de misión" value={nosotros.missionTitle} onChange={(value) => updatePage('nosotros', 'missionTitle', value)} />
-              <TextField label="Texto de misión" value={nosotros.missionText} onChange={(value) => updatePage('nosotros', 'missionText', value)} multiline />
-              <ImageField label="Imagen de misión" value={nosotros.missionImage} onChange={(value) => updatePage('nosotros', 'missionImage', value)} />
             </div>
             <div className="admin-block">
               <div className="admin-block-title"><h2>Valores</h2><button type="button" onClick={() => addItem('nosotros', 'values', { titulo: '', descripcion: '' })}>Agregar</button></div>
