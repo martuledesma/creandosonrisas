@@ -2965,7 +2965,7 @@ h3,
 }
 
 .nosotros-background-words span:nth-child(1) {
-  top: 8%;
+  top: calc(8% - 1px);
   left: 2%;
 }
 
@@ -2976,7 +2976,7 @@ h3,
 }
 
 .nosotros-background-words span:nth-child(3) {
-  bottom: 12%;
+  bottom: 8%;
   left: 11%;
   animation-delay: -3.4s;
 }
@@ -3000,7 +3000,7 @@ h3,
 }
 
 .nosotros-background-words span:nth-child(6) {
-  top: 8%;
+  top: calc(8% + 8px);
   left: 44%;
   animation-delay: -2.7s;
 }
@@ -3012,8 +3012,8 @@ h3,
 }
 
 .nosotros-background-words span:nth-child(8) {
-  bottom: 3%;
-  left: 48%;
+  right: 19%;
+  bottom: 1.5%;
   animation-delay: -5.8s;
 }
 
