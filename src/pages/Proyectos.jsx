@@ -77,8 +77,12 @@ const Proyectos = ({ content = {} }) => {
   const visibleProjects = activeFilter === 'todos'
     ? projects
     : projects.filter((project) => getProjectCategory(project) === activeFilter);
+  const bannerImage = projects.find((project) => project.imagen)?.imagen || fotoFestejo;
   return (
     <div className="proyectos-page proyectos-page-without-hero">
+      <header className="projects-compact-banner" style={{ backgroundImage: `url('${bannerImage}')` }}>
+        <div><span>Fundación Creando Sonrisas</span><h1>Proyectos</h1></div>
+      </header>
       <section className="page-intro">
         <p>
           {content.introText || 'Transformamos necesidades concretas en oportunidades mediante educación, alimentación, acompañamiento y acciones comunitarias.'}

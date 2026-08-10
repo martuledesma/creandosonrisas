@@ -1443,6 +1443,43 @@ h3,
   line-height: 1;
 }
 
+.projects-compact-banner {
+  position: relative;
+  isolation: isolate;
+  min-height: 300px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background-position: center 42%;
+  background-size: cover;
+  color: white;
+  text-align: center;
+}
+
+.projects-compact-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(159, 48, 42, .72);
+  backdrop-filter: grayscale(.15) saturate(.82);
+}
+
+.projects-compact-banner span {
+  color: var(--cs-yellow);
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.projects-compact-banner h1 {
+  margin: 12px 0 0;
+  color: white;
+  font-size: clamp(3rem, 5vw, 5rem);
+  line-height: 1;
+}
+
 .nosotros-page-without-hero .nosotros-intro-section {
   width: min(1120px, calc(100% - 48px));
   display: grid;
@@ -1628,7 +1665,8 @@ h3,
 .nosotros-page-without-hero .nosotros-value-card p { color: var(--cs-muted); }
 
 @media (max-width: 800px) {
-  .nosotros-compact-banner { min-height: 230px; }
+  .nosotros-compact-banner,
+  .projects-compact-banner { min-height: 230px; }
 
   .nosotros-page-without-hero .nosotros-intro-section,
   .nosotros-page-without-hero .nosotros-mission-section {
