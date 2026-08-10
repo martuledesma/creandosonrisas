@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import fotoComunidad from '../Assets/creando-sonrisas-comunidad.jpg';
 import fotoFestejo from '../Assets/creando-sonrisas-festejo.jpg';
 import fotoActividades from '../Assets/creando-sonrisas-actividades.jpg';
 import fotoInfancias from '../Assets/creando-sonrisas-infancias.jpg';
 
 const Sumate = ({ content = {} }) => {
-  const [activeSlide, setActiveSlide] = useState(0);
   const galleryImages = [
     { src: fotoComunidad, alt: 'Voluntarios, niños y familias de Creando Sonrisas' },
     { src: fotoFestejo, alt: 'Festejo comunitario junto a niños y voluntarios' },
@@ -20,28 +19,12 @@ const Sumate = ({ content = {} }) => {
     }));
   const visibleCarouselImages = editableCarouselImages.length ? editableCarouselImages : galleryImages;
 
-  const goToPreviousSlide = () => {
-    if (!visibleCarouselImages.length) return;
-    setActiveSlide((prev) => (prev === 0 ? visibleCarouselImages.length - 1 : prev - 1));
-  };
-
-  const goToNextSlide = () => {
-    if (!visibleCarouselImages.length) return;
-    setActiveSlide((prev) => (prev === visibleCarouselImages.length - 1 ? 0 : prev + 1));
-  };
-
-  useEffect(() => {
-    if (activeSlide >= visibleCarouselImages.length) {
-      setActiveSlide(0);
-    }
-  }, [activeSlide, visibleCarouselImages.length]);
-
   const heroImage = content.heroImage || visibleCarouselImages[0]?.src || '';
 
   return (
     <div className="sumate-page">
       <header
-        className="sumate-hero page-hero-photo"
+        className="sumate-hero page-hero-photo sumate-hero-template"
         style={heroImage ? {
           backgroundImage: `url('${heroImage}')`,
         } : undefined}
@@ -54,95 +37,52 @@ const Sumate = ({ content = {} }) => {
               {content.heroSubtitle || 'Tu tiempo, una donación o la difusión de nuestro trabajo pueden crear nuevas oportunidades.'}
             </p>
           </div>
-          <div className="page-hero-card">
-            <span>Participación</span>
-            <strong className="sumate-participation-copy">
-              <span>Voluntariado, donaciones y difusión</span>
-              <span>para llegar más lejos.</span>
-            </strong>
-          </div>
         </div>
       </header>
 
-      <section className="sumate-content">
-        <div className="sumate-text">
-          {content.content ? (
-            <p className="sumate-highlight-text">{content.content}</p>
-          ) : (
-            <p className="sumate-highlight-text" aria-label="Tu ayuda es fundamental para seguir transformando Tucumán.">
-              <span className="sumate-highlight-line sumate-highlight-blue">
-                Tu ayuda es fundamental para seguir transformando Tucumán.
-              </span>
-            </p>
-          )}
-          {content.contactInfo && (
-            <p>
-              {content.contactInfo}
-            </p>
-          )}
-        </div>
-      </section>
+      <main className="sumate-template-shell">
+        <section className="sumate-quick-actions" aria-label="Formas de ayudar">
+          <div><span>01</span><h2>Doná tu tiempo</h2><p>Participá como voluntario en nuestras actividades.</p></div>
+          <div><span>02</span><h2>Hacé un aporte</h2><p>Ayudanos a sostener meriendas, materiales y encuentros.</p></div>
+          <div><span>03</span><h2>Compartí</h2><p>Difundí nuestro trabajo para que llegue a más personas.</p></div>
+        </section>
 
-      <section id="formas-de-participar" className="sumate-gallery" aria-label="Fotos de la fundación">
-        {visibleCarouselImages.length > 0 && (
-          <div className="sumate-carousel">
-            <button
-              type="button"
-              className="carousel-control carousel-control-prev"
-              onClick={goToPreviousSlide}
-              aria-label="Ver imagen anterior"
-            >
-              ‹
-            </button>
-            <img
-              src={visibleCarouselImages[activeSlide].src}
-              alt={visibleCarouselImages[activeSlide].alt}
-              className="sumate-carousel-image"
-              loading="lazy"
-              decoding="async"
-            />
-            <button
-              type="button"
-              className="carousel-control carousel-control-next"
-              onClick={goToNextSlide}
-              aria-label="Ver imagen siguiente"
-            >
-              ›
-            </button>
-            <div className="carousel-dots" aria-label="Seleccionar imagen">
-              {visibleCarouselImages.map((image, index) => (
-                <button
-                  key={`${image.src}-${index}`}
-                  type="button"
-                  className={index === activeSlide ? 'carousel-dot active' : 'carousel-dot'}
-                  onClick={() => setActiveSlide(index)}
-                  aria-label={`Ver imagen ${index + 1}`}
-                />
-              ))}
-            </div>
+        <section className="sumate-intro-template">
+          <span className="template-kicker">Tu ayuda importa</span>
+          <h2>Hay muchas maneras de crear oportunidades.</h2>
+          <p>{content.content || 'Tu ayuda es fundamental para seguir transformando Tucumán.'}</p>
+          {content.contactInfo && <p>{content.contactInfo}</p>}
+        </section>
+
+        <section id="formas-de-participar" className="sumate-ways-template" aria-labelledby="sumate-ways-title">
+          <header className="template-section-title">
+            <span className="template-kicker">Elegí cómo participar</span>
+            <h2 id="sumate-ways-title">Sumate a la comunidad</h2>
+          </header>
+          <div className="sumate-ways-grid">
+            {['Voluntariado', 'Donaciones', 'Difusión'].map((title, index) => {
+              const image = visibleCarouselImages[index % visibleCarouselImages.length];
+              return (
+                <article className={`sumate-way-card sumate-way-${index + 1}`} key={title}>
+                  {image && <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />}
+                  <div><span>0{index + 1}</span><h3>{title}</h3></div>
+                </article>
+              );
+            })}
           </div>
-        )}
-        <div className="sumate-gallery-action">
-          <h2 className="display-subtitle display-subtitle-dark">
-            <span className="title-line title-line-blue">¿Querés</span>
-            <span className="title-line title-line-white">participar?</span>
-          </h2>
-          <div className="sumate-participation-tags" aria-label="Formas de participar">
-            <span>Voluntariado</span>
-            <span>Donaciones · Alias: {content.donationAlias || 'CREANDOSONRISASTUC'}</span>
-            <span>Difusión</span>
+        </section>
+
+        <section className="sumate-contact-band">
+          <div>
+            <span>Donaciones</span>
+            <h2>Alias: {content.donationAlias || 'CREANDOSONRISASTUC'}</h2>
+            <p>Cada aporte, sin importar el monto, ayuda a sostener nuestro trabajo cotidiano.</p>
           </div>
-          <p>Completá tus datos y nos pondremos en contacto para coordinar cómo podés sumarte.</p>
-          <a
-            className="btn-nav sumate-form-button"
-            href={content.instagramUrl || 'https://www.instagram.com/creandosonrisas.tuc/'}
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href={content.instagramUrl || 'https://www.instagram.com/creandosonrisas.tuc/'} target="_blank" rel="noreferrer">
             Contactar por Instagram
           </a>
-        </div>
-      </section>
+        </section>
+      </main>
 
     </div>
   );
