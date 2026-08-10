@@ -49,6 +49,18 @@ const normalizeText = (value = '') => (
   value.toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
 );
 
+const parseLocalDate = (dateString) => {
+  if (!dateString) return null;
+  const [year, month, day] = dateString.split('-').map(Number);
+  if (!year || !month || !day) return null;
+  return new Date(year, month - 1, day);
+};
+
+const formatEventDate = (dateString, options) => {
+  const date = parseLocalDate(dateString);
+  return date ? date.toLocaleDateString('es-AR', options) : '';
+};
+
 const getProjectCategory = (project = {}) => {
   const explicitCategory = normalizeText(project.categoria || project.category || project.area || '');
   if (explicitCategory.includes('salud')) return 'salud';
@@ -62,7 +74,7 @@ const getProjectCategory = (project = {}) => {
   return 'recreativos';
 };
 
-const Proyectos = ({ content = {} }) => {
+const Proyectos = ({ content = {}, events = [] }) => {
   const [expandedProjects, setExpandedProjects] = useState({});
   const [activeFilter, setActiveFilter] = useState('todos');
 
@@ -78,6 +90,18 @@ const Proyectos = ({ content = {} }) => {
     ? projects
     : projects.filter((project) => getProjectCategory(project) === activeFilter);
   const bannerImage = projects.find((project) => project.imagen)?.imagen || fotoFestejo;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const upcomingEvents = events
+    .filter((event) => {
+      const eventDate = parseLocalDate(event.fecha);
+      return eventDate && eventDate >= today;
+    })
+    .sort((a, b) => parseLocalDate(a.fecha) - parseLocalDate(b.fecha))
+    .slice(0, 4);
+  const featuredEvent = upcomingEvents[0];
+  const secondaryEvents = upcomingEvents.slice(1);
+  const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '5493816384353';
   return (
     <div className="proyectos-page proyectos-page-without-hero">
       <header className="projects-compact-banner" style={{ backgroundImage: `url('${bannerImage}')` }}>
@@ -87,6 +111,48 @@ const Proyectos = ({ content = {} }) => {
         <p>
           {content.introText || 'Transformamos necesidades concretas en oportunidades mediante educación, alimentación, acompañamiento y acciones comunitarias.'}
         </p>
+      </section>
+
+      <section className="projects-events-section" aria-labelledby="projects-events-title">
+        <header className="projects-events-heading">
+          <span>Agenda comunitaria</span>
+          <h2 id="projects-events-title">Próximos eventos</h2>
+        </header>
+        {featuredEvent ? (
+          <div className={`projects-events-layout ${secondaryEvents.length ? '' : 'single-event'}`}>
+            <article className="projects-featured-event">
+              <div className="projects-featured-event-image">
+                <img src={featuredEvent.imagen || bannerImage} alt={featuredEvent.titulo} loading="lazy" decoding="async" />
+                <time dateTime={featuredEvent.fecha}>
+                  <strong>{formatEventDate(featuredEvent.fecha, { day: '2-digit' })}</strong>
+                  <span>{formatEventDate(featuredEvent.fecha, { month: 'short' }).toUpperCase()}</span>
+                </time>
+              </div>
+              <div className="projects-featured-event-copy">
+                <span>Próximo encuentro</span>
+                <h3>{featuredEvent.titulo}</h3>
+                {featuredEvent.lugar && <p className="projects-event-place">{featuredEvent.lugar}</p>}
+                {featuredEvent.descripcion && <p>{featuredEvent.descripcion}</p>}
+                <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">Consultar por WhatsApp</a>
+              </div>
+            </article>
+            {secondaryEvents.length > 0 && (
+              <div className="projects-secondary-events" aria-label="Otros próximos eventos">
+                {secondaryEvents.map((event) => (
+                  <article key={event.id || `${event.fecha}-${event.titulo}`}>
+                    <time dateTime={event.fecha}>
+                      <strong>{formatEventDate(event.fecha, { day: '2-digit' })}</strong>
+                      <span>{formatEventDate(event.fecha, { month: 'short' }).toUpperCase()}</span>
+                    </time>
+                    <div><h3>{event.titulo}</h3>{event.lugar && <p>{event.lugar}</p>}</div>
+                  </article>
+                ))}
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="projects-events-empty"><span>Agenda en preparación</span><p>Muy pronto publicaremos las próximas actividades.</p></div>
+        )}
       </section>
 
       <section className="projects-list-section" aria-labelledby="projects-list-title">

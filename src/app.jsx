@@ -66,7 +66,7 @@ const defaultHomeContent = {
     },
   ],
   events: [
-    { id: 101, fecha: '2026-08-15', titulo: 'Próxima actividad', lugar: 'Lugar a confirmar' },
+    { id: 101, fecha: '2026-08-15', titulo: 'Próxima actividad', lugar: 'Lugar a confirmar', descripcion: '', imagen: '' },
   ],
   impactTitle: 'Siempre elegimos ver esperanza',
   impactText: 'Cada encuentro, cada merienda y cada aprendizaje compartido pueden abrir una nueva posibilidad para niños, niñas y familias.',
@@ -76,7 +76,6 @@ const defaultHomeContent = {
     projects: true,
     cta: true,
     news: true,
-    events: false,
   },
   footerText: '© 2026 Fundación Creando Sonrisas - Tucumán, Argentina',
 };
@@ -135,23 +134,6 @@ const defaultSiteContent = {
   },
 };
 
-const parseLocalDate = (dateString) => {
-  if (!dateString) return null;
-  const [year, month, day] = dateString.split('-').map(Number);
-  if (!year || !month || !day) return null;
-  return new Date(year, month - 1, day);
-};
-
-const formatEventDay = (dateString) => {
-  const date = parseLocalDate(dateString);
-  return date ? date.getDate() : '';
-};
-
-const formatEventMonth = (dateString) => {
-  const date = parseLocalDate(dateString);
-  return date ? date.toLocaleDateString('es-AR', { month: 'short' }).toUpperCase() : '';
-};
-
 const WhatsAppIcon = () => (
   <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
     <path d="M16.04 4C9.42 4 4.05 9.31 4.05 15.86c0 2.24.64 4.35 1.75 6.12L4 28l6.22-1.62A12.1 12.1 0 0 0 16.04 28C22.66 28 28 22.69 28 16.14 28 9.59 22.66 4 16.04 4Zm0 21.86c-1.82 0-3.58-.49-5.11-1.42l-.36-.21-3.69.96.98-3.56-.23-.37a9.68 9.68 0 0 1-1.48-5.12c0-5.38 4.42-9.76 9.89-9.76s9.89 4.38 9.89 9.76-4.42 9.72-9.89 9.72Zm5.42-7.28c-.3-.15-1.75-.85-2.02-.95-.27-.1-.47-.15-.67.15-.2.29-.77.95-.94 1.15-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.46-.88-.78-1.48-1.75-1.65-2.04-.17-.29-.02-.45.13-.6.14-.13.3-.34.45-.51.15-.17.2-.29.3-.49.1-.2.05-.37-.02-.51-.08-.15-.67-1.59-.92-2.17-.24-.56-.49-.49-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.29-1.04 1-1.04 2.46 0 1.45 1.07 2.85 1.22 3.05.15.2 2.11 3.18 5.1 4.46.71.3 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.08 1.75-.71 2-1.39.25-.68.25-1.27.17-1.39-.07-.12-.27-.2-.57-.34Z" />
@@ -185,7 +167,6 @@ function App() {
 
   const acciones = content.cards || defaultHomeContent.cards;
   const pilares = content.pillars?.length ? content.pillars : defaultHomeContent.pillars;
-  const eventosData = content.events || defaultHomeContent.events;
   const novedadesSlides = acciones.map((item, index) => ({
     ...item,
     imagen: item.imagen || '',
@@ -195,55 +176,6 @@ function App() {
     ...defaultHomeContent.sectionVisibility,
     ...(content.sectionVisibility || {}),
   };
-
-  // Mostrar eventos de hoy en adelante
-  const hoy = new Date();
-  hoy.setHours(0, 0, 0, 0);
-
-  const eventosProximos = eventosData.filter((ev) => {
-    const fechaEv = parseLocalDate(ev.fecha);
-    if (!fechaEv) return false;
-    fechaEv.setHours(0, 0, 0, 0);
-    return fechaEv >= hoy;
-  }).sort((a, b) => parseLocalDate(a.fecha) - parseLocalDate(b.fecha));
-  const visibleEventos = eventosProximos.slice(0, 4);
-
-  const eventsSection = (
-    <section
-      className="home-events-panel home-events-feature"
-      aria-labelledby="home-events-title"
-      style={{ backgroundImage: `url('${heroBackground}')` }}
-    >
-      <div className="home-section-heading">
-        <h2 id="home-events-title" className="display-subtitle">
-          <span className="title-line title-line-blue">Próximos</span>
-          <span className="title-line title-line-orange">eventos</span>
-        </h2>
-        <WhatsAppButton className="home-more-link" label="Consultar" />
-      </div>
-      {visibleEventos.length ? (
-        <div className="home-events-grid">
-          {visibleEventos.map((ev) => (
-            <article key={ev.id} className="evento-item-mini">
-              <div className="evento-fecha-mini">
-                <span className="ev-dia">{formatEventDay(ev.fecha)}</span>
-                <span className="ev-mes">{formatEventMonth(ev.fecha)}</span>
-              </div>
-              <div className="evento-info">
-                <h4>{ev.titulo}</h4>
-                <p>{ev.lugar}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      ) : (
-        <div className="home-events-empty">
-          <span>Agenda en preparación</span>
-          <p>Muy pronto publicaremos las próximas actividades. Consultanos por WhatsApp para participar.</p>
-        </div>
-      )}
-    </section>
-  );
 
   return (
     <div className="App">
@@ -328,7 +260,6 @@ function App() {
                   </div>
                 </section>}
 
-                {sectionVisibility.events && <div className="home-events-template">{eventsSection}</div>}
               </main>
 
             </>
@@ -337,7 +268,7 @@ function App() {
 
         {/* OTRAS PÁGINAS */}
         <Route path="/nosotros" element={<Nosotros content={siteContent.nosotros} />} />
-        <Route path="/proyectos" element={<Proyectos content={siteContent.proyectos} />} />
+        <Route path="/proyectos" element={<Proyectos content={siteContent.proyectos} events={content.events || defaultHomeContent.events} />} />
         <Route path="/sumate" element={<Sumate content={siteContent.sumate} />} />
         <Route path="/contacto" element={<Navigate to="/" replace />} />
         <Route path="/admin" element={<Admin content={siteContent} onSave={saveContent} />} />
