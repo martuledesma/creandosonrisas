@@ -25,22 +25,43 @@ function Nosotros({ content = {} }) {
     gallery: true,
     ...(content.sectionVisibility || {}),
   };
+  const bannerImage = content.missionImage || gallery[0]?.url || fotoComunidad;
+  const introPhotos = gallery.length ? gallery : defaultGallery;
 
   return (
     <div className="nosotros-page nosotros-page-without-hero">
       <main>
+        <header className="nosotros-compact-banner" style={{ backgroundImage: `url('${bannerImage}')` }}>
+          <div><span>Fundación Creando Sonrisas</span><h1>Nosotros</h1></div>
+        </header>
+
         <section className="nosotros-intro-section" aria-labelledby="nosotros-intro-title">
-          <span>Fundación Creando Sonrisas</span>
-          <h1 id="nosotros-intro-title">{content.introTitle || 'Transformamos realidades creando oportunidades'}</h1>
-          <p>{content.introPhrase || content.content || 'Somos una organización impulsada por jóvenes tucumanos que trabaja desde el encuentro, la educación y el compromiso con la comunidad.'}</p>
+          <div className="nosotros-intro-collage" aria-label="Comunidad de Creando Sonrisas">
+            <img src={introPhotos[0]?.url || fotoComunidad} alt={introPhotos[0]?.alt || 'Comunidad de Creando Sonrisas'} />
+            <img src={introPhotos[1]?.url || fotoActividades} alt={introPhotos[1]?.alt || 'Actividad de Creando Sonrisas'} />
+            <strong><span>+150</span> niños acompañados</strong>
+          </div>
+          <article className="nosotros-intro-copy">
+            <span>Quiénes somos</span>
+            <h2 id="nosotros-intro-title">{content.introTitle || 'Transformamos realidades creando oportunidades'}</h2>
+            <p>{content.introPhrase || content.content || 'Somos una organización impulsada por jóvenes tucumanos que trabaja desde el encuentro, la educación y el compromiso con la comunidad.'}</p>
+            <ul>
+              <li>Educación y acompañamiento escolar.</li>
+              <li>Alimentación y espacios de encuentro.</li>
+              <li>Recreación, contención y comunidad.</li>
+            </ul>
+          </article>
+        </section>
+
+        <section className="nosotros-impact-strip" aria-label="Impacto de la fundación">
+          <article><strong>+150</strong><span>Niños acompañados</span></article>
+          <article><strong>Diaria</strong><span>Alimentación</span></article>
+          <article><strong>3</strong><span>Áreas de trabajo</span></article>
+          <article><strong>En red</strong><span>Jóvenes voluntarios</span></article>
         </section>
 
         {visibility.mission && (
           <section className="nosotros-mission-section" aria-labelledby="mision-title">
-            <div className="nosotros-mission-image">
-              <img src={content.missionImage || fotoComunidad} alt="La comunidad de Creando Sonrisas" loading="lazy" decoding="async" />
-              <strong>Juntos creamos más oportunidades</strong>
-            </div>
             <article className="nosotros-mission-copy">
               <span>Nuestra misión</span>
               <h2 id="mision-title">{content.missionTitle || 'Siempre elegimos ver esperanza'}</h2>
@@ -50,6 +71,10 @@ function Nosotros({ content = {} }) {
                 <li>Alimentación, recreación y acompañamiento.</li>
               </ul>
             </article>
+            <div className="nosotros-mission-image">
+              <img src={content.missionImage || fotoComunidad} alt="La comunidad de Creando Sonrisas" loading="lazy" decoding="async" />
+              <strong>Juntos creamos más oportunidades</strong>
+            </div>
           </section>
         )}
 
