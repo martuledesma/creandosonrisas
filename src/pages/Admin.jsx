@@ -26,6 +26,23 @@ const VisibilityField = ({ label, checked, onChange }) => (
   </label>
 );
 
+const AdminSection = ({ title, onAdd, children }) => (
+  <details className="admin-block admin-collapsible">
+    <summary className="admin-collapsible-summary">
+      <h2>{title}</h2>
+      <span className="admin-collapsible-icon" aria-hidden="true">+</span>
+    </summary>
+    <div className="admin-collapsible-body">
+      {onAdd && (
+        <div className="admin-collapsible-actions">
+          <button type="button" onClick={onAdd}>Agregar</button>
+        </div>
+      )}
+      {children}
+    </div>
+  </details>
+);
+
 const ImageField = ({ label, value = '', onChange }) => {
   const [uploading, setUploading] = useState(false);
 
@@ -196,24 +213,21 @@ export default function Admin({ content, onSave }) {
       <section className="admin-editor">
         {activeTab === 'home' && (
           <>
-            <div className="admin-block">
-              <h2>Portada y contacto</h2>
+            <AdminSection title="Portada y contacto">
               <TextField label="Título principal" value={home.heroTitle} onChange={(value) => updatePage('home', 'heroTitle', value)} />
               <TextField label="Subtítulo" value={home.heroSubtitle} onChange={(value) => updatePage('home', 'heroSubtitle', value)} multiline />
               <ImageField label="Imagen de portada" value={home.heroImage} onChange={(value) => updatePage('home', 'heroImage', value)} />
               <TextField label="Texto del pie" value={home.footerText} onChange={(value) => updatePage('home', 'footerText', value)} />
-            </div>
-            <div className="admin-block">
-              <h2>Mostrar u ocultar secciones</h2>
+            </AdminSection>
+            <AdminSection title="Mostrar u ocultar secciones">
               <div className="admin-visibility-grid">
                 <VisibilityField label="Accesos rápidos" checked={(home.sectionVisibility?.quickActions ?? true)} onChange={(value) => updateHomeVisibility('quickActions', value)} />
                 <VisibilityField label="Nuestros proyectos" checked={(home.sectionVisibility?.projects ?? true)} onChange={(value) => updateHomeVisibility('projects', value)} />
                 <VisibilityField label="Franja para colaborar" checked={(home.sectionVisibility?.cta ?? true)} onChange={(value) => updateHomeVisibility('cta', value)} />
                 <VisibilityField label="Novedades" checked={(home.sectionVisibility?.news ?? true)} onChange={(value) => updateHomeVisibility('news', value)} />
               </div>
-            </div>
-            <div className="admin-block">
-              <div className="admin-block-title"><h2>Acompañamiento escolar, Merendero y Recreación</h2><button type="button" onClick={() => addItem('home', 'pillars', { titulo: '', desc: '', imagen: '' })}>Agregar</button></div>
+            </AdminSection>
+            <AdminSection title="Acompañamiento escolar, Merendero y Recreación" onAdd={() => addItem('home', 'pillars', { titulo: '', desc: '', imagen: '' })}>
               <p className="admin-help-text">Estas tarjetas aparecen después de la portada. Podés editarlas, ocultar toda la sección o eliminar una tarjeta.</p>
               {(home.pillars || []).map((item, index) => (
                 <article className="admin-item" key={item.id || index}>
@@ -223,9 +237,8 @@ export default function Admin({ content, onSave }) {
                   <button className="admin-delete-button" type="button" onClick={() => removeItem('home', 'pillars', index)}>Eliminar</button>
                 </article>
               ))}
-            </div>
-            <div className="admin-block">
-              <div className="admin-block-title"><h2>Novedades</h2><button type="button" onClick={() => addItem('home', 'cards', { titulo: '', desc: '', imagen: '' })}>Agregar</button></div>
+            </AdminSection>
+            <AdminSection title="Novedades" onAdd={() => addItem('home', 'cards', { titulo: '', desc: '', imagen: '' })}>
               {(home.cards || []).map((item, index) => (
                 <article className="admin-item" key={item.id || index}>
                   <TextField label="Título" value={item.titulo} onChange={(value) => updateItem('home', 'cards', index, 'titulo', value)} />
@@ -234,26 +247,23 @@ export default function Admin({ content, onSave }) {
                   <button className="admin-delete-button" type="button" onClick={() => removeItem('home', 'cards', index)}>Eliminar</button>
                 </article>
               ))}
-            </div>
+            </AdminSection>
           </>
         )}
 
         {activeTab === 'nosotros' && (
           <>
-            <div className="admin-block">
-              <h2>Apertura</h2>
+            <AdminSection title="Apertura">
               <TextField label="Título principal" value={nosotros.introTitle} onChange={(value) => updatePage('nosotros', 'introTitle', value)} />
               <TextField label="Frase de presentación" value={nosotros.introPhrase} onChange={(value) => updatePage('nosotros', 'introPhrase', value)} multiline />
-            </div>
-            <div className="admin-block">
-              <h2>Mostrar u ocultar secciones</h2>
+            </AdminSection>
+            <AdminSection title="Mostrar u ocultar secciones">
               <div className="admin-visibility-grid">
                 <VisibilityField label="Nuestros valores" checked={(nosotros.sectionVisibility?.values ?? true)} onChange={(value) => updateNosotrosVisibility('values', value)} />
                 <VisibilityField label="Collage fotográfico" checked={(nosotros.sectionVisibility?.gallery ?? true)} onChange={(value) => updateNosotrosVisibility('gallery', value)} />
               </div>
-            </div>
-            <div className="admin-block">
-              <div className="admin-block-title"><h2>Valores</h2><button type="button" onClick={() => addItem('nosotros', 'values', { titulo: '', descripcion: '' })}>Agregar</button></div>
+            </AdminSection>
+            <AdminSection title="Valores" onAdd={() => addItem('nosotros', 'values', { titulo: '', descripcion: '' })}>
               {(nosotros.values || []).map((item, index) => (
                 <article className="admin-item" key={item.id || index}>
                   <TextField label="Valor" value={item.titulo} onChange={(value) => updateItem('nosotros', 'values', index, 'titulo', value)} />
@@ -261,9 +271,8 @@ export default function Admin({ content, onSave }) {
                   <button className="admin-delete-button" type="button" onClick={() => removeItem('nosotros', 'values', index)}>Eliminar</button>
                 </article>
               ))}
-            </div>
-            <div className="admin-block">
-              <div className="admin-block-title"><h2>Collage fotográfico</h2><button type="button" onClick={() => addItem('nosotros', 'gallery', { url: '', alt: '' })}>Agregar</button></div>
+            </AdminSection>
+            <AdminSection title="Collage fotográfico" onAdd={() => addItem('nosotros', 'gallery', { url: '', alt: '' })}>
               {(nosotros.gallery || []).map((item, index) => (
                 <article className="admin-item" key={item.id || index}>
                   <ImageField label="Imagen" value={item.url} onChange={(value) => updateItem('nosotros', 'gallery', index, 'url', value)} />
@@ -271,19 +280,17 @@ export default function Admin({ content, onSave }) {
                   <button className="admin-delete-button" type="button" onClick={() => removeItem('nosotros', 'gallery', index)}>Eliminar</button>
                 </article>
               ))}
-            </div>
+            </AdminSection>
           </>
         )}
 
         {activeTab === 'proyectos' && (
           <>
-            <div className="admin-block">
-              <h2>Presentación de proyectos</h2>
+            <AdminSection title="Presentación de proyectos">
               <TextField label="Subtítulo" value={proyectos.heroSubtitle} onChange={(value) => updatePage('proyectos', 'heroSubtitle', value)} multiline />
               <TextField label="Introducción" value={proyectos.introText} onChange={(value) => updatePage('proyectos', 'introText', value)} multiline />
-            </div>
-            <div className="admin-block">
-              <div className="admin-block-title"><h2>Listado de proyectos</h2><button type="button" onClick={() => addItem('proyectos', 'items', { titulo: '', descripcion: '', imagen: '', estado: 'Activo' })}>Agregar</button></div>
+            </AdminSection>
+            <AdminSection title="Listado de proyectos" onAdd={() => addItem('proyectos', 'items', { titulo: '', descripcion: '', imagen: '', estado: 'Activo' })}>
               {(proyectos.items || []).map((item, index) => (
                 <article className="admin-item" key={item.id || index}>
                   <TextField label="Título" value={item.titulo} onChange={(value) => updateItem('proyectos', 'items', index, 'titulo', value)} />
@@ -293,9 +300,8 @@ export default function Admin({ content, onSave }) {
                   <button className="admin-delete-button" type="button" onClick={() => removeItem('proyectos', 'items', index)}>Eliminar</button>
                 </article>
               ))}
-            </div>
-            <div className="admin-block">
-              <div className="admin-block-title"><h2>Próximos eventos</h2><button type="button" onClick={() => addItem('home', 'events', { fecha: '', titulo: '', lugar: '', descripcion: '', imagen: '' })}>Agregar</button></div>
+            </AdminSection>
+            <AdminSection title="Próximos eventos" onAdd={() => addItem('home', 'events', { fecha: '', titulo: '', lugar: '', descripcion: '', imagen: '' })}>
               <p className="admin-help-text">El próximo evento se muestra destacado en Proyectos. Los siguientes aparecen en una lista lateral.</p>
               {(home.events || []).map((item, index) => (
                 <article className="admin-item" key={item.id || index}>
@@ -309,28 +315,30 @@ export default function Admin({ content, onSave }) {
                   <button className="admin-delete-button" type="button" onClick={() => removeItem('home', 'events', index)}>Eliminar</button>
                 </article>
               ))}
-            </div>
+            </AdminSection>
           </>
         )}
 
         {activeTab === 'sumate' && (
-          <div className="admin-block">
-            <h2>Participación y donaciones</h2>
-            <TextField label="Título" value={sumate.title} onChange={(value) => updatePage('sumate', 'title', value)} />
-            <TextField label="Subtítulo" value={sumate.heroSubtitle} onChange={(value) => updatePage('sumate', 'heroSubtitle', value)} multiline />
-            <TextField label="Mensaje principal" value={sumate.content} onChange={(value) => updatePage('sumate', 'content', value)} multiline />
-            <TextField label="Alias de donación" value={sumate.donationAlias} onChange={(value) => updatePage('sumate', 'donationAlias', value)} />
-            <TextField label="Instagram" value={sumate.instagramUrl} onChange={(value) => updatePage('sumate', 'instagramUrl', value)} type="url" />
-            <ImageField label="Imagen de portada" value={sumate.heroImage} onChange={(value) => updatePage('sumate', 'heroImage', value)} />
-            <div className="admin-block-title"><h2>Galería</h2><button type="button" onClick={() => addItem('sumate', 'carouselImages', { url: '', alt: '' })}>Agregar</button></div>
-            {(sumate.carouselImages || []).map((item, index) => (
-              <article className="admin-item" key={item.id || index}>
-                <ImageField label="Imagen" value={item.url} onChange={(value) => updateItem('sumate', 'carouselImages', index, 'url', value)} />
-                <TextField label="Descripción accesible" value={item.alt} onChange={(value) => updateItem('sumate', 'carouselImages', index, 'alt', value)} />
-                <button className="admin-delete-button" type="button" onClick={() => removeItem('sumate', 'carouselImages', index)}>Eliminar</button>
-              </article>
-            ))}
-          </div>
+          <>
+            <AdminSection title="Participación y donaciones">
+              <TextField label="Título" value={sumate.title} onChange={(value) => updatePage('sumate', 'title', value)} />
+              <TextField label="Subtítulo" value={sumate.heroSubtitle} onChange={(value) => updatePage('sumate', 'heroSubtitle', value)} multiline />
+              <TextField label="Mensaje principal" value={sumate.content} onChange={(value) => updatePage('sumate', 'content', value)} multiline />
+              <TextField label="Alias de donación" value={sumate.donationAlias} onChange={(value) => updatePage('sumate', 'donationAlias', value)} />
+              <TextField label="Instagram" value={sumate.instagramUrl} onChange={(value) => updatePage('sumate', 'instagramUrl', value)} type="url" />
+              <ImageField label="Imagen de portada" value={sumate.heroImage} onChange={(value) => updatePage('sumate', 'heroImage', value)} />
+            </AdminSection>
+            <AdminSection title="Galería" onAdd={() => addItem('sumate', 'carouselImages', { url: '', alt: '' })}>
+              {(sumate.carouselImages || []).map((item, index) => (
+                <article className="admin-item" key={item.id || index}>
+                  <ImageField label="Imagen" value={item.url} onChange={(value) => updateItem('sumate', 'carouselImages', index, 'url', value)} />
+                  <TextField label="Descripción accesible" value={item.alt} onChange={(value) => updateItem('sumate', 'carouselImages', index, 'alt', value)} />
+                  <button className="admin-delete-button" type="button" onClick={() => removeItem('sumate', 'carouselImages', index)}>Eliminar</button>
+                </article>
+              ))}
+            </AdminSection>
+          </>
         )}
       </section>
 

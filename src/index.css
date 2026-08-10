@@ -5503,6 +5503,7 @@ h3,
 
 .admin-tabs button,
 .admin-block-title button,
+.admin-collapsible-actions button,
 .admin-primary-button,
 .admin-secondary-button,
 .admin-delete-button {
@@ -5536,6 +5537,74 @@ h3,
     padding: clamp(22px, 4vw, 36px);
 }
 
+.admin-collapsible {
+    display: block;
+    padding: 0;
+    overflow: hidden;
+}
+
+.admin-collapsible-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 22px 26px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+
+.admin-collapsible-summary::-webkit-details-marker {
+    display: none;
+}
+
+.admin-collapsible-summary h2 {
+    margin: 0;
+}
+
+.admin-collapsible-summary:hover {
+    background: #f7f9fc;
+}
+
+.admin-collapsible-summary:focus-visible {
+    outline: 3px solid rgba(29, 93, 152, 0.18);
+    outline-offset: -3px;
+}
+
+.admin-collapsible-icon {
+    display: grid;
+    flex: 0 0 34px;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border: 1px solid #cbd6e1;
+    border-radius: 50%;
+    color: var(--azul-principal);
+    font-size: 1.35rem;
+    font-weight: 500;
+    line-height: 1;
+    transition: transform 180ms ease, background-color 180ms ease, color 180ms ease;
+}
+
+.admin-collapsible[open] .admin-collapsible-icon {
+    transform: rotate(45deg);
+    border-color: var(--azul-principal);
+    background: var(--azul-principal);
+    color: #ffffff;
+}
+
+.admin-collapsible-body {
+    display: grid;
+    gap: 20px;
+    padding: 24px 26px 28px;
+    border-top: 1px solid #e1e8ef;
+}
+
+.admin-collapsible-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .admin-block h2 {
     color: var(--azul-principal);
     font-family: Inter, "Segoe UI", sans-serif;
@@ -5550,6 +5619,7 @@ h3,
 }
 
 .admin-block-title button,
+.admin-collapsible-actions button,
 .admin-secondary-button {
     padding: 9px 14px;
     border: 1px solid #bfcddd;
