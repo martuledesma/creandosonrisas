@@ -96,6 +96,16 @@ export default function Admin({ content, onSave }) {
     });
   };
 
+  const updateNosotrosVisibility = (section, value) => {
+    updatePage('nosotros', 'sectionVisibility', {
+      mission: true,
+      values: true,
+      gallery: true,
+      ...(draft.nosotros?.sectionVisibility || {}),
+      [section]: value,
+    });
+  };
+
   const addItem = (page, collection, item) => {
     updatePage(page, collection, [...(draft[page]?.[collection] || []), { id: Date.now(), ...item }]);
   };
@@ -243,17 +253,47 @@ export default function Admin({ content, onSave }) {
         )}
 
         {activeTab === 'nosotros' && (
-          <div className="admin-block">
-            <h2>Información institucional</h2>
-            <TextField label="Título" value={nosotros.title} onChange={(value) => updatePage('nosotros', 'title', value)} />
-            <TextField label="Subtítulo" value={nosotros.heroSubtitle} onChange={(value) => updatePage('nosotros', 'heroSubtitle', value)} multiline />
-            <TextField label="Presentación" value={nosotros.content} onChange={(value) => updatePage('nosotros', 'content', value)} multiline />
-            <TextField label="Texto adicional" value={nosotros.additionalText} onChange={(value) => updatePage('nosotros', 'additionalText', value)} multiline />
-            <h2>Nuestra misión</h2>
-            <TextField label="Título de misión" value={nosotros.missionTitle} onChange={(value) => updatePage('nosotros', 'missionTitle', value)} />
-            <TextField label="Texto de misión" value={nosotros.missionText} onChange={(value) => updatePage('nosotros', 'missionText', value)} multiline />
-            <ImageField label="Imagen de misión" value={nosotros.missionImage} onChange={(value) => updatePage('nosotros', 'missionImage', value)} />
-          </div>
+          <>
+            <div className="admin-block">
+              <h2>Apertura</h2>
+              <TextField label="Título principal" value={nosotros.introTitle} onChange={(value) => updatePage('nosotros', 'introTitle', value)} />
+              <TextField label="Frase de presentación" value={nosotros.introPhrase} onChange={(value) => updatePage('nosotros', 'introPhrase', value)} multiline />
+            </div>
+            <div className="admin-block">
+              <h2>Mostrar u ocultar secciones</h2>
+              <div className="admin-visibility-grid">
+                <VisibilityField label="Nuestra misión" checked={(nosotros.sectionVisibility?.mission ?? true)} onChange={(value) => updateNosotrosVisibility('mission', value)} />
+                <VisibilityField label="Nuestros valores" checked={(nosotros.sectionVisibility?.values ?? true)} onChange={(value) => updateNosotrosVisibility('values', value)} />
+                <VisibilityField label="Collage fotográfico" checked={(nosotros.sectionVisibility?.gallery ?? true)} onChange={(value) => updateNosotrosVisibility('gallery', value)} />
+              </div>
+            </div>
+            <div className="admin-block">
+              <h2>Nuestra misión</h2>
+              <TextField label="Título de misión" value={nosotros.missionTitle} onChange={(value) => updatePage('nosotros', 'missionTitle', value)} />
+              <TextField label="Texto de misión" value={nosotros.missionText} onChange={(value) => updatePage('nosotros', 'missionText', value)} multiline />
+              <ImageField label="Imagen de misión" value={nosotros.missionImage} onChange={(value) => updatePage('nosotros', 'missionImage', value)} />
+            </div>
+            <div className="admin-block">
+              <div className="admin-block-title"><h2>Valores</h2><button type="button" onClick={() => addItem('nosotros', 'values', { titulo: '', descripcion: '' })}>Agregar</button></div>
+              {(nosotros.values || []).map((item, index) => (
+                <article className="admin-item" key={item.id || index}>
+                  <TextField label="Valor" value={item.titulo} onChange={(value) => updateItem('nosotros', 'values', index, 'titulo', value)} />
+                  <TextField label="Descripción" value={item.descripcion} onChange={(value) => updateItem('nosotros', 'values', index, 'descripcion', value)} multiline />
+                  <button className="admin-delete-button" type="button" onClick={() => removeItem('nosotros', 'values', index)}>Eliminar</button>
+                </article>
+              ))}
+            </div>
+            <div className="admin-block">
+              <div className="admin-block-title"><h2>Collage fotográfico</h2><button type="button" onClick={() => addItem('nosotros', 'gallery', { url: '', alt: '' })}>Agregar</button></div>
+              {(nosotros.gallery || []).map((item, index) => (
+                <article className="admin-item" key={item.id || index}>
+                  <ImageField label="Imagen" value={item.url} onChange={(value) => updateItem('nosotros', 'gallery', index, 'url', value)} />
+                  <TextField label="Descripción accesible" value={item.alt} onChange={(value) => updateItem('nosotros', 'gallery', index, 'alt', value)} />
+                  <button className="admin-delete-button" type="button" onClick={() => removeItem('nosotros', 'gallery', index)}>Eliminar</button>
+                </article>
+              ))}
+            </div>
+          </>
         )}
 
         {activeTab === 'proyectos' && (

@@ -89,9 +89,26 @@ const defaultSiteContent = {
     heroSubtitle: 'Jóvenes tucumanos que transforman realidades con educación y trabajo territorial.',
     content: 'Somos una organización civil impulsada por jóvenes tucumanos. A través del merendero, el apoyo escolar, el acompañamiento en salud y distintas acciones solidarias, generamos oportunidades para niños, adolescentes y familias.',
     additionalText: '',
+    introTitle: 'Transformamos realidades creando oportunidades',
+    introPhrase: 'Somos una organización impulsada por jóvenes tucumanos que trabaja desde el encuentro, la educación y el compromiso con la comunidad.',
     missionTitle: 'Siempre elegimos ver esperanza',
     missionText: 'Cada encuentro, cada merienda y cada aprendizaje compartido pueden abrir una nueva posibilidad para niños, niñas y familias.',
     missionImage: fotoComunidad,
+    values: [
+      { id: 1, titulo: 'Compromiso', descripcion: 'Sostenemos cada acción con responsabilidad, presencia y trabajo constante.' },
+      { id: 2, titulo: 'Solidaridad', descripcion: 'Compartimos tiempo y recursos para acompañar necesidades concretas.' },
+      { id: 3, titulo: 'Comunidad', descripcion: 'Construimos oportunidades junto a niños, familias, voluntarios e instituciones.' },
+    ],
+    gallery: [
+      { id: 1, url: fotoFestejo, alt: 'Voluntarios, niños y familias durante un festejo de la fundación' },
+      { id: 2, url: fotoActividades, alt: 'Actividad comunitaria organizada por Creando Sonrisas' },
+      { id: 3, url: fotoInfancias, alt: 'Niño participando de una jornada de la fundación' },
+    ],
+    sectionVisibility: {
+      mission: true,
+      values: true,
+      gallery: true,
+    },
     teamCards: [],
   },
   proyectos: {

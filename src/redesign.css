@@ -2063,3 +2063,189 @@ h3,
     min-height: 360px;
   }
 }
+
+/* Nosotros editorial: apertura, misión, valores y collage */
+.nosotros-intro-section {
+  width: min(1080px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: clamp(82px, 10vw, 140px) 0 clamp(70px, 8vw, 110px);
+  text-align: center;
+}
+
+.nosotros-intro-section > span,
+.nosotros-values-section > header > span {
+  display: block;
+  margin-bottom: 16px;
+  color: var(--cs-red);
+  font-size: .75rem;
+  font-weight: 900;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+}
+
+.nosotros-intro-section h1 {
+  max-width: 1020px;
+  margin: 0 auto;
+  color: var(--cs-blue-950);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3.7rem, 7.4vw, 7.4rem);
+  font-weight: 750;
+  letter-spacing: -.055em;
+  line-height: .9;
+}
+
+.nosotros-intro-section p {
+  max-width: 760px;
+  margin: 32px auto 0;
+  color: var(--cs-muted);
+  font-size: clamp(1.05rem, 1.7vw, 1.28rem);
+  line-height: 1.75;
+}
+
+.nosotros-page-without-hero .nosotros-mission-section {
+  padding-top: clamp(80px, 9vw, 125px);
+  padding-bottom: clamp(90px, 10vw, 140px);
+  border-top: 1px solid var(--cs-border);
+}
+
+.nosotros-values-section {
+  padding: clamp(85px, 9vw, 125px) max(24px, calc((100vw - 1180px) / 2));
+  background: var(--cs-blue-950);
+}
+
+.nosotros-values-section > header {
+  max-width: 720px;
+  margin-bottom: 48px;
+}
+
+.nosotros-values-section > header > span {
+  color: var(--cs-yellow);
+}
+
+.nosotros-values-section h2 {
+  margin: 0;
+  color: var(--cs-white);
+  font-size: clamp(3rem, 5.4vw, 5.2rem);
+  line-height: .94;
+  letter-spacing: -.045em;
+}
+
+.nosotros-values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid rgba(255, 255, 255, .18);
+  border-bottom: 1px solid rgba(255, 255, 255, .18);
+}
+
+.nosotros-value-card {
+  min-height: 270px;
+  padding: 38px 34px;
+  border-right: 1px solid rgba(255, 255, 255, .18);
+}
+
+.nosotros-value-card:last-child {
+  border-right: 0;
+}
+
+.nosotros-value-card > span {
+  color: var(--cs-yellow);
+  font-size: .75rem;
+  font-weight: 900;
+  letter-spacing: .14em;
+}
+
+.nosotros-value-card h3 {
+  margin: 24px 0 14px;
+  color: var(--cs-white);
+  font-size: clamp(1.8rem, 3vw, 2.7rem);
+}
+
+.nosotros-value-card p {
+  margin: 0;
+  color: rgba(255, 255, 255, .7);
+  line-height: 1.7;
+}
+
+.nosotros-gallery-section .nosotros-group-gallery {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-flow: dense;
+  grid-auto-rows: 240px;
+  gap: 18px;
+}
+
+.nosotros-gallery-section .nosotros-group-photo {
+  grid-column: span 4;
+  min-height: 240px;
+}
+
+.nosotros-gallery-section .gallery-count-1 .nosotros-group-photo {
+  grid-column: 1 / -1;
+  grid-row: span 2;
+}
+
+.nosotros-gallery-section .gallery-count-2 .nosotros-group-photo {
+  grid-column: span 6;
+  grid-row: span 2;
+}
+
+.nosotros-gallery-section .gallery-count-3 .nosotros-group-photo:first-child {
+  grid-column: span 7;
+  grid-row: span 2;
+}
+
+.nosotros-gallery-section .gallery-count-3 .nosotros-group-photo:nth-child(2),
+.nosotros-gallery-section .gallery-count-3 .nosotros-group-photo:nth-child(3) {
+  grid-column: span 5;
+  grid-row: span 1;
+}
+
+.nosotros-gallery-section .gallery-count-3 .nosotros-group-photo:nth-child(n + 4) {
+  grid-column: span 4;
+  grid-row: span 1;
+}
+
+.nosotros-empty-state {
+  margin: 0;
+  padding: 28px;
+  border: 1px solid var(--cs-border);
+  color: var(--cs-muted);
+  background: var(--cs-white);
+}
+
+@media (max-width: 800px) {
+  .nosotros-intro-section {
+    width: calc(100% - 28px);
+  }
+
+  .nosotros-values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nosotros-value-card {
+    min-height: 0;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, .18);
+  }
+
+  .nosotros-value-card:last-child {
+    border-bottom: 0;
+  }
+
+  .nosotros-gallery-section .nosotros-group-gallery {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+  }
+
+  .nosotros-gallery-section .nosotros-group-photo,
+  .nosotros-gallery-section .gallery-count-1 .nosotros-group-photo,
+  .nosotros-gallery-section .gallery-count-2 .nosotros-group-photo,
+  .nosotros-gallery-section .gallery-count-3 .nosotros-group-photo:first-child,
+  .nosotros-gallery-section .gallery-count-3 .nosotros-group-photo:nth-child(2),
+  .nosotros-gallery-section .gallery-count-3 .nosotros-group-photo:nth-child(3),
+  .nosotros-gallery-section .gallery-count-3 .nosotros-group-photo:nth-child(n + 4) {
+    grid-column: auto;
+    grid-row: auto;
+    height: 320px;
+  }
+}
