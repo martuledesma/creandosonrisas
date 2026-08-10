@@ -43,7 +43,7 @@ const Navbar = () => {
             <ul id="main-navigation" className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
                 <li><Link to="/nosotros" onClick={closeMenu}>Nosotros</Link></li>
                 <li><Link to="/proyectos" onClick={closeMenu}>Proyectos</Link></li>
-                <li><Link to="/sumate" onClick={closeMenu}>Sumate</Link></li>
+                <li><Link to="/sumate" className="sumate-nav-link" onClick={closeMenu}>Sumate</Link></li>
                 <li><Link to="/admin" className="admin-access-link" onClick={closeMenu}>Acceso</Link></li>
             </ul>
         </nav>

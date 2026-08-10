@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import fotoFestejo from '../Assets/creando-sonrisas-festejo.jpg';
 import fotoActividades from '../Assets/creando-sonrisas-actividades.jpg';
 import fotoInfancias from '../Assets/creando-sonrisas-infancias.jpg';
@@ -24,25 +24,6 @@ const defaultProjects = [
     descripcion: 'Pintura, juegos, deportes, festejos especiales y acciones solidarias.',
     imagen: fotoInfancias,
     estado: 'Activo',
-  },
-];
-
-const projectAreas = [
-  {
-    title: 'Educación',
-    text: 'Apoyo escolar y acompañamiento para niños, niñas y adolescentes.',
-  },
-  {
-    title: 'Alimentación',
-    text: 'Meriendas y almuerzos que también crean un espacio de encuentro y contención.',
-  },
-  {
-    title: 'Salud y acompañamiento',
-    text: 'Acciones que acercan cuidado y acompañamiento a las familias de la comunidad.',
-  },
-  {
-    title: 'Recreación',
-    text: 'Pintura, juegos, deportes y festejos de fechas especiales para compartir y aprender.',
   },
 ];
 
@@ -84,23 +65,12 @@ const getProjectCategory = (project = {}) => {
 const Proyectos = ({ content = {} }) => {
   const [expandedProjects, setExpandedProjects] = useState({});
   const [activeFilter, setActiveFilter] = useState('todos');
-  const areasTrackRef = useRef(null);
 
   const toggleProjectExpand = (index) => {
     setExpandedProjects((prev) => ({
       ...prev,
       [index]: !prev[index],
     }));
-  };
-
-  const scrollAreas = (direction) => {
-    const track = areasTrackRef.current;
-    if (!track) return;
-
-    track.scrollBy({
-      left: direction * Math.min(track.clientWidth * 0.82, 760),
-      behavior: 'smooth',
-    });
   };
 
   const projects = content.items?.length ? content.items : defaultProjects;
@@ -136,35 +106,6 @@ const Proyectos = ({ content = {} }) => {
         <p>
           {content.introText || 'Transformamos necesidades concretas en oportunidades mediante educación, alimentación, acompañamiento y acciones comunitarias.'}
         </p>
-      </section>
-
-      <section className="project-areas-section" aria-labelledby="project-areas-title">
-        <div className="project-areas-header">
-          <div className="project-section-heading">
-            <span>Áreas de trabajo</span>
-            <h2 id="project-areas-title" className="display-subtitle">
-              <span className="title-line title-line-blue">Proyectos enfocados</span>
-              <span className="title-line title-line-white">en necesidades reales</span>
-            </h2>
-          </div>
-          <div className="project-carousel-controls">
-            <button type="button" onClick={() => scrollAreas(-1)} aria-label="Ver áreas anteriores">
-              ←
-            </button>
-            <button type="button" onClick={() => scrollAreas(1)} aria-label="Ver áreas siguientes">
-              →
-            </button>
-          </div>
-        </div>
-        <div className="project-areas-carousel" ref={areasTrackRef}>
-          {projectAreas.map((area, index) => (
-            <article className="project-area-card" key={area.title}>
-              <span className="project-area-number">{String(index + 1).padStart(2, '0')}</span>
-              <h3>{area.title}</h3>
-              <p>{area.text}</p>
-            </article>
-          ))}
-        </div>
       </section>
 
       <section className="projects-list-section" aria-labelledby="projects-list-title">

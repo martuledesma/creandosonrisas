@@ -1043,9 +1043,24 @@ h3,
 }
 
 .home-hero-template::before {
+  inset: 0;
+  height: 100%;
   background:
     linear-gradient(90deg, rgba(6, 26, 49, 0.76), rgba(6, 26, 49, 0.28)),
     linear-gradient(0deg, rgba(6, 26, 49, 0.48), transparent 55%);
+}
+
+.nav-links .sumate-nav-link {
+  padding: 11px 20px;
+  border-radius: 4px;
+  background: var(--cs-blue-800);
+  color: var(--cs-white);
+  box-shadow: 0 8px 20px rgba(18, 59, 109, .22);
+}
+
+.nav-links .sumate-nav-link:hover {
+  background: var(--cs-red);
+  color: var(--cs-white);
 }
 
 .home-hero-template .home-hero-content {
