@@ -2961,11 +2961,11 @@ h3,
   letter-spacing: -.04em;
   filter: blur(1.4px);
   opacity: .2;
-  animation: nosotros-word-pulse 6.5s ease-in-out infinite;
+  animation: nosotros-word-pulse 7.2s ease-in-out infinite;
 }
 
 .nosotros-background-words span:nth-child(1) {
-  top: 3%;
+  top: 8%;
   left: 37%;
 }
 
@@ -2991,6 +2991,7 @@ h3,
   color: rgba(196, 57, 49, .6);
   font-size: clamp(1.05rem, 2vw, 2.15rem);
   filter: blur(.7px);
+  animation-duration: 10.5s;
 }
 
 .nosotros-background-words span:nth-child(5) {
@@ -3000,20 +3001,20 @@ h3,
 }
 
 .nosotros-background-words span:nth-child(6) {
-  top: 31%;
-  right: 2%;
+  top: 72%;
+  right: 8%;
   animation-delay: -2.7s;
 }
 
 .nosotros-background-words span:nth-child(7) {
-  right: 8%;
-  top: 72%;
+  top: 31%;
+  right: 2%;
   animation-delay: -1.1s;
 }
 
 .nosotros-background-words span:nth-child(8) {
-  bottom: 3%;
-  left: 48%;
+  bottom: 10%;
+  left: 8%;
   animation-delay: -5.8s;
 }
 
