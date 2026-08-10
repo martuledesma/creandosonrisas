@@ -2865,3 +2865,68 @@ h3,
     padding: 28px 22px;
   }
 }
+
+/* Carrusel manual y compacto de eventos secundarios */
+.projects-secondary-events {
+  grid-template-rows: auto 1fr auto;
+  align-content: normal;
+  overflow: hidden;
+}
+
+.projects-secondary-events > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--cs-border);
+}
+
+.projects-secondary-events > header > span {
+  color: var(--cs-red);
+  font-size: .68rem;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.projects-secondary-counter {
+  color: var(--cs-muted);
+  font-size: .75rem;
+  font-weight: 800;
+}
+
+.projects-secondary-events > article {
+  min-height: 170px;
+  border-bottom: 1px solid var(--cs-border);
+}
+
+.projects-secondary-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.projects-secondary-controls button {
+  min-height: 52px;
+  border: 0;
+  border-right: 1px solid var(--cs-border);
+  background: var(--cs-white);
+  color: var(--cs-blue-900);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.projects-secondary-controls button:last-child {
+  border-right: 0;
+}
+
+.projects-secondary-controls button:hover {
+  background: var(--cs-blue-800);
+  color: white;
+}
+
+@media (max-width: 900px) {
+  .projects-secondary-events > article {
+    min-height: 135px;
+  }
+}
