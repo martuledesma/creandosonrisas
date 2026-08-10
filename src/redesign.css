@@ -1555,9 +1555,9 @@ h3,
 
 .home-hero-template::before {
   background:
-    linear-gradient(90deg, rgba(5, 35, 72, 0.92) 0%, rgba(18, 76, 137, 0.7) 48%, rgba(15, 69, 126, 0.42) 100%),
-    rgba(9, 48, 94, 0.3);
-  backdrop-filter: blur(2.5px) saturate(0.9);
+    linear-gradient(90deg, rgba(5, 35, 72, 0.7) 0%, rgba(18, 76, 137, 0.43) 48%, rgba(15, 69, 126, 0.2) 100%),
+    rgba(9, 48, 94, 0.12);
+  backdrop-filter: blur(1.5px) saturate(0.95);
 }
 
 .home-hero-template h1 {
