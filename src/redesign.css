@@ -1116,11 +1116,9 @@ h3,
 }
 
 .home-quick-action:last-child { border-right: 0; }
-.home-quick-action:hover { background: var(--cs-blue-900); color: var(--cs-white); }
 .home-quick-action > span { color: var(--cs-red); font-size: 0.76rem; font-weight: 900; letter-spacing: 0.14em; }
 .home-quick-action h2 { margin: 17px 0 10px; color: inherit; font-size: 1.45rem; }
 .home-quick-action p { margin: 0; color: var(--cs-muted); font-size: 0.92rem; line-height: 1.65; }
-.home-quick-action:hover p { color: rgba(255,255,255,.72); }
 
 .home-mission-template {
   width: min(1120px, calc(100% - 48px));

@@ -256,15 +256,15 @@ function App() {
 
               <main className="home-template-shell">
                 {sectionVisibility.quickActions && <section className="home-quick-actions" aria-label="Formas de participar">
-                  <Link to="/sumate" className="home-quick-action">
-                    <span>01</span><h2>Ser voluntario</h2><p>Compartí tu tiempo y tus ganas de ayudar.</p>
-                  </Link>
-                  <Link to="/proyectos" className="home-quick-action">
-                    <span>02</span><h2>Conocer proyectos</h2><p>Descubrí cómo trabajamos junto a la comunidad.</p>
-                  </Link>
-                  <Link to="/sumate" className="home-quick-action">
-                    <span>03</span><h2>Hacer una donación</h2><p>Cada aporte ayuda a sostener nuestras actividades.</p>
-                  </Link>
+                  <article className="home-quick-action">
+                    <span>+150</span><h2>Niños acompañados</h2><p>Educación, contención y espacios para crecer.</p>
+                  </article>
+                  <article className="home-quick-action">
+                    <span>Diaria</span><h2>Alimentación</h2><p>Meriendas y comidas compartidas con la comunidad.</p>
+                  </article>
+                  <article className="home-quick-action">
+                    <span>En red</span><h2>Jóvenes voluntarios</h2><p>Un equipo comprometido que transforma desde el territorio.</p>
+                  </article>
                 </section>}
 
                 {sectionVisibility.projects && <section className="home-causes-template" aria-labelledby="pillars-title">
