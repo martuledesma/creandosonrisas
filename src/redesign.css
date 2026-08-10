@@ -2987,6 +2987,36 @@ h3,
   animation-delay: -5s;
 }
 
+.nosotros-background-words .is-small {
+  color: rgba(196, 57, 49, .48);
+  font-size: clamp(1.05rem, 2vw, 2.15rem);
+  filter: blur(.7px);
+}
+
+.nosotros-background-words span:nth-child(5) {
+  top: 42%;
+  left: 3%;
+  animation-delay: -4.2s;
+}
+
+.nosotros-background-words span:nth-child(6) {
+  top: 8%;
+  left: 44%;
+  animation-delay: -2.7s;
+}
+
+.nosotros-background-words span:nth-child(7) {
+  right: 3%;
+  top: 52%;
+  animation-delay: -1.1s;
+}
+
+.nosotros-background-words span:nth-child(8) {
+  bottom: 3%;
+  left: 48%;
+  animation-delay: -5.8s;
+}
+
 @keyframes nosotros-word-pulse {
   0%, 100% {
     opacity: .09;

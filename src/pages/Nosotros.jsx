@@ -41,6 +41,10 @@ function Nosotros({ content = {} }) {
             <span>Compromiso</span>
             <span>Empatía</span>
             <span>Comunidad</span>
+            <span className="is-small">Solidaridad</span>
+            <span className="is-small">Compromiso</span>
+            <span className="is-small">Empatía</span>
+            <span className="is-small">Comunidad</span>
           </div>
           <div className="nosotros-intro-collage" aria-label="Comunidad de Creando Sonrisas">
             <img src={introPhotos[0]?.url || fotoComunidad} alt={introPhotos[0]?.alt || 'Comunidad de Creando Sonrisas'} />
