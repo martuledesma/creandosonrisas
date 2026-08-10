@@ -3006,14 +3006,14 @@ h3,
 }
 
 .nosotros-background-words span:nth-child(7) {
-  right: 3%;
-  top: 52%;
+  right: 8%;
+  top: 72%;
   animation-delay: -1.1s;
 }
 
 .nosotros-background-words span:nth-child(8) {
-  right: 19%;
-  bottom: 1.5%;
+  bottom: 3%;
+  left: 48%;
   animation-delay: -5.8s;
 }
 
