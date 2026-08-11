@@ -2965,7 +2965,7 @@ h3,
 }
 
 .nosotros-background-words span:nth-child(1) {
-  top: 8%;
+  top: 10%;
   left: 37%;
 }
 
@@ -3013,8 +3013,8 @@ h3,
 }
 
 .nosotros-background-words span:nth-child(8) {
-  bottom: 13%;
-  left: 5%;
+  bottom: 16%;
+  left: 2%;
   animation-delay: -5.8s;
 }
 
