@@ -20,6 +20,7 @@ const Sumate = ({ content = {} }) => {
   const visibleCarouselImages = editableCarouselImages.length ? editableCarouselImages : galleryImages;
 
   const heroImage = content.heroImage || visibleCarouselImages[0]?.src || '';
+  const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '5493816384353';
 
   return (
     <div className="sumate-page">
@@ -34,10 +35,25 @@ const Sumate = ({ content = {} }) => {
 
       <main className="sumate-template-shell">
         <section className="sumate-intro-template">
-          <span className="template-kicker">Tu ayuda importa</span>
-          <h2>Hay muchas maneras de crear oportunidades.</h2>
-          <p>{content.content || 'Tu ayuda es fundamental para seguir transformando Tucumán.'}</p>
-          {content.contactInfo && <p>{content.contactInfo}</p>}
+          <div className="sumate-intro-copy">
+            <span className="template-kicker">Tu ayuda importa</span>
+            <h2>Hay muchas maneras de crear oportunidades.</h2>
+            <p>{content.content || 'Tu ayuda es fundamental para seguir transformando Tucumán.'}</p>
+            {content.contactInfo && <p>{content.contactInfo}</p>}
+          </div>
+          <aside className="sumate-contact-actions" aria-label="Redes y medios de contacto">
+            <span>Comunicate con nosotros</span>
+            <h3>Elegí el medio que prefieras</h3>
+            <a className="sumate-social-button" href={content.instagramUrl || 'https://www.instagram.com/creandosonrisas.tuc/'} target="_blank" rel="noreferrer">
+              Instagram
+            </a>
+            <a className="sumate-social-button" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">
+              WhatsApp
+            </a>
+            <a className="sumate-sponsor-button" href={`https://wa.me/${whatsappNumber}?text=Hola%2C%20quiero%20recibir%20informaci%C3%B3n%20para%20apadrinar`} target="_blank" rel="noreferrer">
+              Apadrinar
+            </a>
+          </aside>
         </section>
 
         <section id="formas-de-participar" className="sumate-ways-template" aria-labelledby="sumate-ways-title">
