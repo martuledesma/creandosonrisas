@@ -301,6 +301,10 @@ export default function Admin({ content, onSave }) {
 
         {activeTab === 'proyectos' && (
           <>
+            <AdminSection title="Presentación de proyectos">
+              <TextField label="Subtítulo" value={proyectos.heroSubtitle} onChange={(value) => updatePage('proyectos', 'heroSubtitle', value)} multiline />
+              <TextField label="Introducción" value={proyectos.introText} onChange={(value) => updatePage('proyectos', 'introText', value)} multiline />
+            </AdminSection>
             <AdminSection title="Listado de proyectos" onAdd={() => addItem('proyectos', 'items', { titulo: '', descripcion: '', imagen: '', estado: 'Activo' })}>
               {(proyectos.items || []).map((item, index) => (
                 <article className="admin-item" key={item.id || index}>
@@ -309,21 +313,6 @@ export default function Admin({ content, onSave }) {
                   <TextField label="Estado" value={item.estado} onChange={(value) => updateItem('proyectos', 'items', index, 'estado', value)} />
                   <ImageField label="Imagen" value={item.imagen} onChange={(value) => updateItem('proyectos', 'items', index, 'imagen', value)} />
                   <button className="admin-delete-button" type="button" onClick={() => removeItem('proyectos', 'items', index)}>Eliminar</button>
-                </article>
-              ))}
-            </AdminSection>
-            <AdminSection title="Próximos eventos" onAdd={() => addItem('home', 'events', { fecha: '', titulo: '', lugar: '', descripcion: '', imagen: '' })}>
-              <p className="admin-help-text">El próximo evento se muestra destacado en Proyectos. Los siguientes aparecen en una lista lateral.</p>
-              {(home.events || []).map((item, index) => (
-                <article className="admin-item" key={item.id || index}>
-                  <div className="admin-item-grid">
-                    <TextField label="Fecha" value={item.fecha} onChange={(value) => updateItem('home', 'events', index, 'fecha', value)} type="date" />
-                    <TextField label="Título" value={item.titulo} onChange={(value) => updateItem('home', 'events', index, 'titulo', value)} />
-                    <TextField label="Lugar" value={item.lugar} onChange={(value) => updateItem('home', 'events', index, 'lugar', value)} />
-                  </div>
-                  <TextField label="Descripción" value={item.descripcion} onChange={(value) => updateItem('home', 'events', index, 'descripcion', value)} multiline />
-                  <ImageField label="Imagen" value={item.imagen} onChange={(value) => updateItem('home', 'events', index, 'imagen', value)} />
-                  <button className="admin-delete-button" type="button" onClick={() => removeItem('home', 'events', index)}>Eliminar</button>
                 </article>
               ))}
             </AdminSection>

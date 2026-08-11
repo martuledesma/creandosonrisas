@@ -289,7 +289,7 @@ function App() {
 
         {/* OTRAS PÁGINAS */}
         <Route path="/nosotros" element={<Nosotros content={siteContent.nosotros} />} />
-        <Route path="/proyectos" element={<Proyectos content={siteContent.proyectos} events={content.events || defaultHomeContent.events} />} />
+        <Route path="/proyectos" element={<Proyectos content={siteContent.proyectos} />} />
         <Route path="/sumate" element={<Sumate content={siteContent.sumate} />} />
         <Route path="/contacto" element={<Navigate to="/" replace />} />
         <Route path="/admin" element={<Admin content={siteContent} onSave={saveContent} />} />

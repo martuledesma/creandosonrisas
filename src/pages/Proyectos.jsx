@@ -49,18 +49,6 @@ const normalizeText = (value = '') => (
   value.toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
 );
 
-const parseLocalDate = (dateString) => {
-  if (!dateString) return null;
-  const [year, month, day] = dateString.split('-').map(Number);
-  if (!year || !month || !day) return null;
-  return new Date(year, month - 1, day);
-};
-
-const formatEventDate = (dateString, options) => {
-  const date = parseLocalDate(dateString);
-  return date ? date.toLocaleDateString('es-AR', options) : '';
-};
-
 const getProjectCategory = (project = {}) => {
   const explicitCategory = normalizeText(project.categoria || project.category || project.area || '');
   if (explicitCategory.includes('salud')) return 'salud';
@@ -74,7 +62,7 @@ const getProjectCategory = (project = {}) => {
   return 'recreativos';
 };
 
-const Proyectos = ({ content = {}, events = [] }) => {
+const Proyectos = ({ content = {} }) => {
   const [expandedProjects, setExpandedProjects] = useState({});
   const [activeFilter, setActiveFilter] = useState('todos');
 
@@ -89,50 +77,16 @@ const Proyectos = ({ content = {}, events = [] }) => {
   const visibleProjects = activeFilter === 'todos'
     ? projects
     : projects.filter((project) => getProjectCategory(project) === activeFilter);
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const upcomingEvents = events
-    .filter((event) => {
-      const eventDate = parseLocalDate(event.fecha);
-      return eventDate && eventDate >= today;
-    })
-    .sort((a, b) => parseLocalDate(a.fecha) - parseLocalDate(b.fecha))
-    .slice(0, 5);
-  const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '5493816384353';
+  const bannerImage = projects.find((project) => project.imagen)?.imagen || fotoFestejo;
   return (
     <div className="proyectos-page proyectos-page-without-hero">
-      <section className="projects-events-section" aria-labelledby="projects-events-title">
-        <header className="projects-events-heading">
-          <span>Agenda comunitaria</span>
-          <h2 id="projects-events-title">Próximos eventos</h2>
-        </header>
-        {upcomingEvents.length ? (
-          <div className="projects-events-horizontal" aria-label="Lista de próximos eventos">
-            {upcomingEvents.map((event, index) => (
-              <details className="projects-event-item" key={event.id || `${event.fecha}-${event.titulo}`}>
-                <summary>
-                  <time dateTime={event.fecha}>
-                    <strong>{formatEventDate(event.fecha, { day: '2-digit' })}</strong>
-                    <span>{formatEventDate(event.fecha, { month: 'short' }).toUpperCase()}</span>
-                  </time>
-                  <div>
-                    <span>{index === 0 ? 'Próximo encuentro' : `Evento ${index + 1}`}</span>
-                    <h3>{event.titulo}</h3>
-                    {event.lugar && <p>{event.lugar}</p>}
-                  </div>
-                  <span className="projects-event-expand" aria-hidden="true">+</span>
-                </summary>
-                <div className="projects-event-details">
-                  {event.imagen && <img src={event.imagen} alt={event.titulo} loading="lazy" decoding="async" />}
-                  {event.descripcion && <p>{event.descripcion}</p>}
-                  <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">Consultar por WhatsApp</a>
-                </div>
-              </details>
-            ))}
-          </div>
-        ) : (
-          <div className="projects-events-empty"><span>Agenda en preparación</span><p>Muy pronto publicaremos las próximas actividades.</p></div>
-        )}
+      <header className="projects-compact-banner" style={{ backgroundImage: `url('${bannerImage}')` }}>
+        <div><span>Fundación Creando Sonrisas</span><h1>Proyectos</h1></div>
+      </header>
+      <section className="page-intro">
+        <p>
+          {content.introText || 'Transformamos necesidades concretas en oportunidades mediante educación, alimentación, acompañamiento y acciones comunitarias.'}
+        </p>
       </section>
 
       <section className="projects-list-section" aria-labelledby="projects-list-title">
