@@ -68,6 +68,14 @@ const Sumate = ({ content = {} }) => {
             <h2>Hay muchas maneras de crear oportunidades.</h2>
             <p>{content.content || 'Tu ayuda es fundamental para seguir transformando Tucumán.'}</p>
             {content.contactInfo && <p>{content.contactInfo}</p>}
+            <div className="sumate-instagram-reel">
+              <iframe
+                src="https://www.instagram.com/reel/Db1VA4Xg6XH/embed"
+                title="Reel de Fundación Creando Sonrisas en Instagram"
+                loading="lazy"
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+              />
+            </div>
           </div>
           <aside className="sumate-contact-actions" aria-label="Redes y medios de contacto">
             <span>Comunicate con nosotros</span>
