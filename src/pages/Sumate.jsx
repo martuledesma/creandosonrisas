@@ -3,7 +3,7 @@ import fotoComunidad from '../Assets/creando-sonrisas-comunidad.jpg';
 import fotoFestejo from '../Assets/creando-sonrisas-festejo.jpg';
 import fotoActividades from '../Assets/creando-sonrisas-actividades.jpg';
 import fotoInfancias from '../Assets/creando-sonrisas-infancias.jpg';
-import iconoApadrinar from '../Assets/icono-apadrinar.jpg';
+import iconoApadrinar from '../Assets/icono-apadrinar-transparente.png';
 
 const Sumate = ({ content = {} }) => {
   const galleryImages = [
