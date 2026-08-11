@@ -3879,16 +3879,17 @@ h3,
 /* Inicio con lenguaje visual de ONG */
 .home-hero-template .home-hero-content {
   position: relative;
-  padding-left: clamp(22px, 3vw, 38px);
-  border-left: 5px solid var(--cs-yellow);
+  padding-left: 0;
+  border-left: 0;
 }
 
 .home-hero-template .home-eyebrow {
   width: fit-content;
-  padding: 8px 12px;
+  padding: 0 0 9px;
   border: 0;
-  background: var(--cs-red);
-  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, .55);
+  background: transparent;
+  color: rgba(255, 255, 255, .85);
   font-size: .68rem;
   letter-spacing: .15em;
 }
@@ -3906,12 +3907,12 @@ h3,
 }
 
 .home-hero-template .home-primary-link {
-  background: var(--cs-yellow);
-  color: var(--cs-blue-950);
+  background: var(--cs-red);
+  color: #fff;
 }
 
 .home-hero-template .home-primary-link:hover {
-  background: var(--cs-red);
+  background: var(--cs-blue-800);
   color: #fff;
 }
 
@@ -3919,29 +3920,30 @@ h3,
   width: 100%;
   margin-top: 0;
   padding: 0 max(24px, calc((100vw - 1120px) / 2));
-  background: var(--cs-blue-950);
-  box-shadow: none;
+  border-bottom: 1px solid var(--cs-border);
+  background: #f7f9fb;
+  box-shadow: 0 16px 34px rgba(6, 26, 49, .05);
 }
 
 .home-quick-action {
   min-height: 122px;
   padding: 24px 28px;
-  border-right-color: rgba(255, 255, 255, .14);
-  color: #fff;
+  border-right-color: var(--cs-border);
+  color: var(--cs-blue-950);
 }
 
 .home-quick-action > span {
-  color: var(--cs-yellow);
+  color: var(--cs-red);
 }
 
 .home-quick-action h2 {
   margin: 8px 0 4px;
-  color: #fff;
+  color: var(--cs-blue-950);
   font-size: 1.2rem;
 }
 
 .home-quick-action p {
-  color: rgba(255, 255, 255, .7);
+  color: var(--cs-muted);
   font-size: .8rem;
   line-height: 1.45;
 }
@@ -3973,7 +3975,7 @@ h3,
 
 @media (max-width: 800px) {
   .home-hero-template .home-hero-content {
-    padding-left: 20px;
+    padding-left: 0;
   }
 
   .home-quick-actions {
@@ -3984,7 +3986,7 @@ h3,
   .home-quick-action {
     min-height: 0;
     border-right: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, .14);
+    border-bottom: 1px solid var(--cs-border);
   }
 
   .home-causes-template .home-pillar-card {

@@ -17,7 +17,7 @@ import fotoInfancias from './Assets/creando-sonrisas-infancias.jpg';
 
 const defaultHomeContent = {
   heroTitle: 'Fundación Creando Sonrisas',
-  heroSubtitle: 'Jóvenes tucumanos transformando realidades con educación, contención y trabajo solidario.',
+  heroSubtitle: 'Creer en un futuro mejor, crecer en espacios seguros y crear infancias felices. Somos Creando Sonrisas y siempre valdrá la pena.',
   heroImage: fotoComunidad,
   cards: [
     {
@@ -180,6 +180,13 @@ function App() {
     imagen: item.imagen || '',
   }));
   const heroBackground = content.heroImage || novedadesSlides.find((item) => item.imagen)?.imagen || '';
+  const previousHeroSubtitles = [
+    'Jóvenes tucumanos transformando realidades con educación, contención y trabajo solidario.',
+    'Jóvenes tucumanos que transforman realidades con educación y trabajo territorial.',
+  ];
+  const heroSubtitle = !content.heroSubtitle || previousHeroSubtitles.includes(content.heroSubtitle)
+    ? defaultHomeContent.heroSubtitle
+    : content.heroSubtitle;
   const sectionVisibility = {
     ...defaultHomeContent.sectionVisibility,
     ...(content.sectionVisibility || {}),
@@ -204,7 +211,7 @@ function App() {
                 <div className="home-hero-content">
                   <span className="home-eyebrow">Ayudanos a transformar realidades</span>
                   <h1>{content.heroTitle || defaultHomeContent.heroTitle}</h1>
-                  <p>{content.heroSubtitle || defaultHomeContent.heroSubtitle}</p>
+                  <p>{heroSubtitle}</p>
                   <div className="home-hero-actions">
                     <Link className="home-primary-link" to="/sumate">Sumate</Link>
                     <a
@@ -260,7 +267,7 @@ function App() {
                 </section>}
 
                 {sectionVisibility.cta && <section className="home-cta-band">
-                  <div><span>Tu ayuda transforma</span><h2>Hagamos crecer nuevas sonrisas</h2></div>
+                  <div><span>Dejá tu huella</span><h2>Hagamos crecer nuevas sonrisas</h2></div>
                   <Link to="/sumate">Quiero colaborar</Link>
                 </section>}
 

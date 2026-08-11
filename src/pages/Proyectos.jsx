@@ -67,6 +67,10 @@ const Proyectos = ({ content = {} }) => {
     ? projects
     : projects.filter((project) => getProjectCategory(project) === activeFilter);
   const bannerImage = projects.find((project) => project.imagen)?.imagen || fotoFestejo;
+  const previousIntro = 'Transformamos necesidades concretas en oportunidades mediante educación, alimentación, acompañamiento y acciones comunitarias.';
+  const introText = !content.introText || content.introText === previousIntro
+    ? 'Garantizar la educación en contextos de alta vulnerabilidad requiere cubrir primero las necesidades más básicas. Por eso acompañamos desde la alimentación, la contención, la recreación y el trabajo comunitario.'
+    : content.introText;
   return (
     <div className="proyectos-page proyectos-page-without-hero">
       <header className="projects-compact-banner" style={{ backgroundImage: `url('${bannerImage}')` }}>
@@ -74,7 +78,7 @@ const Proyectos = ({ content = {} }) => {
       </header>
       <section className="page-intro">
         <p>
-          {content.introText || 'Transformamos necesidades concretas en oportunidades mediante educación, alimentación, acompañamiento y acciones comunitarias.'}
+          {introText}
         </p>
       </section>
 
