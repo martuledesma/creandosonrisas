@@ -1616,6 +1616,50 @@ h3,
   }
 }
 
+.home-hero-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.home-instagram-link {
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 18px;
+  border: 1px solid rgba(255, 255, 255, .72);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, .08);
+  color: #fff;
+  font-size: .9rem;
+  font-weight: 850;
+  text-decoration: none;
+  backdrop-filter: blur(4px);
+  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+.home-instagram-link svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+}
+
+.home-instagram-link .instagram-dot {
+  fill: currentColor;
+  stroke: none;
+}
+
+.home-instagram-link:hover {
+  border-color: var(--cs-yellow);
+  background: rgba(216, 83, 70, .82);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
 /* Nosotros inspirado en una página institucional clásica */
 .nosotros-compact-banner {
   position: relative;
@@ -3536,4 +3580,17 @@ h3,
   .proyectos-page-without-hero .page-intro p {
     padding: 14px 0 18px;
   }
+}
+
+/* Prioridad final del degradado fotográfico de Inicio. */
+.home-hero-template::before {
+  background: linear-gradient(
+    90deg,
+    rgba(5, 35, 72, .82) 0%,
+    rgba(8, 49, 93, .68) 30%,
+    rgba(12, 63, 115, .3) 56%,
+    rgba(12, 63, 115, .08) 76%,
+    transparent 100%
+  );
+  backdrop-filter: none;
 }
