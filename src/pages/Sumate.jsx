@@ -68,6 +68,8 @@ const Sumate = ({ content = {} }) => {
             <h2>Hay muchas maneras de crear oportunidades.</h2>
             <p>{content.content || 'Tu ayuda es fundamental para seguir transformando Tucumán.'}</p>
             {content.contactInfo && <p>{content.contactInfo}</p>}
+          </div>
+          <div className="sumate-media-row">
             <div className="sumate-instagram-reel">
               <iframe
                 src="https://www.instagram.com/reel/Db1VA4Xg6XH/embed"
@@ -76,21 +78,17 @@ const Sumate = ({ content = {} }) => {
                 allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
               />
             </div>
+            <aside className="sumate-contact-actions" aria-label="Redes y medios de contacto">
+              <span>Comunicate con nosotros</span>
+              <h3>Elegí el medio que prefieras</h3>
+              <a className="sumate-social-button" href={content.instagramUrl || 'https://www.instagram.com/creandosonrisas.tuc/'} target="_blank" rel="noreferrer">Instagram</a>
+              <a className="sumate-social-button" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">WhatsApp</a>
+              <a className="sumate-sponsor-button" href={`https://wa.me/${whatsappNumber}?text=Hola%2C%20quiero%20recibir%20informaci%C3%B3n%20para%20apadrinar`} target="_blank" rel="noreferrer">
+                <img src={iconoApadrinar} alt="" aria-hidden="true" />
+                <span>Apadrinar</span>
+              </a>
+            </aside>
           </div>
-          <aside className="sumate-contact-actions" aria-label="Redes y medios de contacto">
-            <span>Comunicate con nosotros</span>
-            <h3>Elegí el medio que prefieras</h3>
-            <a className="sumate-social-button" href={content.instagramUrl || 'https://www.instagram.com/creandosonrisas.tuc/'} target="_blank" rel="noreferrer">
-              Instagram
-            </a>
-            <a className="sumate-social-button" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">
-              WhatsApp
-            </a>
-            <a className="sumate-sponsor-button" href={`https://wa.me/${whatsappNumber}?text=Hola%2C%20quiero%20recibir%20informaci%C3%B3n%20para%20apadrinar`} target="_blank" rel="noreferrer">
-              <img src={iconoApadrinar} alt="" aria-hidden="true" />
-              <span>Apadrinar</span>
-            </a>
-          </aside>
         </section>
 
         <section className="sumate-contact-band">

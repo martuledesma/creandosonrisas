@@ -3734,10 +3734,6 @@ h3,
 /* Introducción y vías de contacto de Sumate */
 .sumate-intro-template {
   width: min(1080px, calc(100% - 48px));
-  display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr);
-  align-items: center;
-  gap: clamp(42px, 7vw, 90px);
   padding: clamp(72px, 8vw, 108px) 0;
   text-align: left;
 }
@@ -3760,9 +3756,16 @@ h3,
   margin-top: 10px;
 }
 
+.sumate-media-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr);
+  align-items: start;
+  gap: clamp(42px, 7vw, 90px);
+  margin-top: 34px;
+}
+
 .sumate-instagram-reel {
   width: min(100%, 430px);
-  margin-top: 32px;
   overflow: hidden;
   border: 1px solid var(--cs-border);
   border-radius: 12px;
@@ -3844,9 +3847,12 @@ h3,
 
 @media (max-width: 800px) {
   .sumate-intro-template {
-    grid-template-columns: 1fr;
-    gap: 34px;
     padding: 58px 0;
+  }
+
+  .sumate-media-row {
+    grid-template-columns: 1fr;
+    gap: 30px;
   }
 
   .sumate-contact-actions {
