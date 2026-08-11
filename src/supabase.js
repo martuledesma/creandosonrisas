@@ -53,3 +53,16 @@ export const uploadSiteImage = async (file) => {
   if (error) throw error;
   return supabase.storage.from('site-images').getPublicUrl(path).data.publicUrl;
 };
+
+export const uploadSiteVideo = async (file) => {
+  if (!supabase) throw new Error('Supabase no está configurado.');
+  const extension = file.name.split('.').pop()?.toLowerCase() || 'mp4';
+  const path = `videos/${crypto.randomUUID()}.${extension}`;
+  const { error } = await supabase.storage.from('site-images').upload(path, file, {
+    cacheControl: '3600',
+    contentType: file.type || 'video/mp4',
+    upsert: false,
+  });
+  if (error) throw error;
+  return supabase.storage.from('site-images').getPublicUrl(path).data.publicUrl;
+};

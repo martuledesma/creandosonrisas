@@ -71,12 +71,24 @@ const Sumate = ({ content = {} }) => {
           </div>
           <div className="sumate-media-row">
             <div className="sumate-instagram-reel">
-              <iframe
-                src="https://www.instagram.com/reel/Db1VA4Xg6XH/embed"
-                title="Reel de Fundación Creando Sonrisas en Instagram"
-                loading="lazy"
-                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-              />
+              {content.campaignVideoUrl ? (
+                <video
+                  src={content.campaignVideoUrl}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-label="Campaña de Fundación Creando Sonrisas"
+                />
+              ) : (
+                <iframe
+                  src="https://www.instagram.com/reel/Db1VA4Xg6XH/embed"
+                  title="Reel de Fundación Creando Sonrisas en Instagram"
+                  loading="lazy"
+                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                />
+              )}
             </div>
             <aside className="sumate-contact-actions" aria-label="Redes y medios de contacto">
               <span>Apadriná un deseo</span>

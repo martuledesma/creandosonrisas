@@ -133,6 +133,7 @@ const defaultSiteContent = {
     content: 'Tu ayuda es fundamental para seguir transformando Tucumán.',
     donationAlias: 'CREANDOSONRISASTUC',
     instagramUrl: 'https://www.instagram.com/creandosonrisas.tuc/',
+    campaignVideoUrl: '',
     carouselImages: [
       { id: 1, url: fotoComunidad, alt: 'Voluntarios, niños y familias de Creando Sonrisas' },
       { id: 2, url: fotoFestejo, alt: 'Festejo comunitario junto a niños y voluntarios' },
