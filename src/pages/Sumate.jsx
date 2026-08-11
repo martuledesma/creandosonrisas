@@ -69,27 +69,18 @@ const Sumate = ({ content = {} }) => {
             <p>{content.content || 'Tu ayuda es fundamental para seguir transformando Tucumán.'}</p>
             {content.contactInfo && <p>{content.contactInfo}</p>}
           </div>
-          <div className="sumate-media-row">
-            <div className="sumate-instagram-reel">
-              {content.campaignVideoUrl ? (
+          <div className={`sumate-media-row${content.campaignVideoUrl ? '' : ' sumate-media-row-without-video'}`}>
+            {content.campaignVideoUrl && (
+              <div className="sumate-instagram-reel">
                 <video
                   src={content.campaignVideoUrl}
-                  autoPlay
-                  muted
-                  loop
+                  controls
                   playsInline
                   preload="metadata"
                   aria-label="Campaña de Fundación Creando Sonrisas"
                 />
-              ) : (
-                <iframe
-                  src="https://www.instagram.com/reel/Db1VA4Xg6XH/embed"
-                  title="Reel de Fundación Creando Sonrisas en Instagram"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                />
-              )}
-            </div>
+              </div>
+            )}
             <aside className="sumate-contact-actions" aria-label="Redes y medios de contacto">
               <span>Apadriná un deseo</span>
               <h3>Elegí una cartita, convertite en padrino y hacé realidad su deseo.</h3>
