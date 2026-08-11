@@ -301,10 +301,6 @@ export default function Admin({ content, onSave }) {
 
         {activeTab === 'proyectos' && (
           <>
-            <AdminSection title="Presentación de proyectos">
-              <TextField label="Subtítulo" value={proyectos.heroSubtitle} onChange={(value) => updatePage('proyectos', 'heroSubtitle', value)} multiline />
-              <TextField label="Introducción" value={proyectos.introText} onChange={(value) => updatePage('proyectos', 'introText', value)} multiline />
-            </AdminSection>
             <AdminSection title="Listado de proyectos" onAdd={() => addItem('proyectos', 'items', { titulo: '', descripcion: '', imagen: '', estado: 'Activo' })}>
               {(proyectos.items || []).map((item, index) => (
                 <article className="admin-item" key={item.id || index}>
