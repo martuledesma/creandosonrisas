@@ -78,6 +78,7 @@ const defaultHomeContent = {
     news: true,
   },
   footerText: '© 2026 Fundación Creando Sonrisas - Tucumán, Argentina',
+  developerLinkedin: 'https://www.linkedin.com/in/martina-ledesma/',
 };
 
 const defaultSiteContent = {
@@ -297,7 +298,25 @@ function App() {
       <WhatsAppButton className="whatsapp-floating-button" />
 
       <footer className="footer">
-        <p>{content.footerText || defaultHomeContent.footerText}</p>
+        <div className="footer-legal">
+          <p>{content.footerText || defaultHomeContent.footerText}</p>
+          <span>Todos los derechos reservados.</span>
+        </div>
+        <div className="footer-developer">
+          <span>Desarrollado por Martina Ledesma</span>
+          <a
+            href={content.developerLinkedin || defaultHomeContent.developerLinkedin}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="LinkedIn de Martina Ledesma"
+            title="LinkedIn de Martina Ledesma"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <path d="M8 10v7M8 7.5v.1M12 17v-4c0-1.7 1.1-3 2.7-3 1.5 0 2.3 1 2.3 3v4M12 10v7" />
+            </svg>
+          </a>
+        </div>
       </footer>
     </div>
   );

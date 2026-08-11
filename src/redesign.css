@@ -922,6 +922,66 @@ h3,
   margin: 0;
 }
 
+.footer {
+  justify-content: space-between;
+  gap: 28px;
+  padding-right: max(28px, calc((100vw - 1180px) / 2));
+  padding-left: max(28px, calc((100vw - 1180px) / 2));
+}
+
+.footer-legal,
+.footer-developer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-legal {
+  flex-wrap: wrap;
+}
+
+.footer-legal span,
+.footer-developer span {
+  color: rgba(255, 255, 255, .54);
+  font-size: .78rem;
+}
+
+.footer-developer a {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, .28);
+  border-radius: 50%;
+  color: rgba(255, 255, 255, .82);
+  transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease;
+}
+
+.footer-developer a:hover {
+  border-color: #0a66c2;
+  background: #0a66c2;
+  color: #fff;
+}
+
+.footer-developer svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 700px) {
+  .footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+    padding: 26px 22px;
+  }
+}
+
 /* El panel conserva su estructura, pero comparte la identidad */
 .admin-page,
 .admin-login-page {

@@ -219,6 +219,7 @@ export default function Admin({ content, onSave }) {
               <TextField label="Subtítulo" value={home.heroSubtitle} onChange={(value) => updatePage('home', 'heroSubtitle', value)} multiline />
               <ImageField label="Imagen de portada" value={home.heroImage} onChange={(value) => updatePage('home', 'heroImage', value)} />
               <TextField label="Texto del pie" value={home.footerText} onChange={(value) => updatePage('home', 'footerText', value)} />
+              <TextField label="LinkedIn de Martina Ledesma" value={home.developerLinkedin} onChange={(value) => updatePage('home', 'developerLinkedin', value)} type="url" />
             </AdminSection>
             <AdminSection title="Mostrar u ocultar secciones">
               <div className="admin-visibility-grid">
