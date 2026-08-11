@@ -44,7 +44,14 @@ const Navbar = () => {
                 <li><Link to="/nosotros" onClick={closeMenu}>Nosotros</Link></li>
                 <li><Link to="/proyectos" onClick={closeMenu}>Proyectos</Link></li>
                 <li><Link to="/sumate" className="sumate-nav-link" onClick={closeMenu}>Sumate</Link></li>
-                <li><Link to="/admin" className="admin-access-link" onClick={closeMenu}>Acceso</Link></li>
+                <li>
+                    <Link to="/admin" className="admin-access-link" onClick={closeMenu} aria-label="Acceso al panel de administración" title="Acceso al panel">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <circle cx="12" cy="8" r="3.5" />
+                            <path d="M5.5 20c.5-4 2.7-6 6.5-6s6 2 6.5 6" />
+                        </svg>
+                    </Link>
+                </li>
             </ul>
         </nav>
     );

@@ -108,6 +108,30 @@ h3,
   opacity: 0.62;
 }
 
+.nav-links .admin-access-link {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(18, 59, 109, .18);
+  border-radius: 50%;
+}
+
+.admin-access-link svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+.nav-links .admin-access-link:hover {
+  border-color: var(--cs-red);
+  background: rgba(216, 83, 70, .07);
+}
+
 /* Portadas fotográficas compartidas */
 .page-hero-photo,
 .page-hero,
