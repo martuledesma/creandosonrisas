@@ -3664,6 +3664,55 @@ h3,
   padding-top: 0;
 }
 
+/* Mini portada amarilla de Sumate */
+.sumate-compact-banner {
+  position: relative;
+  isolation: isolate;
+  min-height: 300px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background-position: center 42%;
+  background-size: cover;
+  text-align: center;
+}
+
+.sumate-compact-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(235, 181, 45, .76);
+  backdrop-filter: grayscale(.12) saturate(.82);
+}
+
+.sumate-compact-banner span {
+  color: var(--cs-red);
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.sumate-compact-banner h1 {
+  margin: 12px 0 0;
+  color: var(--cs-blue-950);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3rem, 5vw, 5rem);
+  line-height: 1;
+}
+
+.sumate-compact-banner + .sumate-template-shell .sumate-quick-actions {
+  margin-top: 0;
+  box-shadow: 0 16px 40px rgba(6, 26, 49, .1);
+}
+
+@media (max-width: 800px) {
+  .sumate-compact-banner {
+    min-height: 230px;
+  }
+}
+
 .footer {
   min-height: 118px;
   justify-content: center;

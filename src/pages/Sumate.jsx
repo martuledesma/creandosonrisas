@@ -24,20 +24,12 @@ const Sumate = ({ content = {} }) => {
   return (
     <div className="sumate-page">
       <header
-        className="sumate-hero page-hero-photo sumate-hero-template"
+        className="sumate-compact-banner"
         style={heroImage ? {
           backgroundImage: `url('${heroImage}')`,
         } : undefined}
       >
-        <div className="sumate-hero-content">
-          <div className="page-hero-copy">
-            <span className="page-eyebrow">Sumate</span>
-            <h1>{content.title || 'Sumate a la Fundación'}</h1>
-            <p>
-              {content.heroSubtitle || 'Tu tiempo, una donación o la difusión de nuestro trabajo pueden crear nuevas oportunidades.'}
-            </p>
-          </div>
-        </div>
+        <div><span>Fundación Creando Sonrisas</span><h1>Sumate</h1></div>
       </header>
 
       <main className="sumate-template-shell">
