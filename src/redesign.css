@@ -3758,7 +3758,7 @@ h3,
 
 .sumate-media-row {
   display: grid;
-  grid-template-columns: minmax(0, 380px) minmax(280px, 380px);
+  grid-template-columns: minmax(0, 300px) minmax(280px, 380px);
   align-items: start;
   justify-content: center;
   gap: clamp(28px, 4vw, 48px);
@@ -3787,7 +3787,7 @@ h3,
 }
 
 .sumate-instagram-reel {
-  width: min(100%, 380px);
+  width: min(100%, 300px);
   overflow: hidden;
   border: 1px solid var(--cs-border);
   border-radius: 12px;
@@ -3797,7 +3797,7 @@ h3,
 
 .sumate-instagram-reel video {
   width: 100%;
-  height: 675px;
+  height: 533px;
   display: block;
   border: 0;
 }
@@ -3902,12 +3902,13 @@ h3,
   }
 
   .sumate-instagram-reel {
+    width: min(100%, 300px);
     margin-right: auto;
     margin-left: auto;
   }
 
   .sumate-instagram-reel video {
-    height: min(675px, 170vw);
+    height: min(533px, 170vw);
   }
 }
 
