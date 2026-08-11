@@ -27,17 +27,6 @@ const defaultProjects = [
   },
 ];
 
-const getStatusClass = (status = '') => {
-  const normalized = status.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  if (normalized.includes('ultimos cupos')) return 'feature-status status-warning';
-  if (normalized.includes('finalizado')) return 'feature-status status-finished';
-  return 'feature-status status-active';
-};
-
-const getStatusLabel = (status) => (
-  status === 'Últimos cupos' ? '⚠ Últimos cupos' : status
-);
-
 const projectFilters = [
   { id: 'todos', label: 'Todos' },
   { id: 'salud', label: 'Salud' },
@@ -91,10 +80,10 @@ const Proyectos = ({ content = {} }) => {
 
       <section className="projects-list-section" aria-labelledby="projects-list-title">
         <div className="project-section-heading">
-          <span>En marcha</span>
+          <span>Nuestro trabajo</span>
           <h2 id="projects-list-title" className="display-subtitle">
-            <span className="title-line title-line-blue">Proyectos</span>
-            <span className="title-line title-line-white">activos</span>
+            <span className="title-line title-line-blue">Nuestros</span>
+            <span className="title-line title-line-white">proyectos</span>
           </h2>
         </div>
         <div className="project-filter-tabs" aria-label="Filtrar proyectos">
@@ -116,9 +105,6 @@ const Proyectos = ({ content = {} }) => {
                 <img src={project.imagen} alt={project.titulo} className="feature-card-img" loading="lazy" decoding="async" />
               )}
               <div className="feature-card-content">
-                {project.estado && (
-                  <span className={getStatusClass(project.estado)}>{getStatusLabel(project.estado)}</span>
-                )}
                 <h2>{project.titulo}</h2>
                 <p className={expandedProjects[index] ? 'feature-description expanded' : 'feature-description'}>
                   {project.descripcion}
