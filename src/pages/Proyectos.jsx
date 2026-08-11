@@ -77,7 +77,6 @@ const getProjectCategory = (project = {}) => {
 const Proyectos = ({ content = {}, events = [] }) => {
   const [expandedProjects, setExpandedProjects] = useState({});
   const [activeFilter, setActiveFilter] = useState('todos');
-  const [activeSecondaryEvent, setActiveSecondaryEvent] = useState(0);
 
   const toggleProjectExpand = (index) => {
     setExpandedProjects((prev) => ({
@@ -98,19 +97,8 @@ const Proyectos = ({ content = {}, events = [] }) => {
       const eventDate = parseLocalDate(event.fecha);
       return eventDate && eventDate >= today;
     })
-    .sort((a, b) => parseLocalDate(a.fecha) - parseLocalDate(b.fecha));
-  const featuredEvent = upcomingEvents[0];
-  const secondaryEvents = upcomingEvents.slice(1);
-  const secondaryEventIndex = secondaryEvents.length ? activeSecondaryEvent % secondaryEvents.length : 0;
-  const visibleSecondaryEvent = secondaryEvents.length
-    ? secondaryEvents[secondaryEventIndex]
-    : null;
-  const moveSecondaryEvent = (direction) => {
-    setActiveSecondaryEvent((current) => {
-      if (!secondaryEvents.length) return 0;
-      return (current + direction + secondaryEvents.length) % secondaryEvents.length;
-    });
-  };
+    .sort((a, b) => parseLocalDate(a.fecha) - parseLocalDate(b.fecha))
+    .slice(0, 5);
   const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '5493816384353';
   return (
     <div className="proyectos-page proyectos-page-without-hero">
@@ -128,43 +116,29 @@ const Proyectos = ({ content = {}, events = [] }) => {
           <span>Agenda comunitaria</span>
           <h2 id="projects-events-title">Próximos eventos</h2>
         </header>
-        {featuredEvent ? (
-          <div className={`projects-events-layout ${secondaryEvents.length ? '' : 'single-event'}`}>
-            <article className="projects-featured-event">
-              <div className="projects-featured-event-image">
-                <img src={featuredEvent.imagen || bannerImage} alt={featuredEvent.titulo} loading="lazy" decoding="async" />
-                <time dateTime={featuredEvent.fecha}>
-                  <strong>{formatEventDate(featuredEvent.fecha, { day: '2-digit' })}</strong>
-                  <span>{formatEventDate(featuredEvent.fecha, { month: 'short' }).toUpperCase()}</span>
-                </time>
-              </div>
-              <div className="projects-featured-event-copy">
-                <span>Próximo encuentro</span>
-                <h3>{featuredEvent.titulo}</h3>
-                {featuredEvent.lugar && <p className="projects-event-place">{featuredEvent.lugar}</p>}
-                {featuredEvent.descripcion && <p>{featuredEvent.descripcion}</p>}
-                <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">Consultar por WhatsApp</a>
-              </div>
-            </article>
-            {secondaryEvents.length > 0 && (
-              <div className="projects-secondary-events" aria-label="Otros próximos eventos">
-                <header>
-                  <span>También en agenda</span>
-                  <div className="projects-secondary-counter">{secondaryEventIndex + 1} de {secondaryEvents.length}</div>
-                </header>
-                <article key={visibleSecondaryEvent.id || `${visibleSecondaryEvent.fecha}-${visibleSecondaryEvent.titulo}`}>
-                  <time dateTime={visibleSecondaryEvent.fecha}>
-                    <strong>{formatEventDate(visibleSecondaryEvent.fecha, { day: '2-digit' })}</strong>
-                    <span>{formatEventDate(visibleSecondaryEvent.fecha, { month: 'short' }).toUpperCase()}</span>
+        {upcomingEvents.length ? (
+          <div className="projects-events-horizontal" aria-label="Lista de próximos eventos">
+            {upcomingEvents.map((event, index) => (
+              <details className="projects-event-item" key={event.id || `${event.fecha}-${event.titulo}`}>
+                <summary>
+                  <time dateTime={event.fecha}>
+                    <strong>{formatEventDate(event.fecha, { day: '2-digit' })}</strong>
+                    <span>{formatEventDate(event.fecha, { month: 'short' }).toUpperCase()}</span>
                   </time>
-                  <div><h3>{visibleSecondaryEvent.titulo}</h3>{visibleSecondaryEvent.lugar && <p>{visibleSecondaryEvent.lugar}</p>}</div>
-                </article>
-                <div className="projects-secondary-controls">
-                  <button type="button" onClick={() => moveSecondaryEvent(-1)} aria-label="Ver evento anterior">←</button>
-                  <button type="button" onClick={() => moveSecondaryEvent(1)} aria-label="Ver evento siguiente">→</button>
+                  <div>
+                    <span>{index === 0 ? 'Próximo encuentro' : `Evento ${index + 1}`}</span>
+                    <h3>{event.titulo}</h3>
+                    {event.lugar && <p>{event.lugar}</p>}
+                  </div>
+                  <span className="projects-event-expand" aria-hidden="true">+</span>
+                </summary>
+                <div className="projects-event-details">
+                  {event.imagen && <img src={event.imagen} alt={event.titulo} loading="lazy" decoding="async" />}
+                  {event.descripcion && <p>{event.descripcion}</p>}
+                  <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">Consultar por WhatsApp</a>
                 </div>
-              </div>
-            )}
+              </details>
+            ))}
           </div>
         ) : (
           <div className="projects-events-empty"><span>Agenda en preparación</span><p>Muy pronto publicaremos las próximas actividades.</p></div>
