@@ -33,12 +33,6 @@ const Sumate = ({ content = {} }) => {
       </header>
 
       <main className="sumate-template-shell">
-        <section className="sumate-quick-actions" aria-label="Formas de ayudar">
-          <div><span>01</span><h2>Doná tu tiempo</h2><p>Participá como voluntario en nuestras actividades.</p></div>
-          <div><span>02</span><h2>Hacé un aporte</h2><p>Ayudanos a sostener meriendas, materiales y encuentros.</p></div>
-          <div><span>03</span><h2>Compartí</h2><p>Difundí nuestro trabajo para que llegue a más personas.</p></div>
-        </section>
-
         <section className="sumate-intro-template">
           <span className="template-kicker">Tu ayuda importa</span>
           <h2>Hay muchas maneras de crear oportunidades.</h2>

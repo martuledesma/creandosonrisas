@@ -3696,7 +3696,7 @@ h3,
 
 .sumate-compact-banner h1 {
   margin: 12px 0 0;
-  color: var(--cs-blue-950);
+  color: #fff;
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(3rem, 5vw, 5rem);
   line-height: 1;
