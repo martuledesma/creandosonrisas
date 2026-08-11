@@ -83,7 +83,7 @@ const Sumate = ({ content = {} }) => {
               <h3>Elegí el medio que prefieras</h3>
               <a className="sumate-social-button" href={content.instagramUrl || 'https://www.instagram.com/creandosonrisas.tuc/'} target="_blank" rel="noreferrer">Instagram</a>
               <a className="sumate-social-button" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">WhatsApp</a>
-              <a className="sumate-sponsor-button" href={`https://wa.me/${whatsappNumber}?text=Hola%2C%20quiero%20recibir%20informaci%C3%B3n%20para%20apadrinar`} target="_blank" rel="noreferrer">
+              <a className="sumate-sponsor-button" href="https://www.fundaros.com/appadrinar/creandosonrisas/campanas/dia-del-nino-creando-sonrisas-2026" target="_blank" rel="noreferrer">
                 <img src={iconoApadrinar} alt="" aria-hidden="true" />
                 <span>Apadrinar</span>
               </a>
