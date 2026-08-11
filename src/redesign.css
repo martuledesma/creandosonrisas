@@ -3660,6 +3660,10 @@ h3,
   padding-bottom: 0;
 }
 
+.nosotros-page.nosotros-page-without-hero {
+  padding-top: 0;
+}
+
 .footer {
   min-height: 118px;
   justify-content: center;
