@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import fotoComunidad from '../Assets/creando-sonrisas-comunidad.jpg';
 import fotoFestejo from '../Assets/creando-sonrisas-festejo.jpg';
 import fotoActividades from '../Assets/creando-sonrisas-actividades.jpg';
@@ -6,6 +6,8 @@ import fotoInfancias from '../Assets/creando-sonrisas-infancias.jpg';
 import iconoApadrinar from '../Assets/icono-apadrinar-transparente.png';
 
 const Sumate = ({ content = {} }) => {
+  const campaignVideoRef = useRef(null);
+  const [campaignPlaying, setCampaignPlaying] = useState(false);
   const galleryImages = [
     { src: fotoComunidad, alt: 'Voluntarios, niños y familias de Creando Sonrisas' },
     { src: fotoFestejo, alt: 'Festejo comunitario junto a niños y voluntarios' },
@@ -22,6 +24,16 @@ const Sumate = ({ content = {} }) => {
 
   const heroImage = content.heroImage || visibleCarouselImages[0]?.src || '';
   const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '5493816384353';
+
+  const toggleCampaignVideo = async () => {
+    const video = campaignVideoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      await video.play();
+    } else {
+      video.pause();
+    }
+  };
 
   return (
     <div className="sumate-page">
@@ -73,12 +85,27 @@ const Sumate = ({ content = {} }) => {
             {content.campaignVideoUrl && (
               <div className="sumate-instagram-reel">
                 <video
+                  ref={campaignVideoRef}
                   src={content.campaignVideoUrl}
-                  controls
                   playsInline
                   preload="metadata"
+                  controlsList="nodownload noplaybackrate noremoteplayback"
+                  disablePictureInPicture
+                  onPlay={() => setCampaignPlaying(true)}
+                  onPause={() => setCampaignPlaying(false)}
+                  onEnded={() => setCampaignPlaying(false)}
+                  onClick={toggleCampaignVideo}
+                  onContextMenu={(event) => event.preventDefault()}
                   aria-label="Campaña de Fundación Creando Sonrisas"
                 />
+                <button
+                  className="sumate-video-toggle"
+                  type="button"
+                  onClick={toggleCampaignVideo}
+                  aria-label={campaignPlaying ? 'Pausar video' : 'Reproducir video'}
+                >
+                  {campaignPlaying ? 'Pausar' : 'Reproducir'}
+                </button>
               </div>
             )}
             <aside className="sumate-contact-actions" aria-label="Redes y medios de contacto">

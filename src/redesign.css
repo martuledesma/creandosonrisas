@@ -3733,8 +3733,8 @@ h3,
 
 /* Introducción y vías de contacto de Sumate */
 .sumate-intro-template {
-  width: min(1080px, calc(100% - 48px));
-  padding: clamp(72px, 8vw, 108px) 0;
+  width: min(1180px, calc(100% - 64px));
+  padding: clamp(58px, 6vw, 82px) 0;
   text-align: left;
 }
 
@@ -3760,9 +3760,9 @@ h3,
   display: grid;
   grid-template-columns: minmax(0, 300px) minmax(280px, 380px);
   align-items: start;
-  justify-content: center;
+  justify-content: start;
   gap: clamp(28px, 4vw, 48px);
-  margin-top: 34px;
+  margin-top: 22px;
 }
 
 .sumate-media-row-without-video {
@@ -3787,6 +3787,7 @@ h3,
 }
 
 .sumate-instagram-reel {
+  position: relative;
   width: min(100%, 300px);
   overflow: hidden;
   border: 1px solid var(--cs-border);
@@ -3805,6 +3806,29 @@ h3,
 .sumate-instagram-reel video {
   background: #000;
   object-fit: cover;
+  cursor: pointer;
+}
+
+.sumate-video-toggle {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  min-height: 42px;
+  padding: 10px 16px;
+  border: 1px solid rgba(255, 255, 255, .72);
+  border-radius: 999px;
+  background: rgba(6, 26, 49, .82);
+  color: #fff;
+  font: inherit;
+  font-size: .78rem;
+  font-weight: 900;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+
+.sumate-video-toggle:hover,
+.sumate-video-toggle:focus-visible {
+  background: var(--cs-red);
 }
 
 .sumate-contact-actions {
@@ -3881,6 +3905,7 @@ h3,
 
 @media (max-width: 800px) {
   .sumate-intro-template {
+    width: calc(100% - 40px);
     padding: 58px 0;
   }
 
