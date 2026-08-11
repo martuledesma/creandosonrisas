@@ -3654,3 +3654,35 @@ h3,
   );
   backdrop-filter: none;
 }
+
+/* Cierre compacto de Proyectos y footer en dos líneas */
+.proyectos-page.proyectos-page-without-hero {
+  padding-bottom: 0;
+}
+
+.footer {
+  min-height: 118px;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px max(190px, calc((100vw - 1180px) / 2));
+  text-align: center;
+}
+
+.footer-legal,
+.footer-developer {
+  justify-content: center;
+}
+
+@media (max-width: 700px) {
+  .footer {
+    align-items: center;
+    gap: 10px;
+    padding: 24px 100px 24px 20px;
+  }
+
+  .footer-legal {
+    display: grid;
+    gap: 4px;
+  }
+}
