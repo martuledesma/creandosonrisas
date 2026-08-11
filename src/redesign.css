@@ -3787,10 +3787,21 @@ h3,
 }
 
 .sumate-sponsor-button {
+  gap: 10px;
   border-color: var(--cs-yellow);
   background: var(--cs-yellow);
   color: #fff;
   text-shadow: 0 1px 2px rgba(6, 26, 49, .28);
+}
+
+.sumate-sponsor-button img {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border: 2px solid rgba(255, 255, 255, .9);
+  border-radius: 50%;
+  object-fit: cover;
+  transform: scale(1.08);
 }
 
 .sumate-sponsor-button:hover {

@@ -3,6 +3,7 @@ import fotoComunidad from '../Assets/creando-sonrisas-comunidad.jpg';
 import fotoFestejo from '../Assets/creando-sonrisas-festejo.jpg';
 import fotoActividades from '../Assets/creando-sonrisas-actividades.jpg';
 import fotoInfancias from '../Assets/creando-sonrisas-infancias.jpg';
+import iconoApadrinar from '../Assets/icono-apadrinar.jpg';
 
 const Sumate = ({ content = {} }) => {
   const galleryImages = [
@@ -51,7 +52,8 @@ const Sumate = ({ content = {} }) => {
               WhatsApp
             </a>
             <a className="sumate-sponsor-button" href={`https://wa.me/${whatsappNumber}?text=Hola%2C%20quiero%20recibir%20informaci%C3%B3n%20para%20apadrinar`} target="_blank" rel="noreferrer">
-              Apadrinar
+              <img src={iconoApadrinar} alt="" aria-hidden="true" />
+              <span>Apadrinar</span>
             </a>
           </aside>
         </section>
