@@ -96,9 +96,14 @@ const Sumate = ({ content = {} }) => {
             <h2>Alias: {content.donationAlias || 'CREANDOSONRISASTUC'}</h2>
             <p>Cada aporte, sin importar el monto, ayuda a sostener nuestro trabajo cotidiano.</p>
           </div>
-          <a href={content.instagramUrl || 'https://www.instagram.com/creandosonrisas.tuc/'} target="_blank" rel="noreferrer">
-            Contactar por Instagram
-          </a>
+          <div className="sumate-contact-band-actions">
+            <a href={content.instagramUrl || 'https://www.instagram.com/creandosonrisas.tuc/'} target="_blank" rel="noreferrer">
+              Contactar por Instagram
+            </a>
+            <a className="sumate-contact-band-whatsapp" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">
+              Contactar por WhatsApp
+            </a>
+          </div>
         </section>
       </main>
 

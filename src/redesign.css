@@ -3758,10 +3758,28 @@ h3,
 
 .sumate-media-row {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr);
+  grid-template-columns: minmax(0, 380px) minmax(280px, 380px);
   align-items: start;
-  gap: clamp(42px, 7vw, 90px);
+  justify-content: center;
+  gap: clamp(28px, 4vw, 48px);
   margin-top: 34px;
+}
+
+.sumate-contact-band-actions {
+  display: grid;
+  flex: 0 0 auto;
+  gap: 10px;
+}
+
+.sumate-contact-band-actions a {
+  min-width: 250px;
+  text-align: center;
+}
+
+.sumate-contact-band a.sumate-contact-band-whatsapp {
+  border: 1px solid rgba(255, 255, 255, .7);
+  background: transparent;
+  color: #fff;
 }
 
 .sumate-instagram-reel {
@@ -3860,6 +3878,14 @@ h3,
   .sumate-media-row {
     grid-template-columns: 1fr;
     gap: 30px;
+  }
+
+  .sumate-contact-band-actions {
+    width: 100%;
+  }
+
+  .sumate-contact-band-actions a {
+    min-width: 0;
   }
 
   .sumate-contact-actions {
