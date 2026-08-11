@@ -35,6 +35,33 @@ const Sumate = ({ content = {} }) => {
       </header>
 
       <main className="sumate-template-shell">
+        <section id="formas-de-participar" className="sumate-ways-template" aria-labelledby="sumate-ways-title">
+          <header className="template-section-title">
+            <span className="template-kicker">Elegí cómo participar</span>
+            <h2 id="sumate-ways-title">Sumate a la comunidad</h2>
+          </header>
+          <div className="sumate-ways-grid">
+            <article className="sumate-way-card sumate-way-1">
+              <span className="sumate-way-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM19 8v6M22 11h-6" /></svg>
+              </span>
+              <div><span>01</span><h3>Voluntariado</h3></div>
+            </article>
+            <article className="sumate-way-card sumate-way-2">
+              <span className="sumate-way-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z" /></svg>
+              </span>
+              <div><span>02</span><h3>Donaciones</h3></div>
+            </article>
+            <article className="sumate-way-card sumate-way-3">
+              <span className="sumate-way-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="m3 11 18-5-5 18-4-8-9-5ZM12 16l4-4" /></svg>
+              </span>
+              <div><span>03</span><h3>Difusión</h3></div>
+            </article>
+          </div>
+        </section>
+
         <section className="sumate-intro-template">
           <div className="sumate-intro-copy">
             <span className="template-kicker">Tu ayuda importa</span>
@@ -56,24 +83,6 @@ const Sumate = ({ content = {} }) => {
               <span>Apadrinar</span>
             </a>
           </aside>
-        </section>
-
-        <section id="formas-de-participar" className="sumate-ways-template" aria-labelledby="sumate-ways-title">
-          <header className="template-section-title">
-            <span className="template-kicker">Elegí cómo participar</span>
-            <h2 id="sumate-ways-title">Sumate a la comunidad</h2>
-          </header>
-          <div className="sumate-ways-grid">
-            {['Voluntariado', 'Donaciones', 'Difusión'].map((title, index) => {
-              const image = visibleCarouselImages[index % visibleCarouselImages.length];
-              return (
-                <article className={`sumate-way-card sumate-way-${index + 1}`} key={title}>
-                  {image && <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />}
-                  <div><span>0{index + 1}</span><h3>{title}</h3></div>
-                </article>
-              );
-            })}
-          </div>
         </section>
 
         <section className="sumate-contact-band">
