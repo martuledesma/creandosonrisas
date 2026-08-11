@@ -98,6 +98,12 @@ const defaultSiteContent = {
       { id: 2, titulo: 'Solidaridad', descripcion: 'Compartimos tiempo y recursos para acompañar necesidades concretas.' },
       { id: 3, titulo: 'Comunidad', descripcion: 'Construimos oportunidades junto a niños, familias, voluntarios e instituciones.' },
     ],
+    professionals: [
+      { id: 1, nombre: 'Profesional 1', rol: 'Área profesional', descripcion: '', imagen: '' },
+      { id: 2, nombre: 'Profesional 2', rol: 'Área profesional', descripcion: '', imagen: '' },
+      { id: 3, nombre: 'Profesional 3', rol: 'Área profesional', descripcion: '', imagen: '' },
+      { id: 4, nombre: 'Profesional 4', rol: 'Área profesional', descripcion: '', imagen: '' },
+    ],
     gallery: [
       { id: 1, url: fotoFestejo, alt: 'Voluntarios, niños y familias durante un festejo de la fundación' },
       { id: 2, url: fotoActividades, alt: 'Actividad comunitaria organizada por Creando Sonrisas' },
@@ -106,6 +112,7 @@ const defaultSiteContent = {
     sectionVisibility: {
       mission: true,
       values: true,
+      professionals: true,
       gallery: true,
     },
     teamCards: [],

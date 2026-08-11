@@ -16,12 +16,21 @@ const defaultGallery = [
   { id: 3, url: fotoInfancias, alt: 'Niño participando de una jornada de la fundación' },
 ];
 
+const defaultProfessionals = [
+  { id: 1, nombre: 'Profesional 1', rol: 'Área profesional', descripcion: '', imagen: '' },
+  { id: 2, nombre: 'Profesional 2', rol: 'Área profesional', descripcion: '', imagen: '' },
+  { id: 3, nombre: 'Profesional 3', rol: 'Área profesional', descripcion: '', imagen: '' },
+  { id: 4, nombre: 'Profesional 4', rol: 'Área profesional', descripcion: '', imagen: '' },
+];
+
 function Nosotros({ content = {} }) {
   const values = content.values || defaultValues;
+  const professionals = content.professionals || defaultProfessionals;
   const gallery = (content.gallery || defaultGallery).filter((photo) => photo?.url);
   const visibility = {
     mission: true,
     values: true,
+    professionals: true,
     gallery: true,
     ...(content.sectionVisibility || {}),
   };
@@ -75,6 +84,36 @@ function Nosotros({ content = {} }) {
                 ))}
               </div>
             ) : <p className="nosotros-empty-state">Los valores se están actualizando.</p>}
+          </section>
+        )}
+
+        {visibility.professionals && (
+          <section className="nosotros-professionals-section" aria-labelledby="profesionales-title">
+            <header>
+              <span>Quienes acompañan</span>
+              <h2 id="profesionales-title">Nuestro equipo profesional</h2>
+              <p>Personas comprometidas que aportan su experiencia al trabajo cotidiano de la fundación.</p>
+            </header>
+            {professionals.length ? (
+              <div className="nosotros-professionals-grid">
+                {professionals.map((professional, index) => (
+                  <article className="nosotros-professional-card" key={professional.id || index}>
+                    {professional.imagen ? (
+                      <img src={professional.imagen} alt={professional.nombre || `Profesional ${index + 1}`} loading="lazy" decoding="async" />
+                    ) : (
+                      <div className="nosotros-professional-placeholder" aria-label="Fotografía pendiente">
+                        <span>Foto</span>
+                      </div>
+                    )}
+                    <div>
+                      <span>{professional.rol || 'Área profesional'}</span>
+                      <h3>{professional.nombre || `Profesional ${index + 1}`}</h3>
+                      {professional.descripcion && <p>{professional.descripcion}</p>}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            ) : <p className="nosotros-empty-state">El equipo profesional se está actualizando.</p>}
           </section>
         )}
 

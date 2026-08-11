@@ -115,6 +115,7 @@ export default function Admin({ content, onSave }) {
   const updateNosotrosVisibility = (section, value) => {
     updatePage('nosotros', 'sectionVisibility', {
       values: true,
+      professionals: true,
       gallery: true,
       ...(draft.nosotros?.sectionVisibility || {}),
       [section]: value,
@@ -260,6 +261,7 @@ export default function Admin({ content, onSave }) {
             <AdminSection title="Mostrar u ocultar secciones">
               <div className="admin-visibility-grid">
                 <VisibilityField label="Nuestros valores" checked={(nosotros.sectionVisibility?.values ?? true)} onChange={(value) => updateNosotrosVisibility('values', value)} />
+                <VisibilityField label="Equipo profesional" checked={(nosotros.sectionVisibility?.professionals ?? true)} onChange={(value) => updateNosotrosVisibility('professionals', value)} />
                 <VisibilityField label="Collage fotográfico" checked={(nosotros.sectionVisibility?.gallery ?? true)} onChange={(value) => updateNosotrosVisibility('gallery', value)} />
               </div>
             </AdminSection>
@@ -269,6 +271,18 @@ export default function Admin({ content, onSave }) {
                   <TextField label="Valor" value={item.titulo} onChange={(value) => updateItem('nosotros', 'values', index, 'titulo', value)} />
                   <TextField label="Descripción" value={item.descripcion} onChange={(value) => updateItem('nosotros', 'values', index, 'descripcion', value)} multiline />
                   <button className="admin-delete-button" type="button" onClick={() => removeItem('nosotros', 'values', index)}>Eliminar</button>
+                </article>
+              ))}
+            </AdminSection>
+            <AdminSection title="Equipo profesional" onAdd={() => addItem('nosotros', 'professionals', { nombre: '', rol: '', descripcion: '', imagen: '' })}>
+              <p className="admin-help-text">Editá los cuatro perfiles y cargá sus fotografías. También podés agregar o eliminar integrantes.</p>
+              {(nosotros.professionals || []).map((item, index) => (
+                <article className="admin-item" key={item.id || index}>
+                  <TextField label="Nombre" value={item.nombre} onChange={(value) => updateItem('nosotros', 'professionals', index, 'nombre', value)} />
+                  <TextField label="Profesión o función" value={item.rol} onChange={(value) => updateItem('nosotros', 'professionals', index, 'rol', value)} />
+                  <TextField label="Descripción breve" value={item.descripcion} onChange={(value) => updateItem('nosotros', 'professionals', index, 'descripcion', value)} multiline />
+                  <ImageField label="Fotografía" value={item.imagen} onChange={(value) => updateItem('nosotros', 'professionals', index, 'imagen', value)} />
+                  <button className="admin-delete-button" type="button" onClick={() => removeItem('nosotros', 'professionals', index)}>Eliminar</button>
                 </article>
               ))}
             </AdminSection>
