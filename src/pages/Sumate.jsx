@@ -87,15 +87,11 @@ const Sumate = ({ content = {} }) => {
                 <video
                   ref={campaignVideoRef}
                   src={content.campaignVideoUrl}
-                  autoPlay
-                  muted
-                  defaultMuted
                   playsInline
                   preload="metadata"
                   controlsList="nodownload noplaybackrate noremoteplayback"
                   disablePictureInPicture
                   onPlay={() => setCampaignPlaying(true)}
-                  onCanPlay={(event) => event.currentTarget.play().catch(() => {})}
                   onPause={() => setCampaignPlaying(false)}
                   onEnded={() => setCampaignPlaying(false)}
                   onClick={toggleCampaignVideo}
