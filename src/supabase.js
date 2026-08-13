@@ -1,15 +1,28 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const rawSupabaseUrl = (import.meta.env.VITE_SUPABASE_URL || '').trim();
+const supabaseUrl = /^[a-z0-9]{20}$/i.test(rawSupabaseUrl)
+  ? `https://${rawSupabaseUrl}.supabase.co`
+  : rawSupabaseUrl.replace(/\/rest\/v1\/?$/, '');
 const supabasePublishableKey =
-  import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ||
-  import.meta.env.VITE_SUPABASE_ANON_KEY;
+  (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ||
+  import.meta.env.VITE_SUPABASE_ANON_KEY || '').trim();
+
+const isValidSupabaseUrl = (() => {
+  try {
+    const parsedUrl = new URL(supabaseUrl);
+    return parsedUrl.protocol === 'https:' && parsedUrl.hostname.endsWith('.supabase.co');
+  } catch {
+    return false;
+  }
+})();
 
 export const supabaseConfigStatus = {
   hasUrl: Boolean(supabaseUrl),
+  hasValidUrl: isValidSupabaseUrl,
   hasKey: Boolean(supabasePublishableKey),
 };
-export const isSupabaseConfigured = Boolean(supabaseUrl && supabasePublishableKey);
+export const isSupabaseConfigured = Boolean(isValidSupabaseUrl && supabasePublishableKey);
 export const supabase = isSupabaseConfigured
   ? createClient(supabaseUrl, supabasePublishableKey)
   : null;

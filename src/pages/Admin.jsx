@@ -200,8 +200,8 @@ export default function Admin({ content, onSave }) {
         <h1>Conectá Supabase para habilitar el panel</h1>
         <p>Este despliegue no recibió todas las variables necesarias durante la compilación.</p>
         <ul className="admin-config-checklist">
-          <li className={supabaseConfigStatus.hasUrl ? 'is-ready' : 'is-missing'}>
-            <code>VITE_SUPABASE_URL</code>: {supabaseConfigStatus.hasUrl ? 'detectada' : 'falta'}
+          <li className={supabaseConfigStatus.hasValidUrl ? 'is-ready' : 'is-missing'}>
+            <code>VITE_SUPABASE_URL</code>: {!supabaseConfigStatus.hasUrl ? 'falta' : supabaseConfigStatus.hasValidUrl ? 'válida' : 'inválida'}
           </li>
           <li className={supabaseConfigStatus.hasKey ? 'is-ready' : 'is-missing'}>
             <code>VITE_SUPABASE_PUBLISHABLE_KEY</code>: {supabaseConfigStatus.hasKey ? 'detectada' : 'falta'}
