@@ -982,6 +982,125 @@ h3,
   }
 }
 
+/* Portada de Inicio: campaña ONG compacta, fotográfica y con indicadores superpuestos */
+.home-hero-template {
+  min-height: 610px;
+  place-items: center start;
+  padding: 128px max(24px, calc((100vw - 1120px) / 2)) 138px;
+  background-position: center 42%;
+}
+
+.home-hero-template::before {
+  background: linear-gradient(
+    90deg,
+    rgba(4, 26, 53, .9) 0%,
+    rgba(7, 43, 82, .78) 27%,
+    rgba(10, 61, 111, .38) 52%,
+    rgba(10, 61, 111, .08) 76%,
+    transparent 100%
+  );
+}
+
+.home-hero-template .home-hero-content {
+  width: min(520px, 100%);
+  margin: 0;
+}
+
+.home-hero-template .home-eyebrow {
+  padding: 0;
+  border: 0;
+  color: var(--cs-yellow);
+  font-size: .72rem;
+  letter-spacing: .18em;
+}
+
+.home-hero-template h1 {
+  max-width: 520px;
+  margin: 17px 0 18px;
+  font-family: Inter, Arial, sans-serif;
+  font-size: clamp(3rem, 5.4vw, 5.15rem);
+  font-weight: 850;
+  line-height: .96;
+  letter-spacing: -.045em;
+}
+
+.home-hero-template p {
+  max-width: 500px;
+  margin-bottom: 25px;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.home-hero-template .home-primary-link {
+  background: var(--cs-yellow);
+  color: var(--cs-blue-950);
+}
+
+.home-hero-template .home-instagram-link {
+  background: rgba(6, 26, 49, .2);
+  backdrop-filter: blur(8px);
+}
+
+.home-quick-actions {
+  width: min(1020px, calc(100% - 48px));
+  margin: -72px auto 0;
+  padding: 0;
+  border: 0;
+  border-radius: 10px 10px 0 0;
+  background: var(--cs-white);
+  box-shadow: 0 22px 52px rgba(6, 26, 49, .18);
+  overflow: hidden;
+}
+
+.home-quick-action {
+  min-height: 142px;
+  padding: 27px 30px;
+  background: var(--cs-white);
+}
+
+.home-quick-action:nth-child(1) { border-top: 4px solid var(--cs-red); }
+.home-quick-action:nth-child(2) { border-top: 4px solid var(--cs-blue-700); }
+.home-quick-action:nth-child(3) { border-top: 4px solid var(--cs-yellow); }
+
+.home-quick-action > span {
+  color: var(--cs-red);
+  font-size: 1rem;
+  letter-spacing: .08em;
+}
+
+.home-quick-action h2 {
+  margin-top: 7px;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 1.08rem;
+  font-weight: 800;
+}
+
+@media (max-width: 800px) {
+  .home-hero-template {
+    min-height: 600px;
+    padding: 135px 24px 115px;
+    background-position: 60% center;
+  }
+
+  .home-hero-template::before {
+    background: linear-gradient(90deg, rgba(4, 26, 53, .9), rgba(6, 38, 75, .67) 72%, rgba(6, 38, 75, .35));
+  }
+
+  .home-hero-template h1 {
+    font-size: clamp(2.8rem, 13vw, 4.35rem);
+  }
+
+  .home-quick-actions {
+    width: calc(100% - 28px);
+    margin-top: -54px;
+    border-radius: 9px;
+  }
+
+  .home-quick-action {
+    padding: 22px 24px;
+  }
+}
+
 .app-recovery-screen {
   min-height: 100vh;
   display: grid;
