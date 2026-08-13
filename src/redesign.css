@@ -3758,11 +3758,11 @@ h3,
 
 .sumate-media-row {
   display: grid;
-  grid-template-columns: minmax(0, 300px) minmax(320px, 500px);
+  grid-template-columns: minmax(0, 300px) minmax(320px, 440px);
   align-items: start;
-  justify-content: start;
+  justify-content: center;
   gap: clamp(28px, 4vw, 48px);
-  margin-top: 0;
+  margin-top: 28px;
 }
 
 .sumate-media-row-without-video {
@@ -3774,9 +3774,6 @@ h3,
   gap: 22px;
 }
 
-.sumate-campaign-column .sumate-intro-copy h2 {
-  font-size: clamp(2.6rem, 4.2vw, 4.4rem);
-}
 
 .sumate-contact-band-actions {
   display: grid;

@@ -75,6 +75,12 @@ const Sumate = ({ content = {} }) => {
         </section>
 
         <section className="sumate-intro-template">
+          <div className="sumate-intro-copy">
+            <span className="template-kicker">Tu ayuda importa</span>
+            <h2>Hay muchas maneras de crear oportunidades.</h2>
+            <p>{content.content || 'Tu ayuda es fundamental para seguir transformando Tucumán.'}</p>
+            {content.contactInfo && <p>{content.contactInfo}</p>}
+          </div>
           <div className={`sumate-media-row${content.campaignVideoUrl ? '' : ' sumate-media-row-without-video'}`}>
             {content.campaignVideoUrl && (
               <div className="sumate-instagram-reel">
@@ -83,11 +89,13 @@ const Sumate = ({ content = {} }) => {
                   src={content.campaignVideoUrl}
                   autoPlay
                   muted
+                  defaultMuted
                   playsInline
                   preload="metadata"
                   controlsList="nodownload noplaybackrate noremoteplayback"
                   disablePictureInPicture
                   onPlay={() => setCampaignPlaying(true)}
+                  onCanPlay={(event) => event.currentTarget.play().catch(() => {})}
                   onPause={() => setCampaignPlaying(false)}
                   onEnded={() => setCampaignPlaying(false)}
                   onClick={toggleCampaignVideo}
@@ -109,12 +117,6 @@ const Sumate = ({ content = {} }) => {
               </div>
             )}
             <div className="sumate-campaign-column">
-              <div className="sumate-intro-copy">
-                <span className="template-kicker">Tu ayuda importa</span>
-                <h2>Hay muchas maneras de crear oportunidades.</h2>
-                <p>{content.content || 'Tu ayuda es fundamental para seguir transformando Tucumán.'}</p>
-                {content.contactInfo && <p>{content.contactInfo}</p>}
-              </div>
               <aside className="sumate-contact-actions" aria-label="Campaña de apadrinamiento">
                 <span>Apadriná un deseo</span>
                 <h3>Elegí una cartita, convertite en padrino y hacé realidad su deseo.</h3>

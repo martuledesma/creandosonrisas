@@ -175,8 +175,8 @@ function App() {
   const { content: siteContent, save: saveContent } = useSiteContent(defaultSiteContent);
   const content = siteContent.home || defaultHomeContent;
 
-  const acciones = content.cards || defaultHomeContent.cards;
-  const pilares = content.pillars?.length ? content.pillars : defaultHomeContent.pillars;
+  const acciones = Array.isArray(content.cards) ? content.cards : defaultHomeContent.cards;
+  const pilares = Array.isArray(content.pillars) && content.pillars.length ? content.pillars : defaultHomeContent.pillars;
   const novedadesSlides = acciones.map((item, index) => ({
     ...item,
     imagen: item.imagen || '',
