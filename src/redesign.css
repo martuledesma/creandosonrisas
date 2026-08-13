@@ -984,9 +984,9 @@ h3,
 
 /* Portada de Inicio: campaña ONG compacta, fotográfica y con indicadores superpuestos */
 .home-hero-template {
-  min-height: 610px;
+  min-height: 535px;
   place-items: center start;
-  padding: 128px max(24px, calc((100vw - 1120px) / 2)) 138px;
+  padding: 112px max(24px, calc((100vw - 1060px) / 2)) 125px;
   background-position: center 42%;
 }
 
@@ -1002,7 +1002,7 @@ h3,
 }
 
 .home-hero-template .home-hero-content {
-  width: min(520px, 100%);
+  width: min(470px, 100%);
   margin: 0;
 }
 
@@ -1015,19 +1015,19 @@ h3,
 }
 
 .home-hero-template h1 {
-  max-width: 520px;
-  margin: 17px 0 18px;
+  max-width: 455px;
+  margin: 14px 0 15px;
   font-family: Inter, Arial, sans-serif;
-  font-size: clamp(3rem, 5.4vw, 5.15rem);
+  font-size: clamp(2.5rem, 4.2vw, 4rem);
   font-weight: 850;
   line-height: .96;
   letter-spacing: -.045em;
 }
 
 .home-hero-template p {
-  max-width: 500px;
-  margin-bottom: 25px;
-  font-size: 1rem;
+  max-width: 450px;
+  margin-bottom: 21px;
+  font-size: .91rem;
   line-height: 1.55;
 }
 
@@ -1042,8 +1042,8 @@ h3,
 }
 
 .home-quick-actions {
-  width: min(1020px, calc(100% - 48px));
-  margin: -72px auto 0;
+  width: min(880px, calc(100% - 48px));
+  margin: -86px auto 0;
   padding: 0;
   border: 0;
   border-radius: 10px 10px 0 0;
@@ -1053,8 +1053,12 @@ h3,
 }
 
 .home-quick-action {
-  min-height: 142px;
-  padding: 27px 30px;
+  min-height: 132px;
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  align-items: center;
+  gap: 15px;
+  padding: 23px 22px;
   background: var(--cs-white);
 }
 
@@ -1062,22 +1066,46 @@ h3,
 .home-quick-action:nth-child(2) { border-top: 4px solid var(--cs-blue-700); }
 .home-quick-action:nth-child(3) { border-top: 4px solid var(--cs-yellow); }
 
-.home-quick-action > span {
+.home-quick-action > div > span {
   color: var(--cs-red);
-  font-size: 1rem;
+  font-size: .92rem;
+  font-weight: 900;
   letter-spacing: .08em;
 }
 
+.home-stat-icon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(18, 76, 137, .08);
+  color: var(--cs-blue-700);
+}
+
+.home-quick-action:nth-child(1) .home-stat-icon { background: rgba(217, 93, 75, .1); color: var(--cs-red); }
+.home-quick-action:nth-child(3) .home-stat-icon { background: rgba(244, 191, 69, .2); color: #b57b00; }
+
+.home-stat-icon svg {
+  width: 25px;
+  height: 25px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .home-quick-action h2 {
-  margin-top: 7px;
+  margin: 4px 0 2px;
   font-family: Inter, Arial, sans-serif;
-  font-size: 1.08rem;
+  font-size: 1rem;
   font-weight: 800;
 }
 
 @media (max-width: 800px) {
   .home-hero-template {
-    min-height: 600px;
+    min-height: 550px;
     padding: 135px 24px 115px;
     background-position: 60% center;
   }
@@ -1097,6 +1125,7 @@ h3,
   }
 
   .home-quick-action {
+    grid-template-columns: 44px 1fr;
     padding: 22px 24px;
   }
 }

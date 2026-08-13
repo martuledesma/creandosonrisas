@@ -236,13 +236,16 @@ function App() {
               <main className="home-template-shell">
                 {sectionVisibility.quickActions && <section className="home-quick-actions" aria-label="Formas de participar">
                   <article className="home-quick-action">
-                    <span>+150</span><h2>Niños acompañados</h2><p>Educación, contención y espacios para crecer.</p>
+                    <span className="home-stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M16 20v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8M18 8v6M21 11h-6" /></svg></span>
+                    <div><span>+150</span><h2>Niños acompañados</h2><p>Educación, contención y espacios para crecer.</p></div>
                   </article>
                   <article className="home-quick-action">
-                    <span>Diaria</span><h2>Alimentación</h2><p>Meriendas y comidas compartidas con la comunidad.</p>
+                    <span className="home-stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 9h16M6 9c0 6 2 10 6 10s6-4 6-10M8 5c1-2 2-2 4 0M13 4c1-2 2-2 3 0" /></svg></span>
+                    <div><span>Diaria</span><h2>Alimentación</h2><p>Meriendas y comidas compartidas con la comunidad.</p></div>
                   </article>
                   <article className="home-quick-action">
-                    <span>En red</span><h2>Jóvenes voluntarios</h2><p>Un equipo comprometido que transforma desde el territorio.</p>
+                    <span className="home-stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" /><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3" /></svg></span>
+                    <div><span>En red</span><h2>Jóvenes voluntarios</h2><p>Un equipo comprometido que transforma desde el territorio.</p></div>
                   </article>
                 </section>}
 
