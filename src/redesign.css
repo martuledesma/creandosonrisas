@@ -4944,6 +4944,40 @@ body .home-template-shell .home-quick-action p {
   line-height: 1.42;
 }
 
+/* Los nombres de las áreas siempre permanecen visibles bajo la fotografía. */
+body .home-template-shell .home-causes-template .home-pillar-card {
+  display: grid;
+  grid-template-rows: 245px auto;
+  min-height: 330px;
+  overflow: visible;
+}
+
+body .home-template-shell .home-causes-template .home-pillar-image {
+  grid-row: 1;
+  height: 245px;
+}
+
+body .home-template-shell .home-causes-template .home-pillar-content {
+  position: relative;
+  z-index: 3;
+  grid-row: 2;
+  display: grid;
+  place-items: center;
+  min-height: 86px;
+  padding: 40px 14px 12px;
+  color: var(--cs-blue-950);
+  opacity: 1;
+  visibility: visible;
+}
+
+body .home-template-shell .home-causes-template .home-pillar-content h3 {
+  display: block;
+  margin: 0;
+  color: var(--cs-blue-950);
+  opacity: 1;
+  visibility: visible;
+}
+
 @media (max-width: 700px) {
   body .home-template-shell .home-quick-actions {
     grid-template-columns: 1fr;

@@ -238,7 +238,7 @@ function App() {
                     <div><span>+150</span><h2>Niños acompañados</h2><p>Educación, contención y espacios para crecer.</p></div>
                   </article>
                   <article className="home-quick-action">
-                    <div><span>50+</span><h2>Alimentación diaria</h2><p>Meriendas y comidas compartidas con la comunidad.</p></div>
+                    <div><span>Diaria</span><h2>Alimentación</h2><p>Meriendas y comidas compartidas con la comunidad.</p></div>
                   </article>
                   <article className="home-quick-action">
                     <div><span>30+</span><h2>Jóvenes voluntarios</h2><p>Un equipo comprometido que transforma desde el territorio.</p></div>
