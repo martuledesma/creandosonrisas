@@ -4837,7 +4837,108 @@ body .navbar .admin-access-link {
   height: 38px;
 }
 
+/* Impacto integrado: una sola superficie, sin tarjetas individuales. */
+body .home-template-shell .home-quick-actions {
+  position: relative;
+  z-index: 4;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  width: 100%;
+  max-width: none;
+  margin: -92px 0 0;
+  padding: 108px max(44px, calc((100vw - 980px) / 2)) 42px;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: #fff;
+  box-shadow: none;
+}
+
+body .home-template-shell .home-quick-actions::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -78px;
+  left: 0;
+  width: 220%;
+  height: 178px;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  background: #fff;
+  clip-path: none;
+  pointer-events: none;
+}
+
+body .home-template-shell .home-quick-actions .home-quick-action,
+body .home-template-shell .home-quick-actions .home-quick-action:hover {
+  display: block;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 4px 38px 8px;
+  border: 0;
+  border-right: 1px solid rgba(6, 26, 49, .42);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--cs-blue-950);
+  text-align: left;
+  transform: none;
+}
+
+body .home-template-shell .home-quick-actions .home-quick-action:last-child {
+  border-right: 0;
+}
+
+body .home-template-shell .home-quick-action > div {
+  display: block;
+  width: 100%;
+}
+
+body .home-template-shell .home-quick-action > div > span {
+  display: block;
+  font-size: clamp(3rem, 5vw, 4.65rem);
+  line-height: .9;
+}
+
+body .home-template-shell .home-quick-action h2 {
+  margin: 12px 0 5px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(6, 26, 49, .62);
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+body .home-template-shell .home-quick-action p {
+  max-width: 235px;
+  margin: 0;
+  font-size: .78rem;
+  line-height: 1.42;
+}
+
 @media (max-width: 700px) {
+  body .home-template-shell .home-quick-actions {
+    grid-template-columns: 1fr;
+    margin-top: -42px;
+    padding: 64px 28px 24px;
+  }
+
+  body .home-template-shell .home-quick-actions::before {
+    top: -38px;
+    height: 84px;
+  }
+
+  body .home-template-shell .home-quick-actions .home-quick-action,
+  body .home-template-shell .home-quick-actions .home-quick-action:hover {
+    padding: 22px 4px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(6, 26, 49, .22);
+  }
+
+  body .home-template-shell .home-quick-actions .home-quick-action:last-child {
+    border-bottom: 0;
+  }
+
   .footer {
     align-items: center;
     gap: 10px;
