@@ -1024,10 +1024,10 @@ body .home-causes-template .home-pillar-card:nth-child(3)::after { content: "03"
   body .home-causes-template .home-pillar-card::after { top: 192px; }
 }
 
-/* Contenido principal de portada a la derecha */
+/* Contenido principal de portada a la izquierda */
 body .home-hero-template::before {
   background: linear-gradient(
-    270deg,
+    90deg,
     rgba(4, 26, 53, .9) 0%,
     rgba(7, 43, 82, .76) 30%,
     rgba(10, 61, 111, .34) 57%,
@@ -1037,8 +1037,8 @@ body .home-hero-template::before {
 }
 
 body .home-hero-template .home-hero-content {
-  margin-right: 0;
-  margin-left: auto;
+  margin-right: auto;
+  margin-left: 0;
 }
 
 @media (max-width: 800px) {
