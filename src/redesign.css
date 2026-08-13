@@ -1024,6 +1024,34 @@ body .home-causes-template .home-pillar-card:nth-child(3)::after { content: "03"
   body .home-causes-template .home-pillar-card::after { top: 192px; }
 }
 
+/* Contenido principal de portada a la derecha */
+body .home-hero-template::before {
+  background: linear-gradient(
+    270deg,
+    rgba(4, 26, 53, .9) 0%,
+    rgba(7, 43, 82, .76) 30%,
+    rgba(10, 61, 111, .34) 57%,
+    rgba(10, 61, 111, .08) 78%,
+    transparent 100%
+  );
+}
+
+body .home-hero-template .home-hero-content {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+@media (max-width: 800px) {
+  body .home-hero-template::before {
+    background: linear-gradient(90deg, rgba(4, 26, 53, .86), rgba(6, 38, 75, .64));
+  }
+
+  body .home-hero-template .home-hero-content {
+    margin-right: auto;
+    margin-left: 0;
+  }
+}
+
 /* Ajuste final de portada y áreas de trabajo según referencias editoriales */
 .home-hero-template {
   min-height: 490px;

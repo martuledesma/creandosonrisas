@@ -240,7 +240,7 @@ function App() {
                   </article>
                   <article className="home-quick-action">
                     <span className="home-stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 9h16M6 9c0 6 2 10 6 10s6-4 6-10M8 5c1-2 2-2 4 0M13 4c1-2 2-2 3 0" /></svg></span>
-                    <div><span>Diaria</span><h2>Alimentación</h2><p>Meriendas y comidas compartidas con la comunidad.</p></div>
+                    <div><span>Salud</span><h2>Alimentación diaria</h2><p>Meriendas y comidas compartidas con la comunidad.</p></div>
                   </article>
                   <article className="home-quick-action">
                     <span className="home-stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" /><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3" /></svg></span>
