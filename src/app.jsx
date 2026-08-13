@@ -122,9 +122,9 @@ const defaultSiteContent = {
     heroSubtitle: 'Impulsamos respuestas concretas en educación, alimentación, salud y recreación.',
     introText: 'Transformamos necesidades concretas en oportunidades mediante educación, alimentación, acompañamiento y acciones comunitarias.',
     items: [
-      { id: 1, titulo: 'Merendero comunitario', descripcion: 'Meriendas y almuerzos compartidos con niños, niñas y familias de la comunidad.', imagen: fotoFestejo, estado: 'Activo' },
-      { id: 2, titulo: 'Apoyo escolar', descripcion: 'Acompañamiento educativo para fortalecer el aprendizaje y las trayectorias escolares.', imagen: fotoActividades, estado: 'Activo' },
-      { id: 3, titulo: 'Recreación y comunidad', descripcion: 'Pintura, juegos, deportes, festejos especiales y acciones solidarias.', imagen: fotoInfancias, estado: 'Activo' },
+      { id: 1, titulo: 'Merendero comunitario', descripcion: 'Meriendas y almuerzos compartidos con niños, niñas y familias de la comunidad.', imagen: fotoFestejo, estado: 'Activo', categoria: 'salud' },
+      { id: 2, titulo: 'Apoyo escolar', descripcion: 'Acompañamiento educativo para fortalecer el aprendizaje y las trayectorias escolares.', imagen: fotoActividades, estado: 'Activo', categoria: 'educacion' },
+      { id: 3, titulo: 'Recreación y comunidad', descripcion: 'Pintura, juegos, deportes, festejos especiales y acciones solidarias.', imagen: fotoInfancias, estado: 'Activo', categoria: 'recreativos' },
     ],
   },
   sumate: {

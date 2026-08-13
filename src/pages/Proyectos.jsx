@@ -10,6 +10,7 @@ const defaultProjects = [
     descripcion: 'Meriendas y almuerzos compartidos con niños, niñas y familias de la comunidad.',
     imagen: fotoFestejo,
     estado: 'Activo',
+    categoria: 'salud',
   },
   {
     id: 2,
@@ -17,6 +18,7 @@ const defaultProjects = [
     descripcion: 'Acompañamiento educativo para fortalecer el aprendizaje y las trayectorias escolares.',
     imagen: fotoActividades,
     estado: 'Activo',
+    categoria: 'educacion',
   },
   {
     id: 3,
@@ -24,6 +26,7 @@ const defaultProjects = [
     descripcion: 'Pintura, juegos, deportes, festejos especiales y acciones solidarias.',
     imagen: fotoInfancias,
     estado: 'Activo',
+    categoria: 'recreativos',
   },
 ];
 
@@ -84,10 +87,10 @@ const Proyectos = ({ content = {} }) => {
 
       <section className="projects-list-section" aria-labelledby="projects-list-title">
         <div className="project-section-heading">
-          <span>Nuestro trabajo</span>
+          <span>Conocé</span>
           <h2 id="projects-list-title" className="display-subtitle">
-            <span className="title-line title-line-blue">Nuestros</span>
-            <span className="title-line title-line-white">proyectos</span>
+            <span className="title-line title-line-blue">Nuestro</span>
+            <span className="title-line title-line-white">trabajo</span>
           </h2>
         </div>
         <div className="project-filter-tabs" aria-label="Filtrar proyectos">

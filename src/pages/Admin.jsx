@@ -19,6 +19,18 @@ const TextField = ({ label, value = '', onChange, multiline = false, type = 'tex
   </label>
 );
 
+const SelectField = ({ label, value = '', onChange, options = [] }) => (
+  <label className="admin-field">
+    <span>{label}</span>
+    <select value={value} onChange={(event) => onChange(event.target.value)} required>
+      <option value="" disabled>Seleccioná una categoría</option>
+      {options.map((option) => (
+        <option key={option.value} value={option.value}>{option.label}</option>
+      ))}
+    </select>
+  </label>
+);
+
 const VisibilityField = ({ label, checked, onChange }) => (
   <label className="admin-visibility-field">
     <input type="checkbox" checked={checked} onChange={(event) => onChange(event.target.checked)} />
@@ -332,11 +344,21 @@ export default function Admin({ content, onSave }) {
               <TextField label="Subtítulo" value={proyectos.heroSubtitle} onChange={(value) => updatePage('proyectos', 'heroSubtitle', value)} multiline />
               <TextField label="Introducción" value={proyectos.introText} onChange={(value) => updatePage('proyectos', 'introText', value)} multiline />
             </AdminSection>
-            <AdminSection title="Listado de proyectos" onAdd={() => addItem('proyectos', 'items', { titulo: '', descripcion: '', imagen: '', estado: 'Activo' })}>
+            <AdminSection title="Listado de proyectos" onAdd={() => addItem('proyectos', 'items', { titulo: '', descripcion: '', imagen: '', estado: 'Activo', categoria: 'educacion' })}>
               {(proyectos.items || []).map((item, index) => (
                 <article className="admin-item" key={item.id || index}>
                   <TextField label="Título" value={item.titulo} onChange={(value) => updateItem('proyectos', 'items', index, 'titulo', value)} />
                   <TextField label="Descripción" value={item.descripcion} onChange={(value) => updateItem('proyectos', 'items', index, 'descripcion', value)} multiline />
+                  <SelectField
+                    label="Categoría del proyecto"
+                    value={item.categoria || ''}
+                    onChange={(value) => updateItem('proyectos', 'items', index, 'categoria', value)}
+                    options={[
+                      { value: 'salud', label: 'Salud' },
+                      { value: 'educacion', label: 'Educación' },
+                      { value: 'recreativos', label: 'Recreativos' },
+                    ]}
+                  />
                   <TextField label="Estado" value={item.estado} onChange={(value) => updateItem('proyectos', 'items', index, 'estado', value)} />
                   <ImageField label="Imagen" value={item.imagen} onChange={(value) => updateItem('proyectos', 'items', index, 'imagen', value)} />
                   <button className="admin-delete-button" type="button" onClick={() => removeItem('proyectos', 'items', index)}>Eliminar</button>

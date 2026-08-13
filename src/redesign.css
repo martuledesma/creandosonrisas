@@ -3193,7 +3193,14 @@ h3,
 }
 
 .proyectos-page-without-hero .projects-list-section {
-  margin-top: 64px;
+  margin-top: 0;
+  background:
+    linear-gradient(
+      180deg,
+      var(--cs-white) 0,
+      rgba(250, 248, 243, 0.72) 54px,
+      var(--cs-paper) 128px
+    );
 }
 
 @media (max-width: 900px) {
