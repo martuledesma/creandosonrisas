@@ -15,6 +15,19 @@ import fotoFestejo from './Assets/creando-sonrisas-festejo.jpg';
 import fotoActividades from './Assets/creando-sonrisas-actividades.jpg';
 import fotoInfancias from './Assets/creando-sonrisas-infancias.jpg';
 
+const bundledImageFallbacks = {
+  'creando-sonrisas-comunidad.jpg': fotoComunidad,
+  'creando-sonrisas-festejo.jpg': fotoFestejo,
+  'creando-sonrisas-actividades.jpg': fotoActividades,
+  'creando-sonrisas-infancias.jpg': fotoInfancias,
+};
+
+const resolveSiteImage = (value, fallback = '') => {
+  if (!value) return fallback;
+  const legacyName = Object.keys(bundledImageFallbacks).find((name) => value.includes(name));
+  return legacyName ? bundledImageFallbacks[legacyName] : value;
+};
+
 const defaultHomeContent = {
   heroTitle: 'Fundación Creando Sonrisas',
   heroSubtitle: 'Creer en un futuro mejor, crecer en espacios seguros y crear infancias felices. Somos Creando Sonrisas y siempre valdrá la pena.',
@@ -227,9 +240,12 @@ function App() {
   const pilares = Array.isArray(content.pillars) && content.pillars.length ? content.pillars : defaultHomeContent.pillars;
   const novedadesSlides = acciones.map((item, index) => ({
     ...item,
-    imagen: item.imagen || '',
+    imagen: resolveSiteImage(item.imagen),
   }));
-  const heroBackground = content.heroImage || novedadesSlides.find((item) => item.imagen)?.imagen || '';
+  const heroBackground = resolveSiteImage(
+    content.heroImage || novedadesSlides.find((item) => item.imagen)?.imagen,
+    fotoComunidad,
+  );
   const previousHeroSubtitles = [
     'Jóvenes tucumanos transformando realidades con educación, contención y trabajo solidario.',
     'Jóvenes tucumanos que transforman realidades con educación y trabajo territorial.',
@@ -250,9 +266,11 @@ function App() {
             <>
               <header
                 className="home-hero home-hero-template"
-                style={heroBackground ? {
-                  backgroundImage: `url('${heroBackground}')`,
-                } : undefined}
+                style={{
+                  backgroundImage: heroBackground === fotoComunidad
+                    ? `url('${fotoComunidad}')`
+                    : `url('${heroBackground}'), url('${fotoComunidad}')`,
+                }}
               >
                 <div className="home-hero-content">
                   <h1>{content.heroTitle || defaultHomeContent.heroTitle}</h1>
@@ -292,10 +310,11 @@ function App() {
                     {pilares.slice(0, 3).map((pillar, index) => {
                       const pillarNames = ['Acompañamiento escolar', 'Merendero', 'Recreación'];
                       const displayName = index === 0 && pillar.titulo === 'Educación' ? pillarNames[0] : (pillar.titulo || pillarNames[index]);
+                      const pillarImage = resolveSiteImage(pillar.imagen, defaultHomeContent.pillars[index]?.imagen);
                       return (
                       <Link className={`home-pillar-card home-pillar-tone-${index + 1}`} to="/proyectos" key={pillar.id || index}>
                         <div className="home-pillar-image">
-                          {pillar.imagen && <img src={pillar.imagen} alt={displayName} loading="lazy" decoding="async" />}
+                          {pillarImage && <img src={pillarImage} alt={displayName} loading="lazy" decoding="async" />}
                         </div>
                         <div className="home-pillar-content">
                           <h3>{displayName}</h3>
