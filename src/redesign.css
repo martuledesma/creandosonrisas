@@ -4846,8 +4846,8 @@ body .home-template-shell .home-quick-actions {
   gap: 0;
   width: 100%;
   max-width: none;
-  margin: -92px 0 0;
-  padding: 108px max(44px, calc((100vw - 980px) / 2)) 42px;
+  margin: -70px 0 0;
+  padding: 88px max(44px, calc((100vw - 980px) / 2)) 42px;
   overflow: visible;
   border: 0;
   border-radius: 0;
@@ -4869,19 +4869,15 @@ body .home-template-shell .home-quick-actions::before {
   pointer-events: none;
 }
 
-/* Silueta final de la referencia: caída a la izquierda y loma hacia la derecha. */
+/* Ola de la referencia: caída izquierda, centro bajo y loma suave a la derecha. */
 body .home-template-shell .home-quick-actions::before {
   top: -92px;
   left: 0;
   width: 100%;
-  height: 150px;
+  height: 164px;
   border-radius: 0;
-  background: #fff;
-  clip-path: polygon(
-    0 72%, 10% 78%, 20% 80%, 30% 78%, 40% 73%,
-    50% 64%, 60% 53%, 70% 45%, 80% 44%, 90% 52%,
-    100% 66%, 100% 100%, 0 100%
-  );
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 164' preserveAspectRatio='none'%3E%3Cpath fill='%23fff' d='M0 72 C58 106 112 119 166 120 L166 76 C305 76 397 78 490 69 C590 60 650 22 747 20 C839 18 900 50 1000 72 L1000 164 L0 164 Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  clip-path: none;
 }
 
 body .home-template-shell .home-quick-actions::after {
@@ -4991,17 +4987,15 @@ body .home-template-shell .home-causes-template .home-pillar-content p {
 @media (max-width: 700px) {
   body .home-template-shell .home-quick-actions {
     grid-template-columns: 1fr;
-    margin-top: -42px;
-    padding: 64px 28px 24px;
+    margin-top: -34px;
+    padding: 54px 28px 24px;
   }
 
   body .home-template-shell .home-quick-actions::before {
-    top: -48px;
-    height: 86px;
-    clip-path: polygon(
-      0 72%, 15% 78%, 30% 78%, 45% 72%, 60% 58%,
-      74% 46%, 86% 45%, 94% 54%, 100% 65%, 100% 100%, 0 100%
-    );
+    top: -52px;
+    height: 94px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 94' preserveAspectRatio='none'%3E%3Cpath fill='%23fff' d='M0 43 C72 64 126 70 180 70 L180 47 C320 47 420 48 510 42 C612 35 670 12 758 11 C846 10 912 30 1000 43 L1000 94 L0 94 Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+    clip-path: none;
   }
 
   body .home-hero-template .home-hero-content {
