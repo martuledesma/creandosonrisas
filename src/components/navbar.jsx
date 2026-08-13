@@ -6,7 +6,7 @@ const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [hasScrolled, setHasScrolled] = useState(false);
     const location = useLocation();
-    const isHomeAtTop = location.pathname === '/' && !hasScrolled;
+    const isPublicAtTop = location.pathname !== '/admin' && !hasScrolled;
     const closeMenu = () => setIsMenuOpen(false);
 
     useEffect(() => {
@@ -21,7 +21,7 @@ const Navbar = () => {
     }, []);
 
     return (
-        <nav className={`navbar ${hasScrolled ? 'navbar-scrolled' : ''}${isHomeAtTop ? ' navbar-home-top' : ''}`}>
+        <nav className={`navbar ${hasScrolled ? 'navbar-scrolled' : ''}${isPublicAtTop ? ' navbar-public-top' : ''}`}>
             <div className="logo-container">
                 <Link to="/" onClick={closeMenu}>
                     <img className="brand-isotipo" src={isotipo} alt="" aria-hidden="true" />
