@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import isotipo from '../Assets/isotipo-creando-sonrisas.png';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [hasScrolled, setHasScrolled] = useState(false);
+    const location = useLocation();
+    const isHomeAtTop = location.pathname === '/' && !hasScrolled;
     const closeMenu = () => setIsMenuOpen(false);
 
     useEffect(() => {
@@ -19,7 +21,7 @@ const Navbar = () => {
     }, []);
 
     return (
-        <nav className={`navbar ${hasScrolled ? 'navbar-scrolled' : ''}`}>
+        <nav className={`navbar ${hasScrolled ? 'navbar-scrolled' : ''}${isHomeAtTop ? ' navbar-home-top' : ''}`}>
             <div className="logo-container">
                 <Link to="/" onClick={closeMenu}>
                     <img className="brand-isotipo" src={isotipo} alt="" aria-hidden="true" />
