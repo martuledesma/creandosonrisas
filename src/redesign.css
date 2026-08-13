@@ -3758,15 +3758,24 @@ h3,
 
 .sumate-media-row {
   display: grid;
-  grid-template-columns: minmax(0, 300px) minmax(280px, 380px);
+  grid-template-columns: minmax(0, 300px) minmax(320px, 500px);
   align-items: start;
   justify-content: start;
   gap: clamp(28px, 4vw, 48px);
-  margin-top: 22px;
+  margin-top: 0;
 }
 
 .sumate-media-row-without-video {
-  grid-template-columns: minmax(280px, 420px);
+  grid-template-columns: minmax(320px, 560px);
+}
+
+.sumate-campaign-column {
+  display: grid;
+  gap: 22px;
+}
+
+.sumate-campaign-column .sumate-intro-copy h2 {
+  font-size: clamp(2.6rem, 4.2vw, 4.4rem);
 }
 
 .sumate-contact-band-actions {
@@ -3901,6 +3910,30 @@ h3,
   border-color: var(--cs-red);
   background: var(--cs-red);
   color: #fff;
+}
+
+.sumate-volunteer-card {
+  border-left-color: var(--cs-yellow);
+}
+
+.sumate-volunteer-button {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  background: var(--cs-red);
+  color: #fff;
+  font-size: .84rem;
+  font-weight: 900;
+  text-align: center;
+  text-decoration: none;
+}
+
+.sumate-volunteer-button.is-disabled {
+  background: #d8dde4;
+  color: #657286;
+  cursor: default;
 }
 
 @media (max-width: 800px) {

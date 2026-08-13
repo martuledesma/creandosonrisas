@@ -75,12 +75,6 @@ const Sumate = ({ content = {} }) => {
         </section>
 
         <section className="sumate-intro-template">
-          <div className="sumate-intro-copy">
-            <span className="template-kicker">Tu ayuda importa</span>
-            <h2>Hay muchas maneras de crear oportunidades.</h2>
-            <p>{content.content || 'Tu ayuda es fundamental para seguir transformando Tucumán.'}</p>
-            {content.contactInfo && <p>{content.contactInfo}</p>}
-          </div>
           <div className={`sumate-media-row${content.campaignVideoUrl ? '' : ' sumate-media-row-without-video'}`}>
             {content.campaignVideoUrl && (
               <div className="sumate-instagram-reel">
@@ -108,15 +102,33 @@ const Sumate = ({ content = {} }) => {
                 </button>
               </div>
             )}
-            <aside className="sumate-contact-actions" aria-label="Redes y medios de contacto">
-              <span>Apadriná un deseo</span>
-              <h3>Elegí una cartita, convertite en padrino y hacé realidad su deseo.</h3>
-              <p>Tenés tiempo hasta el 29 de agosto.</p>
-              <a className="sumate-sponsor-button" href="https://www.fundaros.com/appadrinar/creandosonrisas/campanas/dia-del-nino-creando-sonrisas-2026" target="_blank" rel="noreferrer">
-                <img src={iconoApadrinar} alt="" aria-hidden="true" />
-                <span>Apadrinar</span>
-              </a>
-            </aside>
+            <div className="sumate-campaign-column">
+              <div className="sumate-intro-copy">
+                <span className="template-kicker">Tu ayuda importa</span>
+                <h2>Hay muchas maneras de crear oportunidades.</h2>
+                <p>{content.content || 'Tu ayuda es fundamental para seguir transformando Tucumán.'}</p>
+                {content.contactInfo && <p>{content.contactInfo}</p>}
+              </div>
+              <aside className="sumate-contact-actions" aria-label="Campaña de apadrinamiento">
+                <span>Apadriná un deseo</span>
+                <h3>Elegí una cartita, convertite en padrino y hacé realidad su deseo.</h3>
+                <p>Tenés tiempo hasta el 29 de agosto.</p>
+                <a className="sumate-sponsor-button" href="https://www.fundaros.com/appadrinar/creandosonrisas/campanas/dia-del-nino-creando-sonrisas-2026" target="_blank" rel="noreferrer">
+                  <img src={iconoApadrinar} alt="" aria-hidden="true" />
+                  <span>Apadrinar</span>
+                </a>
+              </aside>
+              <aside className="sumate-contact-actions sumate-volunteer-card" aria-label="Voluntariado">
+                <span>Sumate al equipo</span>
+                <h3>Quiero ser voluntario</h3>
+                <p>Compartí tu tiempo y tus ganas de transformar realidades.</p>
+                {content.volunteerFormUrl ? (
+                  <a className="sumate-volunteer-button" href={content.volunteerFormUrl} target="_blank" rel="noreferrer">Completar formulario</a>
+                ) : (
+                  <span className="sumate-volunteer-button is-disabled">Formulario próximamente</span>
+                )}
+              </aside>
+            </div>
           </div>
         </section>
 

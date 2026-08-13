@@ -355,6 +355,7 @@ export default function Admin({ content, onSave }) {
               <TextField label="Alias de donación" value={sumate.donationAlias} onChange={(value) => updatePage('sumate', 'donationAlias', value)} />
               <TextField label="Instagram" value={sumate.instagramUrl} onChange={(value) => updatePage('sumate', 'instagramUrl', value)} type="url" />
               <VideoField label="Video de la campaña (MP4 o WebM)" value={sumate.campaignVideoUrl} onChange={(value) => updatePage('sumate', 'campaignVideoUrl', value)} />
+              <TextField label="Formulario de voluntariado" value={sumate.volunteerFormUrl} onChange={(value) => updatePage('sumate', 'volunteerFormUrl', value)} type="url" />
               <ImageField label="Imagen de portada" value={sumate.heroImage} onChange={(value) => updatePage('sumate', 'heroImage', value)} />
             </AdminSection>
             <AdminSection title="Galería" onAdd={() => addItem('sumate', 'carouselImages', { url: '', alt: '' })}>
