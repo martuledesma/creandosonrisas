@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link, Navigate, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, Navigate, Routes, Route, useLocation } from 'react-router-dom';
 import './index.css';
 import './redesign.css';
 import Navbar from './components/navbar';
@@ -19,6 +19,18 @@ const defaultHomeContent = {
   heroTitle: 'Fundación Creando Sonrisas',
   heroSubtitle: 'Creer en un futuro mejor, crecer en espacios seguros y crear infancias felices. Somos Creando Sonrisas y siempre valdrá la pena.',
   heroImage: fotoComunidad,
+  stats: [
+    { id: 1, valor: '+150', titulo: 'Niños acompañados', descripcion: 'Educación, contención y espacios para crecer.' },
+    { id: 2, valor: '50+', titulo: 'Alimentación diaria', descripcion: 'Meriendas y comidas compartidas con la comunidad.' },
+    { id: 3, valor: '30+', titulo: 'Jóvenes voluntarios', descripcion: 'Un equipo comprometido que transforma desde el territorio.' },
+  ],
+  areasKicker: 'Ayudamos desde el territorio',
+  areasTitle: 'Nuestras áreas de trabajo',
+  ctaKicker: 'Dejá tu huella',
+  ctaTitle: 'Hagamos crecer nuevas sonrisas',
+  ctaButton: 'Quiero colaborar',
+  newsKicker: 'Historias recientes',
+  newsTitle: 'Novedades',
   cards: [
     {
       id: 1,
@@ -91,6 +103,18 @@ const defaultSiteContent = {
     additionalText: '',
     introTitle: 'Transformamos realidades creando oportunidades',
     introPhrase: 'Somos una organización impulsada por jóvenes tucumanos que trabaja desde el encuentro, la educación y el compromiso con la comunidad.',
+    bannerKicker: 'Fundación Creando Sonrisas',
+    bannerTitle: 'Nosotros',
+    introKicker: 'Quiénes somos',
+    impactValue: '+150',
+    impactLabel: 'niños acompañados',
+    valuesKicker: 'Lo que nos guía',
+    valuesTitle: 'Nuestros valores',
+    professionalsKicker: 'Quienes acompañan',
+    professionalsTitle: 'Nuestro equipo profesional',
+    professionalsIntro: 'Personas comprometidas que aportan su experiencia al trabajo cotidiano de la fundación.',
+    galleryKicker: 'Momentos compartidos',
+    galleryTitle: 'La comunidad también se cuenta en imágenes.',
     missionTitle: 'Siempre elegimos ver esperanza',
     missionText: 'Cada encuentro, cada merienda y cada aprendizaje compartido pueden abrir una nueva posibilidad para niños, niñas y familias.',
     missionImage: fotoComunidad,
@@ -119,6 +143,10 @@ const defaultSiteContent = {
     teamCards: [],
   },
   proyectos: {
+    bannerKicker: 'Fundación Creando Sonrisas',
+    bannerTitle: 'Proyectos',
+    sectionKicker: 'Conocé',
+    sectionTitle: 'Nuestro trabajo',
     heroSubtitle: 'Impulsamos respuestas concretas en educación, alimentación, salud y recreación.',
     introText: 'Transformamos necesidades concretas en oportunidades mediante educación, alimentación, acompañamiento y acciones comunitarias.',
     items: [
@@ -131,6 +159,24 @@ const defaultSiteContent = {
     title: 'Sumate a la Fundación',
     heroSubtitle: 'Tu tiempo, una donación o la difusión de nuestro trabajo pueden crear nuevas oportunidades.',
     content: 'Tu ayuda es fundamental para seguir transformando Tucumán.',
+    bannerKicker: 'Fundación Creando Sonrisas',
+    bannerTitle: 'Sumate',
+    waysKicker: 'Elegí cómo participar',
+    ways: [
+      { id: 1, titulo: 'Voluntariado' }, { id: 2, titulo: 'Donaciones' }, { id: 3, titulo: 'Difusión' },
+    ],
+    introKicker: 'Tu ayuda importa',
+    introTitle: 'Hay muchas maneras de crear oportunidades.',
+    campaignKicker: 'Apadriná un deseo',
+    campaignTitle: 'Elegí una cartita, convertite en padrino y hacé realidad su deseo.',
+    campaignDeadline: 'Tenés tiempo hasta el 29 de agosto.',
+    campaignButton: 'Apadrinar',
+    campaignUrl: 'https://www.fundaros.com/appadrinar/creandosonrisas/campanas/dia-del-nino-creando-sonrisas-2026',
+    volunteerKicker: 'Sumate al equipo',
+    volunteerTitle: 'Quiero ser voluntario',
+    volunteerText: 'Compartí tu tiempo y tus ganas de transformar realidades.',
+    donationKicker: 'Donaciones',
+    donationText: 'Cada aporte, sin importar el monto, ayuda a sostener nuestro trabajo cotidiano.',
     donationAlias: 'CREANDOSONRISASTUC',
     instagramUrl: 'https://www.instagram.com/creandosonrisas.tuc/',
     campaignImage: fotoComunidad,
@@ -172,6 +218,8 @@ const WhatsAppButton = ({ className = '', label = 'WhatsApp' }) => {
 };
 
 function App() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); }, [pathname]);
   const { content: siteContent, save: saveContent } = useSiteContent(defaultSiteContent);
   const content = siteContent.home || defaultHomeContent;
 
@@ -189,11 +237,7 @@ function App() {
   const heroSubtitle = !content.heroSubtitle || previousHeroSubtitles.includes(content.heroSubtitle)
     ? defaultHomeContent.heroSubtitle
     : content.heroSubtitle;
-  const sectionVisibility = {
-    ...defaultHomeContent.sectionVisibility,
-    ...(content.sectionVisibility || {}),
-  };
-
+  const stats = Array.isArray(content.stats) && content.stats.length ? content.stats : defaultHomeContent.stats;
   return (
     <div className="App">
       <Navbar />
@@ -233,22 +277,16 @@ function App() {
               </header>
 
               <main className="home-template-shell">
-                {sectionVisibility.quickActions && <section className="home-quick-actions" aria-label="Formas de participar">
-                  <article className="home-quick-action">
-                    <div><span>+150</span><h2>Niños acompañados</h2><p>Educación, contención y espacios para crecer.</p></div>
-                  </article>
-                  <article className="home-quick-action">
-                    <div><span>Diaria</span><h2>Alimentación</h2><p>Meriendas y comidas compartidas con la comunidad.</p></div>
-                  </article>
-                  <article className="home-quick-action">
-                    <div><span>30+</span><h2>Jóvenes voluntarios</h2><p>Un equipo comprometido que transforma desde el territorio.</p></div>
-                  </article>
-                </section>}
+                <section className="home-quick-actions" aria-label="Formas de participar">
+                  {stats.slice(0, 3).map((stat, index) => <article className="home-quick-action" key={stat.id || index}>
+                    <div><span>{stat.valor}</span><h2>{stat.titulo}</h2><p>{stat.descripcion}</p></div>
+                  </article>)}
+                </section>
 
-                {sectionVisibility.projects && <section className="home-causes-template" aria-labelledby="pillars-title">
+                <section className="home-causes-template" aria-labelledby="pillars-title">
                   <div className="template-section-title">
-                    <span className="template-kicker">Ayudamos desde el territorio</span>
-                    <h2 id="pillars-title">Nuestras áreas de trabajo</h2>
+                    <span className="template-kicker">{content.areasKicker || defaultHomeContent.areasKicker}</span>
+                    <h2 id="pillars-title">{content.areasTitle || defaultHomeContent.areasTitle}</h2>
                   </div>
                   <div className="home-pillars-grid">
                     {pilares.slice(0, 3).map((pillar, index) => {
@@ -265,17 +303,17 @@ function App() {
                       </Link>
                     )})}
                   </div>
-                </section>}
+                </section>
 
-                {sectionVisibility.cta && <section className="home-cta-band">
-                  <div><span>Dejá tu huella</span><h2>Hagamos crecer nuevas sonrisas</h2></div>
-                  <Link to="/sumate">Quiero colaborar</Link>
-                </section>}
+                <section className="home-cta-band">
+                  <div><span>{content.ctaKicker}</span><h2>{content.ctaTitle}</h2></div>
+                  <Link to="/sumate">{content.ctaButton}</Link>
+                </section>
 
-                {sectionVisibility.news && <section id="novedades" className="home-news-template" aria-labelledby="news-title">
+                <section id="novedades" className="home-news-template" aria-labelledby="news-title">
                   <div className="template-section-title centered">
-                    <span className="template-kicker">Historias recientes</span>
-                    <h2 id="news-title">Novedades</h2>
+                    <span className="template-kicker">{content.newsKicker}</span>
+                    <h2 id="news-title">{content.newsTitle}</h2>
                   </div>
                   <div className="home-news-grid">
                     {novedadesSlides.slice(0, 3).map((item, index) => (
@@ -287,7 +325,7 @@ function App() {
                       </article>
                     ))}
                   </div>
-                </section>}
+                </section>
 
               </main>
 

@@ -31,13 +31,6 @@ const SelectField = ({ label, value = '', onChange, options = [] }) => (
   </label>
 );
 
-const VisibilityField = ({ label, checked, onChange }) => (
-  <label className="admin-visibility-field">
-    <input type="checkbox" checked={checked} onChange={(event) => onChange(event.target.checked)} />
-    <span><strong>{label}</strong><small>{checked ? 'Visible en el sitio' : 'Oculta en el sitio'}</small></span>
-  </label>
-);
-
 const AdminSection = ({ title, onAdd, children }) => (
   <details className="admin-block admin-collapsible">
     <summary className="admin-collapsible-summary">
@@ -51,6 +44,21 @@ const AdminSection = ({ title, onAdd, children }) => (
         </div>
       )}
       {children}
+    </div>
+  </details>
+);
+
+const AdminItem = ({ title, onDelete, onSave, children }) => (
+  <details className="admin-item admin-item-collapsible">
+    <summary className="admin-item-summary">
+      <strong>{title}</strong><span aria-hidden="true">+</span>
+    </summary>
+    <div className="admin-item-body">
+      {children}
+      <div className="admin-item-actions">
+        <button className="admin-delete-button" type="button" onClick={onDelete}>Eliminar</button>
+        <button className="admin-primary-button" type="button" onClick={onSave}>Guardar</button>
+      </div>
     </div>
   </details>
 );
@@ -111,27 +119,6 @@ export default function Admin({ content, onSave }) {
     const items = [...(draft[page]?.[collection] || [])];
     items[index] = { ...items[index], [key]: value };
     updatePage(page, collection, items);
-  };
-
-  const updateHomeVisibility = (section, value) => {
-    updatePage('home', 'sectionVisibility', {
-      quickActions: true,
-      projects: true,
-      cta: true,
-      news: true,
-      ...(draft.home?.sectionVisibility || {}),
-      [section]: value,
-    });
-  };
-
-  const updateNosotrosVisibility = (section, value) => {
-    updatePage('nosotros', 'sectionVisibility', {
-      values: true,
-      professionals: true,
-      gallery: true,
-      ...(draft.nosotros?.sectionVisibility || {}),
-      [section]: value,
-    });
   };
 
   const addItem = (page, collection, item) => {
@@ -212,7 +199,7 @@ export default function Admin({ content, onSave }) {
         <div>
           <span className="admin-kicker">Creando Sonrisas</span>
           <h1>Panel de contenidos</h1>
-          <p>Editá la información pública del sitio y guardá todos los cambios juntos.</p>
+          <p>Las secciones respetan el mismo orden de cada página. Desplegá solamente lo que quieras editar.</p>
         </div>
         <button className="admin-secondary-button" type="button" onClick={() => signOut()}>Cerrar sesión</button>
       </header>
@@ -226,86 +213,99 @@ export default function Admin({ content, onSave }) {
       <section className="admin-editor">
         {activeTab === 'home' && (
           <>
-            <AdminSection title="Portada y contacto">
+            <AdminSection title="1. Portada">
               <TextField label="Título principal" value={home.heroTitle} onChange={(value) => updatePage('home', 'heroTitle', value)} />
               <TextField label="Subtítulo" value={home.heroSubtitle} onChange={(value) => updatePage('home', 'heroSubtitle', value)} multiline />
               <ImageField label="Imagen de portada" value={home.heroImage} onChange={(value) => updatePage('home', 'heroImage', value)} />
-              <TextField label="Texto del pie" value={home.footerText} onChange={(value) => updatePage('home', 'footerText', value)} />
-              <TextField label="LinkedIn de Martina Ledesma" value={home.developerLinkedin} onChange={(value) => updatePage('home', 'developerLinkedin', value)} type="url" />
             </AdminSection>
-            <AdminSection title="Mostrar u ocultar secciones">
-              <div className="admin-visibility-grid">
-                <VisibilityField label="Accesos rápidos" checked={(home.sectionVisibility?.quickActions ?? true)} onChange={(value) => updateHomeVisibility('quickActions', value)} />
-                <VisibilityField label="Nuestros proyectos" checked={(home.sectionVisibility?.projects ?? true)} onChange={(value) => updateHomeVisibility('projects', value)} />
-                <VisibilityField label="Franja para colaborar" checked={(home.sectionVisibility?.cta ?? true)} onChange={(value) => updateHomeVisibility('cta', value)} />
-                <VisibilityField label="Novedades" checked={(home.sectionVisibility?.news ?? true)} onChange={(value) => updateHomeVisibility('news', value)} />
-              </div>
-            </AdminSection>
-            <AdminSection title="Acompañamiento escolar, Merendero y Recreación" onAdd={() => addItem('home', 'pillars', { titulo: '', desc: '', imagen: '' })}>
-              <p className="admin-help-text">Estas tarjetas aparecen después de la portada. Podés editarlas, ocultar toda la sección o eliminar una tarjeta.</p>
-              {(home.pillars || []).map((item, index) => (
-                <article className="admin-item" key={item.id || index}>
-                  <TextField label={`Título del eje ${index + 1}`} value={item.titulo} onChange={(value) => updateItem('home', 'pillars', index, 'titulo', value)} />
-                  <TextField label="Descripción" value={item.desc} onChange={(value) => updateItem('home', 'pillars', index, 'desc', value)} multiline />
-                  <ImageField label="Imagen" value={item.imagen} onChange={(value) => updateItem('home', 'pillars', index, 'imagen', value)} />
-                  <button className="admin-delete-button" type="button" onClick={() => removeItem('home', 'pillars', index)}>Eliminar</button>
-                </article>
+            <AdminSection title="2. Datos destacados" onAdd={() => addItem('home', 'stats', { valor: '', titulo: '', descripcion: '' })}>
+              {(home.stats || []).map((item, index) => (
+                <AdminItem key={item.id || index} title={item.titulo || `Dato ${index + 1}`} onDelete={() => removeItem('home', 'stats', index)} onSave={save}>
+                  <TextField label="Valor" value={item.valor} onChange={(value) => updateItem('home', 'stats', index, 'valor', value)} />
+                  <TextField label="Título" value={item.titulo} onChange={(value) => updateItem('home', 'stats', index, 'titulo', value)} />
+                  <TextField label="Descripción" value={item.descripcion} onChange={(value) => updateItem('home', 'stats', index, 'descripcion', value)} multiline />
+                </AdminItem>
               ))}
             </AdminSection>
-            <AdminSection title="Novedades" onAdd={() => addItem('home', 'cards', { titulo: '', desc: '', imagen: '' })}>
+            <AdminSection title="3. Áreas de trabajo" onAdd={() => addItem('home', 'pillars', { titulo: '', desc: '', imagen: '' })}>
+              <TextField label="Antetítulo" value={home.areasKicker} onChange={(value) => updatePage('home', 'areasKicker', value)} />
+              <TextField label="Título de la sección" value={home.areasTitle} onChange={(value) => updatePage('home', 'areasTitle', value)} />
+              {(home.pillars || []).map((item, index) => (
+                <AdminItem key={item.id || index} title={item.titulo || `Área ${index + 1}`} onDelete={() => removeItem('home', 'pillars', index)} onSave={save}>
+                  <TextField label="Título" value={item.titulo} onChange={(value) => updateItem('home', 'pillars', index, 'titulo', value)} />
+                  <TextField label="Descripción" value={item.desc} onChange={(value) => updateItem('home', 'pillars', index, 'desc', value)} multiline />
+                  <ImageField label="Imagen" value={item.imagen} onChange={(value) => updateItem('home', 'pillars', index, 'imagen', value)} />
+                </AdminItem>
+              ))}
+            </AdminSection>
+            <AdminSection title="4. Llamado a participar">
+              <TextField label="Antetítulo" value={home.ctaKicker} onChange={(value) => updatePage('home', 'ctaKicker', value)} />
+              <TextField label="Título" value={home.ctaTitle} onChange={(value) => updatePage('home', 'ctaTitle', value)} />
+              <TextField label="Texto del botón" value={home.ctaButton} onChange={(value) => updatePage('home', 'ctaButton', value)} />
+            </AdminSection>
+            <AdminSection title="5. Novedades" onAdd={() => addItem('home', 'cards', { titulo: '', desc: '', imagen: '' })}>
+              <TextField label="Antetítulo" value={home.newsKicker} onChange={(value) => updatePage('home', 'newsKicker', value)} />
+              <TextField label="Título de la sección" value={home.newsTitle} onChange={(value) => updatePage('home', 'newsTitle', value)} />
               {(home.cards || []).map((item, index) => (
-                <article className="admin-item" key={item.id || index}>
+                <AdminItem key={item.id || index} title={item.titulo || `Novedad ${index + 1}`} onDelete={() => removeItem('home', 'cards', index)} onSave={save}>
                   <TextField label="Título" value={item.titulo} onChange={(value) => updateItem('home', 'cards', index, 'titulo', value)} />
                   <TextField label="Descripción" value={item.desc} onChange={(value) => updateItem('home', 'cards', index, 'desc', value)} multiline />
                   <ImageField label="Imagen" value={item.imagen} onChange={(value) => updateItem('home', 'cards', index, 'imagen', value)} />
-                  <button className="admin-delete-button" type="button" onClick={() => removeItem('home', 'cards', index)}>Eliminar</button>
-                </article>
+                </AdminItem>
               ))}
+            </AdminSection>
+            <AdminSection title="6. Pie de página">
+              <TextField label="Texto legal" value={home.footerText} onChange={(value) => updatePage('home', 'footerText', value)} />
+              <TextField label="LinkedIn de Martina Ledesma" value={home.developerLinkedin} onChange={(value) => updatePage('home', 'developerLinkedin', value)} type="url" />
             </AdminSection>
           </>
         )}
 
         {activeTab === 'nosotros' && (
           <>
-            <AdminSection title="Apertura">
+            <AdminSection title="1. Mini portada">
+              <TextField label="Antetítulo" value={nosotros.bannerKicker} onChange={(value) => updatePage('nosotros', 'bannerKicker', value)} />
+              <TextField label="Título" value={nosotros.bannerTitle} onChange={(value) => updatePage('nosotros', 'bannerTitle', value)} />
+              <ImageField label="Imagen" value={nosotros.missionImage} onChange={(value) => updatePage('nosotros', 'missionImage', value)} />
+            </AdminSection>
+            <AdminSection title="2. Quiénes somos">
+              <TextField label="Antetítulo" value={nosotros.introKicker} onChange={(value) => updatePage('nosotros', 'introKicker', value)} />
               <TextField label="Título principal" value={nosotros.introTitle} onChange={(value) => updatePage('nosotros', 'introTitle', value)} />
               <TextField label="Frase de presentación" value={nosotros.introPhrase} onChange={(value) => updatePage('nosotros', 'introPhrase', value)} multiline />
+              <TextField label="Dato destacado" value={nosotros.impactValue} onChange={(value) => updatePage('nosotros', 'impactValue', value)} />
+              <TextField label="Descripción del dato" value={nosotros.impactLabel} onChange={(value) => updatePage('nosotros', 'impactLabel', value)} />
             </AdminSection>
-            <AdminSection title="Mostrar u ocultar secciones">
-              <div className="admin-visibility-grid">
-                <VisibilityField label="Nuestros valores" checked={(nosotros.sectionVisibility?.values ?? true)} onChange={(value) => updateNosotrosVisibility('values', value)} />
-                <VisibilityField label="Equipo profesional" checked={(nosotros.sectionVisibility?.professionals ?? true)} onChange={(value) => updateNosotrosVisibility('professionals', value)} />
-                <VisibilityField label="Collage fotográfico" checked={(nosotros.sectionVisibility?.gallery ?? true)} onChange={(value) => updateNosotrosVisibility('gallery', value)} />
-              </div>
-            </AdminSection>
-            <AdminSection title="Valores" onAdd={() => addItem('nosotros', 'values', { titulo: '', descripcion: '' })}>
+            <AdminSection title="3. Valores" onAdd={() => addItem('nosotros', 'values', { titulo: '', descripcion: '' })}>
+              <TextField label="Antetítulo" value={nosotros.valuesKicker} onChange={(value) => updatePage('nosotros', 'valuesKicker', value)} />
+              <TextField label="Título de la sección" value={nosotros.valuesTitle} onChange={(value) => updatePage('nosotros', 'valuesTitle', value)} />
               {(nosotros.values || []).map((item, index) => (
-                <article className="admin-item" key={item.id || index}>
+                <AdminItem key={item.id || index} title={item.titulo || `Valor ${index + 1}`} onDelete={() => removeItem('nosotros', 'values', index)} onSave={save}>
                   <TextField label="Valor" value={item.titulo} onChange={(value) => updateItem('nosotros', 'values', index, 'titulo', value)} />
                   <TextField label="Descripción" value={item.descripcion} onChange={(value) => updateItem('nosotros', 'values', index, 'descripcion', value)} multiline />
-                  <button className="admin-delete-button" type="button" onClick={() => removeItem('nosotros', 'values', index)}>Eliminar</button>
-                </article>
+                </AdminItem>
               ))}
             </AdminSection>
-            <AdminSection title="Equipo profesional" onAdd={() => addItem('nosotros', 'professionals', { nombre: '', rol: '', descripcion: '', imagen: '' })}>
-              <p className="admin-help-text">Editá los cuatro perfiles y cargá sus fotografías. También podés agregar o eliminar integrantes.</p>
+            <AdminSection title="4. Equipo profesional" onAdd={() => addItem('nosotros', 'professionals', { nombre: '', rol: '', descripcion: '', imagen: '' })}>
+              <TextField label="Antetítulo" value={nosotros.professionalsKicker} onChange={(value) => updatePage('nosotros', 'professionalsKicker', value)} />
+              <TextField label="Título" value={nosotros.professionalsTitle} onChange={(value) => updatePage('nosotros', 'professionalsTitle', value)} />
+              <TextField label="Introducción" value={nosotros.professionalsIntro} onChange={(value) => updatePage('nosotros', 'professionalsIntro', value)} multiline />
               {(nosotros.professionals || []).map((item, index) => (
-                <article className="admin-item" key={item.id || index}>
+                <AdminItem key={item.id || index} title={item.nombre || `Profesional ${index + 1}`} onDelete={() => removeItem('nosotros', 'professionals', index)} onSave={save}>
                   <TextField label="Nombre" value={item.nombre} onChange={(value) => updateItem('nosotros', 'professionals', index, 'nombre', value)} />
                   <TextField label="Profesión o función" value={item.rol} onChange={(value) => updateItem('nosotros', 'professionals', index, 'rol', value)} />
                   <TextField label="Descripción breve" value={item.descripcion} onChange={(value) => updateItem('nosotros', 'professionals', index, 'descripcion', value)} multiline />
                   <ImageField label="Fotografía" value={item.imagen} onChange={(value) => updateItem('nosotros', 'professionals', index, 'imagen', value)} />
-                  <button className="admin-delete-button" type="button" onClick={() => removeItem('nosotros', 'professionals', index)}>Eliminar</button>
-                </article>
+                </AdminItem>
               ))}
             </AdminSection>
-            <AdminSection title="Collage fotográfico" onAdd={() => addItem('nosotros', 'gallery', { url: '', alt: '' })}>
+            <AdminSection title="5. Collage fotográfico" onAdd={() => addItem('nosotros', 'gallery', { url: '', alt: '' })}>
+              <TextField label="Antetítulo" value={nosotros.galleryKicker} onChange={(value) => updatePage('nosotros', 'galleryKicker', value)} />
+              <TextField label="Título" value={nosotros.galleryTitle} onChange={(value) => updatePage('nosotros', 'galleryTitle', value)} />
               {(nosotros.gallery || []).map((item, index) => (
-                <article className="admin-item" key={item.id || index}>
+                <AdminItem key={item.id || index} title={item.alt || `Fotografía ${index + 1}`} onDelete={() => removeItem('nosotros', 'gallery', index)} onSave={save}>
                   <ImageField label="Imagen" value={item.url} onChange={(value) => updateItem('nosotros', 'gallery', index, 'url', value)} />
                   <TextField label="Descripción accesible" value={item.alt} onChange={(value) => updateItem('nosotros', 'gallery', index, 'alt', value)} />
-                  <button className="admin-delete-button" type="button" onClick={() => removeItem('nosotros', 'gallery', index)}>Eliminar</button>
-                </article>
+                </AdminItem>
               ))}
             </AdminSection>
           </>
@@ -313,13 +313,19 @@ export default function Admin({ content, onSave }) {
 
         {activeTab === 'proyectos' && (
           <>
-            <AdminSection title="Presentación de proyectos">
+            <AdminSection title="1. Mini portada">
+              <TextField label="Antetítulo" value={proyectos.bannerKicker} onChange={(value) => updatePage('proyectos', 'bannerKicker', value)} />
+              <TextField label="Título" value={proyectos.bannerTitle} onChange={(value) => updatePage('proyectos', 'bannerTitle', value)} />
               <TextField label="Subtítulo" value={proyectos.heroSubtitle} onChange={(value) => updatePage('proyectos', 'heroSubtitle', value)} multiline />
+            </AdminSection>
+            <AdminSection title="2. Frase de presentación">
               <TextField label="Introducción" value={proyectos.introText} onChange={(value) => updatePage('proyectos', 'introText', value)} multiline />
             </AdminSection>
-            <AdminSection title="Listado de proyectos" onAdd={() => addItem('proyectos', 'items', { titulo: '', descripcion: '', imagen: '', estado: 'Activo', categoria: 'educacion' })}>
+            <AdminSection title="3. Nuestro trabajo" onAdd={() => addItem('proyectos', 'items', { titulo: '', descripcion: '', imagen: '', estado: 'Activo', categoria: 'educacion' })}>
+              <TextField label="Antetítulo" value={proyectos.sectionKicker} onChange={(value) => updatePage('proyectos', 'sectionKicker', value)} />
+              <TextField label="Título de la sección" value={proyectos.sectionTitle} onChange={(value) => updatePage('proyectos', 'sectionTitle', value)} />
               {(proyectos.items || []).map((item, index) => (
-                <article className="admin-item" key={item.id || index}>
+                <AdminItem key={item.id || index} title={item.titulo || `Proyecto ${index + 1}`} onDelete={() => removeItem('proyectos', 'items', index)} onSave={save}>
                   <TextField label="Título" value={item.titulo} onChange={(value) => updateItem('proyectos', 'items', index, 'titulo', value)} />
                   <TextField label="Descripción" value={item.descripcion} onChange={(value) => updateItem('proyectos', 'items', index, 'descripcion', value)} multiline />
                   <SelectField
@@ -334,8 +340,7 @@ export default function Admin({ content, onSave }) {
                   />
                   <TextField label="Estado" value={item.estado} onChange={(value) => updateItem('proyectos', 'items', index, 'estado', value)} />
                   <ImageField label="Imagen" value={item.imagen} onChange={(value) => updateItem('proyectos', 'items', index, 'imagen', value)} />
-                  <button className="admin-delete-button" type="button" onClick={() => removeItem('proyectos', 'items', index)}>Eliminar</button>
-                </article>
+                </AdminItem>
               ))}
             </AdminSection>
           </>
@@ -343,24 +348,38 @@ export default function Admin({ content, onSave }) {
 
         {activeTab === 'sumate' && (
           <>
-            <AdminSection title="Participación y donaciones">
-              <TextField label="Título" value={sumate.title} onChange={(value) => updatePage('sumate', 'title', value)} />
-              <TextField label="Subtítulo" value={sumate.heroSubtitle} onChange={(value) => updatePage('sumate', 'heroSubtitle', value)} multiline />
-              <TextField label="Mensaje principal" value={sumate.content} onChange={(value) => updatePage('sumate', 'content', value)} multiline />
-              <TextField label="Alias de donación" value={sumate.donationAlias} onChange={(value) => updatePage('sumate', 'donationAlias', value)} />
-              <TextField label="Instagram" value={sumate.instagramUrl} onChange={(value) => updatePage('sumate', 'instagramUrl', value)} type="url" />
-              <ImageField label="Imagen de la campaña de apadrinamiento" value={sumate.campaignImage} onChange={(value) => updatePage('sumate', 'campaignImage', value)} />
-              <TextField label="Formulario de voluntariado" value={sumate.volunteerFormUrl} onChange={(value) => updatePage('sumate', 'volunteerFormUrl', value)} type="url" />
+            <AdminSection title="1. Mini portada">
+              <TextField label="Antetítulo" value={sumate.bannerKicker} onChange={(value) => updatePage('sumate', 'bannerKicker', value)} />
+              <TextField label="Título" value={sumate.bannerTitle} onChange={(value) => updatePage('sumate', 'bannerTitle', value)} />
               <ImageField label="Imagen de portada" value={sumate.heroImage} onChange={(value) => updatePage('sumate', 'heroImage', value)} />
             </AdminSection>
-            <AdminSection title="Galería" onAdd={() => addItem('sumate', 'carouselImages', { url: '', alt: '' })}>
-              {(sumate.carouselImages || []).map((item, index) => (
-                <article className="admin-item" key={item.id || index}>
-                  <ImageField label="Imagen" value={item.url} onChange={(value) => updateItem('sumate', 'carouselImages', index, 'url', value)} />
-                  <TextField label="Descripción accesible" value={item.alt} onChange={(value) => updateItem('sumate', 'carouselImages', index, 'alt', value)} />
-                  <button className="admin-delete-button" type="button" onClick={() => removeItem('sumate', 'carouselImages', index)}>Eliminar</button>
-                </article>
-              ))}
+            <AdminSection title="2. Formas de participar" onAdd={() => addItem('sumate', 'ways', { titulo: '' })}>
+              <TextField label="Antetítulo" value={sumate.waysKicker} onChange={(value) => updatePage('sumate', 'waysKicker', value)} />
+              {(sumate.ways || []).map((item, index) => <AdminItem key={item.id || index} title={item.titulo || `Opción ${index + 1}`} onDelete={() => removeItem('sumate', 'ways', index)} onSave={save}>
+                <TextField label="Nombre" value={item.titulo} onChange={(value) => updateItem('sumate', 'ways', index, 'titulo', value)} />
+              </AdminItem>)}
+            </AdminSection>
+            <AdminSection title="3. Campaña y voluntariado">
+              <TextField label="Antetítulo principal" value={sumate.introKicker} onChange={(value) => updatePage('sumate', 'introKicker', value)} />
+              <TextField label="Título principal" value={sumate.introTitle} onChange={(value) => updatePage('sumate', 'introTitle', value)} />
+              <TextField label="Mensaje principal" value={sumate.content} onChange={(value) => updatePage('sumate', 'content', value)} multiline />
+              <ImageField label="Imagen de la campaña de apadrinamiento" value={sumate.campaignImage} onChange={(value) => updatePage('sumate', 'campaignImage', value)} />
+              <TextField label="Descripción accesible de la imagen" value={sumate.campaignImageAlt} onChange={(value) => updatePage('sumate', 'campaignImageAlt', value)} />
+              <TextField label="Antetítulo de apadrinamiento" value={sumate.campaignKicker} onChange={(value) => updatePage('sumate', 'campaignKicker', value)} />
+              <TextField label="Título de apadrinamiento" value={sumate.campaignTitle} onChange={(value) => updatePage('sumate', 'campaignTitle', value)} multiline />
+              <TextField label="Fecha límite" value={sumate.campaignDeadline} onChange={(value) => updatePage('sumate', 'campaignDeadline', value)} />
+              <TextField label="Texto del botón" value={sumate.campaignButton} onChange={(value) => updatePage('sumate', 'campaignButton', value)} />
+              <TextField label="Enlace para apadrinar" value={sumate.campaignUrl} onChange={(value) => updatePage('sumate', 'campaignUrl', value)} type="url" />
+              <TextField label="Antetítulo de voluntariado" value={sumate.volunteerKicker} onChange={(value) => updatePage('sumate', 'volunteerKicker', value)} />
+              <TextField label="Título de voluntariado" value={sumate.volunteerTitle} onChange={(value) => updatePage('sumate', 'volunteerTitle', value)} />
+              <TextField label="Descripción de voluntariado" value={sumate.volunteerText} onChange={(value) => updatePage('sumate', 'volunteerText', value)} multiline />
+              <TextField label="Formulario de voluntariado" value={sumate.volunteerFormUrl} onChange={(value) => updatePage('sumate', 'volunteerFormUrl', value)} type="url" />
+            </AdminSection>
+            <AdminSection title="4. Donaciones y contacto">
+              <TextField label="Antetítulo" value={sumate.donationKicker} onChange={(value) => updatePage('sumate', 'donationKicker', value)} />
+              <TextField label="Alias de donación" value={sumate.donationAlias} onChange={(value) => updatePage('sumate', 'donationAlias', value)} />
+              <TextField label="Descripción" value={sumate.donationText} onChange={(value) => updatePage('sumate', 'donationText', value)} multiline />
+              <TextField label="Instagram" value={sumate.instagramUrl} onChange={(value) => updatePage('sumate', 'instagramUrl', value)} type="url" />
             </AdminSection>
           </>
         )}

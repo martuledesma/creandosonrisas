@@ -77,7 +77,7 @@ const Proyectos = ({ content = {} }) => {
   return (
     <div className="proyectos-page proyectos-page-without-hero">
       <header className="projects-compact-banner" style={{ backgroundImage: `url('${bannerImage}')` }}>
-        <div><span>Fundación Creando Sonrisas</span><h1>Proyectos</h1></div>
+        <div><span>{content.bannerKicker || 'Fundación Creando Sonrisas'}</span><h1>{content.bannerTitle || 'Proyectos'}</h1></div>
       </header>
       <section className="page-intro">
         <p>
@@ -87,9 +87,9 @@ const Proyectos = ({ content = {} }) => {
 
       <section className="projects-list-section" aria-labelledby="projects-list-title">
         <div className="project-section-heading">
-          <span>Conocé</span>
+          <span>{content.sectionKicker || 'Conocé'}</span>
           <h2 id="projects-list-title" className="display-subtitle">
-            <span className="title-line title-line-blue">Nuestro trabajo</span>
+            <span className="title-line title-line-blue">{content.sectionTitle || 'Nuestro trabajo'}</span>
           </h2>
         </div>
         <div className="project-filter-tabs" aria-label="Filtrar proyectos">

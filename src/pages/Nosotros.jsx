@@ -27,13 +27,6 @@ function Nosotros({ content = {} }) {
   const values = content.values || defaultValues;
   const professionals = content.professionals || defaultProfessionals;
   const gallery = (content.gallery || defaultGallery).filter((photo) => photo?.url);
-  const visibility = {
-    mission: true,
-    values: true,
-    professionals: true,
-    gallery: true,
-    ...(content.sectionVisibility || {}),
-  };
   const bannerImage = content.missionImage || gallery[0]?.url || fotoComunidad;
   const introPhotos = gallery.length ? gallery : defaultGallery;
 
@@ -41,27 +34,26 @@ function Nosotros({ content = {} }) {
     <div className="nosotros-page nosotros-page-without-hero">
       <main>
         <header className="nosotros-compact-banner" style={{ backgroundImage: `url('${bannerImage}')` }}>
-          <div><span>Fundación Creando Sonrisas</span><h1>Nosotros</h1></div>
+          <div><span>{content.bannerKicker || 'Fundación Creando Sonrisas'}</span><h1>{content.bannerTitle || 'Nosotros'}</h1></div>
         </header>
 
         <section className="nosotros-intro-section" aria-labelledby="nosotros-intro-title">
           <div className="nosotros-intro-collage" aria-label="Comunidad de Creando Sonrisas">
             <img src={introPhotos[0]?.url || fotoComunidad} alt={introPhotos[0]?.alt || 'Comunidad de Creando Sonrisas'} />
             <img src={introPhotos[1]?.url || fotoActividades} alt={introPhotos[1]?.alt || 'Actividad de Creando Sonrisas'} />
-            <strong><span>+150</span> niños acompañados</strong>
+            <strong><span>{content.impactValue || '+150'}</span> {content.impactLabel || 'niños acompañados'}</strong>
           </div>
           <article className="nosotros-intro-copy">
-            <span>Quiénes somos</span>
+            <span>{content.introKicker || 'Quiénes somos'}</span>
             <h2 id="nosotros-intro-title">{content.introTitle || 'Transformamos realidades creando oportunidades'}</h2>
             <p>{content.introPhrase || content.content || 'Somos una organización impulsada por jóvenes tucumanos que trabaja desde el encuentro, la educación y el compromiso con la comunidad.'}</p>
           </article>
         </section>
 
-        {visibility.values && (
           <section className="nosotros-values-section" aria-labelledby="valores-title">
             <header>
-              <span>Lo que nos guía</span>
-              <h2 id="valores-title">Nuestros valores</h2>
+              <span>{content.valuesKicker || 'Lo que nos guía'}</span>
+              <h2 id="valores-title">{content.valuesTitle || 'Nuestros valores'}</h2>
             </header>
             {values.length ? (
               <div className="nosotros-values-grid">
@@ -75,14 +67,12 @@ function Nosotros({ content = {} }) {
               </div>
             ) : <p className="nosotros-empty-state">Los valores se están actualizando.</p>}
           </section>
-        )}
 
-        {visibility.professionals && (
           <section className="nosotros-professionals-section" aria-labelledby="profesionales-title">
             <header>
-              <span>Quienes acompañan</span>
-              <h2 id="profesionales-title">Nuestro equipo profesional</h2>
-              <p>Personas comprometidas que aportan su experiencia al trabajo cotidiano de la fundación.</p>
+              <span>{content.professionalsKicker || 'Quienes acompañan'}</span>
+              <h2 id="profesionales-title">{content.professionalsTitle || 'Nuestro equipo profesional'}</h2>
+              <p>{content.professionalsIntro || 'Personas comprometidas que aportan su experiencia al trabajo cotidiano de la fundación.'}</p>
             </header>
             {professionals.length ? (
               <div className="nosotros-professionals-grid">
@@ -105,13 +95,11 @@ function Nosotros({ content = {} }) {
               </div>
             ) : <p className="nosotros-empty-state">El equipo profesional se está actualizando.</p>}
           </section>
-        )}
 
-        {visibility.gallery && (
           <section className="nosotros-gallery-section" aria-labelledby="galeria-nosotros-title">
             <header>
-              <span>Momentos compartidos</span>
-              <h2 id="galeria-nosotros-title">La comunidad también se cuenta en imágenes.</h2>
+              <span>{content.galleryKicker || 'Momentos compartidos'}</span>
+              <h2 id="galeria-nosotros-title">{content.galleryTitle || 'La comunidad también se cuenta en imágenes.'}</h2>
             </header>
             {gallery.length ? (
               <div className={`nosotros-group-gallery gallery-count-${Math.min(gallery.length, 3)}`}>
@@ -123,7 +111,6 @@ function Nosotros({ content = {} }) {
               </div>
             ) : <p className="nosotros-empty-state">La galería se está actualizando.</p>}
           </section>
-        )}
       </main>
     </div>
   );

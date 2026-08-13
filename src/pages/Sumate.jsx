@@ -32,61 +32,61 @@ const Sumate = ({ content = {} }) => {
           backgroundImage: `url('${heroImage}')`,
         } : undefined}
       >
-        <div><span>Fundación Creando Sonrisas</span><h1>Sumate</h1></div>
+        <div><span>{content.bannerKicker || 'Fundación Creando Sonrisas'}</span><h1>{content.bannerTitle || 'Sumate'}</h1></div>
       </header>
 
       <main className="sumate-template-shell">
         <section id="formas-de-participar" className="sumate-ways-template" aria-label="Formas de participar">
           <header className="template-section-title">
-            <span className="template-kicker">Elegí cómo participar</span>
+            <span className="template-kicker">{content.waysKicker || 'Elegí cómo participar'}</span>
           </header>
           <div className="sumate-ways-grid">
             <article className="sumate-way-card sumate-way-1">
               <span className="sumate-way-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM19 8v6M22 11h-6" /></svg>
               </span>
-              <div><span>01</span><h3>Voluntariado</h3></div>
+              <div><span>01</span><h3>{content.ways?.[0]?.titulo || 'Voluntariado'}</h3></div>
             </article>
             <article className="sumate-way-card sumate-way-2">
               <span className="sumate-way-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z" /></svg>
               </span>
-              <div><span>02</span><h3>Donaciones</h3></div>
+              <div><span>02</span><h3>{content.ways?.[1]?.titulo || 'Donaciones'}</h3></div>
             </article>
             <article className="sumate-way-card sumate-way-3">
               <span className="sumate-way-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><path d="m3 11 18-5-5 18-4-8-9-5ZM12 16l4-4" /></svg>
               </span>
-              <div><span>03</span><h3>Difusión</h3></div>
+              <div><span>03</span><h3>{content.ways?.[2]?.titulo || 'Difusión'}</h3></div>
             </article>
           </div>
         </section>
 
         <section className="sumate-intro-template">
           <div className="sumate-intro-copy">
-            <span className="template-kicker">Tu ayuda importa</span>
-            <h2>Hay muchas maneras de crear oportunidades.</h2>
+            <span className="template-kicker">{content.introKicker || 'Tu ayuda importa'}</span>
+            <h2>{content.introTitle || 'Hay muchas maneras de crear oportunidades.'}</h2>
             <p>{content.content || 'Tu ayuda es fundamental para seguir transformando Tucumán.'}</p>
             {content.contactInfo && <p>{content.contactInfo}</p>}
           </div>
           <div className="sumate-media-row">
             <figure className="sumate-campaign-image">
-              <img src={campaignImage} alt="Comunidad de Fundación Creando Sonrisas" />
+              <img src={campaignImage} alt={content.campaignImageAlt || "Comunidad de Fundación Creando Sonrisas"} />
             </figure>
             <div className="sumate-campaign-column">
               <aside className="sumate-contact-actions" aria-label="Campaña de apadrinamiento">
-                <span>Apadriná un deseo</span>
-                <h3>Elegí una cartita, convertite en padrino y hacé realidad su deseo.</h3>
-                <p>Tenés tiempo hasta el 29 de agosto.</p>
-                <a className="sumate-sponsor-button" href="https://www.fundaros.com/appadrinar/creandosonrisas/campanas/dia-del-nino-creando-sonrisas-2026" target="_blank" rel="noreferrer">
+                <span>{content.campaignKicker || 'Apadriná un deseo'}</span>
+                <h3>{content.campaignTitle || 'Elegí una cartita, convertite en padrino y hacé realidad su deseo.'}</h3>
+                <p>{content.campaignDeadline || 'Tenés tiempo hasta el 29 de agosto.'}</p>
+                <a className="sumate-sponsor-button" href={content.campaignUrl || 'https://www.fundaros.com/appadrinar/creandosonrisas/campanas/dia-del-nino-creando-sonrisas-2026'} target="_blank" rel="noreferrer">
                   <img src={iconoApadrinar} alt="" aria-hidden="true" />
-                  <span>Apadrinar</span>
+                  <span>{content.campaignButton || 'Apadrinar'}</span>
                 </a>
               </aside>
               <aside className="sumate-contact-actions sumate-volunteer-card" aria-label="Voluntariado">
-                <span>Sumate al equipo</span>
-                <h3>Quiero ser voluntario</h3>
-                <p>Compartí tu tiempo y tus ganas de transformar realidades.</p>
+                <span>{content.volunteerKicker || 'Sumate al equipo'}</span>
+                <h3>{content.volunteerTitle || 'Quiero ser voluntario'}</h3>
+                <p>{content.volunteerText || 'Compartí tu tiempo y tus ganas de transformar realidades.'}</p>
                 {content.volunteerFormUrl ? (
                   <a className="sumate-volunteer-button" href={content.volunteerFormUrl} target="_blank" rel="noreferrer">Completar formulario</a>
                 ) : (
@@ -99,9 +99,9 @@ const Sumate = ({ content = {} }) => {
 
         <section className="sumate-contact-band">
           <div>
-            <span>Donaciones</span>
+            <span>{content.donationKicker || 'Donaciones'}</span>
             <h2>Alias: {content.donationAlias || 'CREANDOSONRISASTUC'}</h2>
-            <p>Cada aporte, sin importar el monto, ayuda a sostener nuestro trabajo cotidiano.</p>
+            <p>{content.donationText || 'Cada aporte, sin importar el monto, ayuda a sostener nuestro trabajo cotidiano.'}</p>
           </div>
           <div className="sumate-contact-band-actions">
             <a href={content.instagramUrl || 'https://www.instagram.com/creandosonrisas.tuc/'} target="_blank" rel="noreferrer">
