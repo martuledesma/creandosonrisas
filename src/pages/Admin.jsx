@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { isSupabaseConfigured, signIn, signOut, supabase, supabaseConfigStatus, uploadSiteImage, uploadSiteVideo } from '../supabase';
+import { isSupabaseConfigured, signIn, signOut, supabase, supabaseConfigStatus, uploadSiteImage } from '../supabase';
 
 const tabs = [
   ['home', 'Inicio'],
@@ -78,33 +78,6 @@ const ImageField = ({ label, value = '', onChange }) => {
         <input type="file" accept="image/*" onChange={upload} disabled={uploading} />
       </label>
       {value && <img src={value} alt="Vista previa" />}
-    </div>
-  );
-};
-
-const VideoField = ({ label, value = '', onChange }) => {
-  const [uploading, setUploading] = useState(false);
-
-  const upload = async (event) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    setUploading(true);
-    try {
-      onChange(await uploadSiteVideo(file));
-    } finally {
-      setUploading(false);
-      event.target.value = '';
-    }
-  };
-
-  return (
-    <div className="admin-image-field">
-      <TextField label={label} value={value} onChange={onChange} type="url" />
-      <label className="admin-upload-button">
-        {uploading ? 'Subiendo…' : 'Subir video'}
-        <input type="file" accept="video/mp4,video/webm" onChange={upload} disabled={uploading} />
-      </label>
-      {value && <video src={value} controls muted playsInline />}
     </div>
   );
 };
@@ -376,7 +349,7 @@ export default function Admin({ content, onSave }) {
               <TextField label="Mensaje principal" value={sumate.content} onChange={(value) => updatePage('sumate', 'content', value)} multiline />
               <TextField label="Alias de donación" value={sumate.donationAlias} onChange={(value) => updatePage('sumate', 'donationAlias', value)} />
               <TextField label="Instagram" value={sumate.instagramUrl} onChange={(value) => updatePage('sumate', 'instagramUrl', value)} type="url" />
-              <VideoField label="Video de la campaña (MP4 o WebM)" value={sumate.campaignVideoUrl} onChange={(value) => updatePage('sumate', 'campaignVideoUrl', value)} />
+              <ImageField label="Imagen de la campaña de apadrinamiento" value={sumate.campaignImage} onChange={(value) => updatePage('sumate', 'campaignImage', value)} />
               <TextField label="Formulario de voluntariado" value={sumate.volunteerFormUrl} onChange={(value) => updatePage('sumate', 'volunteerFormUrl', value)} type="url" />
               <ImageField label="Imagen de portada" value={sumate.heroImage} onChange={(value) => updatePage('sumate', 'heroImage', value)} />
             </AdminSection>

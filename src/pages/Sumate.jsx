@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import fotoComunidad from '../Assets/creando-sonrisas-comunidad.jpg';
 import fotoFestejo from '../Assets/creando-sonrisas-festejo.jpg';
 import fotoActividades from '../Assets/creando-sonrisas-actividades.jpg';
@@ -6,8 +6,6 @@ import fotoInfancias from '../Assets/creando-sonrisas-infancias.jpg';
 import iconoApadrinar from '../Assets/icono-apadrinar-transparente.png';
 
 const Sumate = ({ content = {} }) => {
-  const campaignVideoRef = useRef(null);
-  const [campaignPlaying, setCampaignPlaying] = useState(false);
   const galleryImages = [
     { src: fotoComunidad, alt: 'Voluntarios, niños y familias de Creando Sonrisas' },
     { src: fotoFestejo, alt: 'Festejo comunitario junto a niños y voluntarios' },
@@ -23,17 +21,8 @@ const Sumate = ({ content = {} }) => {
   const visibleCarouselImages = editableCarouselImages.length ? editableCarouselImages : galleryImages;
 
   const heroImage = content.heroImage || visibleCarouselImages[0]?.src || '';
+  const campaignImage = content.campaignImage || fotoComunidad;
   const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '5493816384353';
-
-  const toggleCampaignVideo = async () => {
-    const video = campaignVideoRef.current;
-    if (!video) return;
-    if (video.paused) {
-      await video.play();
-    } else {
-      video.pause();
-    }
-  };
 
   return (
     <div className="sumate-page">
@@ -81,37 +70,10 @@ const Sumate = ({ content = {} }) => {
             <p>{content.content || 'Tu ayuda es fundamental para seguir transformando Tucumán.'}</p>
             {content.contactInfo && <p>{content.contactInfo}</p>}
           </div>
-          <div className={`sumate-media-row${content.campaignVideoUrl ? '' : ' sumate-media-row-without-video'}`}>
-            {content.campaignVideoUrl && (
-              <div className="sumate-instagram-reel">
-                <video
-                  ref={campaignVideoRef}
-                  src={content.campaignVideoUrl}
-                  playsInline
-                  preload="metadata"
-                  controlsList="nodownload noplaybackrate noremoteplayback"
-                  disablePictureInPicture
-                  onPlay={() => setCampaignPlaying(true)}
-                  onPause={() => setCampaignPlaying(false)}
-                  onEnded={() => setCampaignPlaying(false)}
-                  onClick={toggleCampaignVideo}
-                  onContextMenu={(event) => event.preventDefault()}
-                  aria-label="Campaña de Fundación Creando Sonrisas"
-                />
-                <button
-                  className="sumate-video-toggle"
-                  type="button"
-                  onClick={toggleCampaignVideo}
-                  aria-label={campaignPlaying ? 'Pausar video' : 'Reproducir video'}
-                >
-                  {campaignPlaying ? (
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14" /></svg>
-                  ) : (
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z" /></svg>
-                  )}
-                </button>
-              </div>
-            )}
+          <div className="sumate-media-row">
+            <figure className="sumate-campaign-image">
+              <img src={campaignImage} alt="Comunidad de Fundación Creando Sonrisas" />
+            </figure>
             <div className="sumate-campaign-column">
               <aside className="sumate-contact-actions" aria-label="Campaña de apadrinamiento">
                 <span>Apadriná un deseo</span>
