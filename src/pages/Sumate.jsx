@@ -36,10 +36,9 @@ const Sumate = ({ content = {} }) => {
       </header>
 
       <main className="sumate-template-shell">
-        <section id="formas-de-participar" className="sumate-ways-template" aria-labelledby="sumate-ways-title">
+        <section id="formas-de-participar" className="sumate-ways-template" aria-label="Formas de participar">
           <header className="template-section-title">
             <span className="template-kicker">Elegí cómo participar</span>
-            <h2 id="sumate-ways-title">Sumate a la comunidad</h2>
           </header>
           <div className="sumate-ways-grid">
             <article className="sumate-way-card sumate-way-1">

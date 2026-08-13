@@ -3920,7 +3920,7 @@ h3,
 
 .sumate-media-row {
   display: grid;
-  grid-template-columns: minmax(0, 340px) minmax(320px, 440px);
+  grid-template-columns: minmax(0, 430px) minmax(340px, 460px);
   align-items: start;
   justify-content: center;
   gap: clamp(28px, 4vw, 48px);
@@ -3956,7 +3956,7 @@ h3,
 
 .sumate-campaign-image {
   position: relative;
-  width: min(100%, 340px);
+  width: min(100%, 430px);
   height: 604px;
   margin: 0;
   overflow: hidden;
