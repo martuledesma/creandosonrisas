@@ -81,6 +81,8 @@ const Sumate = ({ content = {} }) => {
                 <video
                   ref={campaignVideoRef}
                   src={content.campaignVideoUrl}
+                  autoPlay
+                  muted
                   playsInline
                   preload="metadata"
                   controlsList="nodownload noplaybackrate noremoteplayback"
@@ -98,7 +100,11 @@ const Sumate = ({ content = {} }) => {
                   onClick={toggleCampaignVideo}
                   aria-label={campaignPlaying ? 'Pausar video' : 'Reproducir video'}
                 >
-                  {campaignPlaying ? 'Pausar' : 'Reproducir'}
+                  {campaignPlaying ? (
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14" /></svg>
+                  ) : (
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z" /></svg>
+                  )}
                 </button>
               </div>
             )}

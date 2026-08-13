@@ -3822,17 +3822,27 @@ h3,
   position: absolute;
   right: 14px;
   bottom: 14px;
-  min-height: 42px;
-  padding: 10px 16px;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  padding: 0;
   border: 1px solid rgba(255, 255, 255, .72);
   border-radius: 999px;
-  background: rgba(6, 26, 49, .82);
+  background: rgba(6, 26, 49, .46);
   color: #fff;
-  font: inherit;
-  font-size: .78rem;
-  font-weight: 900;
   cursor: pointer;
   backdrop-filter: blur(8px);
+}
+
+.sumate-video-toggle svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .sumate-video-toggle:hover,
