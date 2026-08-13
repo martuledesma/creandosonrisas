@@ -211,7 +211,6 @@ function App() {
                 } : undefined}
               >
                 <div className="home-hero-content">
-                  <span className="home-eyebrow">Ayudanos a transformar realidades</span>
                   <h1>{content.heroTitle || defaultHomeContent.heroTitle}</h1>
                   <p>{heroSubtitle}</p>
                   <div className="home-hero-actions">
@@ -252,7 +251,7 @@ function App() {
                 {sectionVisibility.projects && <section className="home-causes-template" aria-labelledby="pillars-title">
                   <div className="template-section-title">
                     <span className="template-kicker">Ayudamos desde el territorio</span>
-                    <h2 id="pillars-title">Nuestros proyectos</h2>
+                    <h2 id="pillars-title">Nuestras áreas de trabajo</h2>
                   </div>
                   <div className="home-pillars-grid">
                     {pilares.slice(0, 3).map((pillar, index) => {
