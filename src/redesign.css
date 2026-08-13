@@ -4739,6 +4739,16 @@ body .navbar.navbar-public-top .menu-toggle span {
   justify-content: center;
 }
 
+/* El navbar fijo flota sobre la primera fotografía, sin una franja detrás. */
+body {
+  padding-top: 0;
+}
+
+.admin-page,
+.admin-login-page {
+  padding-top: 94px;
+}
+
 @media (max-width: 700px) {
   .footer {
     align-items: center;
