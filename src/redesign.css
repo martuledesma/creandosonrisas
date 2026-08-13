@@ -1052,6 +1052,71 @@ body .home-hero-template .home-hero-content {
   }
 }
 
+/* Proporciones finales de la portada */
+body .home-hero-template {
+  background-position: center 58%;
+}
+
+body .home-hero-template .home-hero-content {
+  transform: translateY(-32px);
+}
+
+body .home-quick-actions {
+  width: min(820px, calc(100% - 64px));
+  margin-top: -70px;
+}
+
+body .home-quick-action {
+  min-height: 104px;
+  grid-template-columns: 38px 1fr;
+  gap: 12px;
+  padding: 16px 18px;
+}
+
+body .home-stat-icon {
+  width: 38px;
+  height: 38px;
+}
+
+body .home-stat-icon svg {
+  width: 21px;
+  height: 21px;
+}
+
+body .home-quick-action > div > span {
+  font-size: .78rem;
+}
+
+body .home-quick-action h2 {
+  font-size: .88rem;
+}
+
+body .home-quick-action p {
+  font-size: .7rem;
+  line-height: 1.35;
+}
+
+@media (max-width: 800px) {
+  body .home-hero-template {
+    background-position: 58% 58%;
+  }
+
+  body .home-hero-template .home-hero-content {
+    transform: translateY(-18px);
+  }
+
+  body .home-quick-actions {
+    width: calc(100% - 28px);
+    margin-top: -52px;
+  }
+
+  body .home-quick-action {
+    min-height: 88px;
+    grid-template-columns: 38px 1fr;
+    padding: 15px 18px;
+  }
+}
+
 /* Ajuste final de portada y áreas de trabajo según referencias editoriales */
 .home-hero-template {
   min-height: 490px;
