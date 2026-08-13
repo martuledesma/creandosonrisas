@@ -34,7 +34,7 @@ const defaultHomeContent = {
   heroImage: fotoComunidad,
   stats: [
     { id: 1, valor: '+150', titulo: 'Niños acompañados', descripcion: 'Educación, contención y espacios para crecer.' },
-    { id: 2, valor: '50+', titulo: 'Alimentación diaria', descripcion: 'Meriendas y comidas compartidas con la comunidad.' },
+    { id: 2, valor: '+1200', titulo: 'Platos de comida', descripcion: 'Meriendas y comidas compartidas con la comunidad.' },
     { id: 3, valor: '30+', titulo: 'Jóvenes voluntarios', descripcion: 'Un equipo comprometido que transforma desde el territorio.' },
   ],
   areasKicker: 'Ayudamos desde el territorio',
@@ -253,7 +253,12 @@ function App() {
   const heroSubtitle = !content.heroSubtitle || previousHeroSubtitles.includes(content.heroSubtitle)
     ? defaultHomeContent.heroSubtitle
     : content.heroSubtitle;
-  const stats = Array.isArray(content.stats) && content.stats.length ? content.stats : defaultHomeContent.stats;
+  const statsSource = Array.isArray(content.stats) && content.stats.length ? content.stats : defaultHomeContent.stats;
+  const stats = statsSource.map((stat, index) => index === 1 ? {
+    ...stat,
+    valor: stat.valor === '50+' || stat.valor === 'Diaria' ? '+1200' : stat.valor,
+    titulo: stat.titulo === 'Alimentación diaria' || stat.titulo === 'Alimentación' ? 'Platos de comida' : stat.titulo,
+  } : stat);
   return (
     <div className="App">
       <Navbar />
