@@ -4943,7 +4943,7 @@ body .home-template-shell .home-quick-action p {
 body .home-template-shell .home-causes-template .home-pillar-card {
   display: grid;
   grid-template-rows: 245px auto;
-  min-height: 330px;
+  min-height: 385px;
   overflow: visible;
 }
 
@@ -4956,10 +4956,13 @@ body .home-template-shell .home-causes-template .home-pillar-content {
   position: relative;
   z-index: 3;
   grid-row: 2;
-  display: grid;
-  place-items: center;
-  min-height: 86px;
-  padding: 40px 14px 12px;
+  display: flex;
+  min-height: 140px;
+  padding: 40px 22px 18px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
   color: var(--cs-blue-950);
   opacity: 1;
   visibility: visible;
@@ -4969,6 +4972,18 @@ body .home-template-shell .home-causes-template .home-pillar-content h3 {
   display: block;
   margin: 0;
   color: var(--cs-blue-950);
+  opacity: 1;
+  visibility: visible;
+}
+
+body .home-template-shell .home-causes-template .home-pillar-content p {
+  display: block;
+  max-width: 290px;
+  min-height: 0;
+  margin: 9px 0 0;
+  color: var(--cs-muted);
+  font-size: .92rem;
+  line-height: 1.5;
   opacity: 1;
   visibility: visible;
 }

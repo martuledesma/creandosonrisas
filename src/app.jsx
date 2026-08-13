@@ -299,6 +299,7 @@ function App() {
                         </div>
                         <div className="home-pillar-content">
                           <h3>{displayName}</h3>
+                          <p>{pillar.desc}</p>
                         </div>
                       </Link>
                     )})}
