@@ -1182,6 +1182,56 @@ body .feature-description:not(.is-collapsible) {
   }
 }
 
+/* Portada: bloque más centrado y datos como tarjetas flotantes independientes */
+@media (min-width: 801px) {
+  body .home-hero-template .home-hero-content {
+    margin-left: clamp(44px, 8vw, 118px);
+  }
+
+  body .home-quick-actions {
+    width: min(1040px, calc(100% - 80px));
+    gap: 16px;
+    margin-top: -82px;
+    overflow: visible;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  body .home-quick-action {
+    min-height: 124px;
+    grid-template-columns: 44px 1fr;
+    gap: 14px;
+    padding: 20px 22px;
+    border: 1px solid rgba(18, 76, 137, .1);
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 18px 38px rgba(6, 26, 49, .13);
+  }
+
+  body .home-quick-action:last-child {
+    border-right: 1px solid rgba(18, 76, 137, .1);
+  }
+
+  body .home-stat-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  body .home-quick-action > div > span {
+    font-size: .86rem;
+  }
+
+  body .home-quick-action h2 {
+    font-size: .98rem;
+  }
+
+  body .home-quick-action p {
+    font-size: .75rem;
+    line-height: 1.42;
+  }
+}
+
 /* Ajuste final de portada y áreas de trabajo según referencias editoriales */
 .home-hero-template {
   min-height: 490px;
