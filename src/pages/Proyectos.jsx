@@ -89,8 +89,7 @@ const Proyectos = ({ content = {} }) => {
         <div className="project-section-heading">
           <span>Conocé</span>
           <h2 id="projects-list-title" className="display-subtitle">
-            <span className="title-line title-line-blue">Nuestro</span>
-            <span className="title-line title-line-white">trabajo</span>
+            <span className="title-line title-line-blue">Nuestro trabajo</span>
           </h2>
         </div>
         <div className="project-filter-tabs" aria-label="Filtrar proyectos">
