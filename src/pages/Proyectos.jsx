@@ -113,10 +113,10 @@ const Proyectos = ({ content = {} }) => {
               )}
               <div className="feature-card-content">
                 <h2>{project.titulo}</h2>
-                <p className={expandedProjects[index] ? 'feature-description expanded' : 'feature-description'}>
+                <p className={expandedProjects[index] ? 'feature-description expanded' : `feature-description${project.descripcion?.length > 150 ? ' is-collapsible' : ''}`}>
                   {project.descripcion}
                 </p>
-                {project.descripcion && (
+                {project.descripcion?.length > 150 && (
                   <button
                     type="button"
                     className="btn-small feature-toggle"

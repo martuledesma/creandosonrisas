@@ -1117,6 +1117,71 @@ body .home-quick-action p {
   }
 }
 
+/* Proyectos: respiración editorial y filtros segmentados */
+body .proyectos-page-without-hero .page-intro {
+  margin-top: 52px;
+}
+
+body .project-filter-tabs {
+  width: fit-content;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 5px;
+  border: 1px solid rgba(18, 76, 137, .14);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .72);
+  box-shadow: 0 8px 24px rgba(6, 26, 49, .06);
+  backdrop-filter: blur(10px);
+}
+
+body .project-filter-tabs button {
+  min-height: 40px;
+  padding: 9px 18px;
+  border: 0;
+  border-radius: 11px;
+  background: transparent;
+  box-shadow: none;
+  color: var(--cs-muted);
+  font-size: .84rem;
+  font-weight: 800;
+  transition: color 160ms ease, background 160ms ease, transform 160ms ease;
+}
+
+body .project-filter-tabs button:hover {
+  background: rgba(18, 76, 137, .08);
+  color: var(--cs-blue-900);
+  transform: none;
+}
+
+body .project-filter-tabs button.active {
+  background: var(--cs-blue-800);
+  color: #fff;
+  box-shadow: 0 6px 14px rgba(18, 76, 137, .18);
+}
+
+body .feature-description:not(.is-collapsible) {
+  display: block;
+  overflow: visible;
+  -webkit-line-clamp: unset;
+}
+
+@media (max-width: 700px) {
+  body .proyectos-page-without-hero .page-intro {
+    margin-top: 38px;
+  }
+
+  body .project-filter-tabs {
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+
+  body .project-filter-tabs button {
+    flex: 0 0 auto;
+  }
+}
+
 /* Ajuste final de portada y áreas de trabajo según referencias editoriales */
 .home-hero-template {
   min-height: 490px;
