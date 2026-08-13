@@ -982,6 +982,42 @@ h3,
   }
 }
 
+.app-recovery-screen {
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  gap: 14px;
+  padding: 32px;
+  background: #f7f9fb;
+  color: var(--cs-blue-950);
+  text-align: center;
+}
+
+.app-recovery-screen span {
+  color: var(--cs-red);
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+.app-recovery-screen h1,
+.app-recovery-screen p {
+  margin: 0;
+}
+
+.app-recovery-screen button {
+  justify-self: center;
+  margin-top: 8px;
+  padding: 13px 22px;
+  border: 0;
+  background: var(--cs-blue-900);
+  color: #fff;
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+
 /* El panel conserva su estructura, pero comparte la identidad */
 .admin-page,
 .admin-login-page {
