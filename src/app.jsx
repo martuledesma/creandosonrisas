@@ -14,19 +14,7 @@ import fotoComunidad from './Assets/creando-sonrisas-comunidad.jpg';
 import fotoFestejo from './Assets/creando-sonrisas-festejo.jpg';
 import fotoActividades from './Assets/creando-sonrisas-actividades.jpg';
 import fotoInfancias from './Assets/creando-sonrisas-infancias.jpg';
-
-const bundledImageFallbacks = {
-  'creando-sonrisas-comunidad.jpg': fotoComunidad,
-  'creando-sonrisas-festejo.jpg': fotoFestejo,
-  'creando-sonrisas-actividades.jpg': fotoActividades,
-  'creando-sonrisas-infancias.jpg': fotoInfancias,
-};
-
-const resolveSiteImage = (value, fallback = '') => {
-  if (!value) return fallback;
-  const legacyName = Object.keys(bundledImageFallbacks).find((name) => value.includes(name));
-  return legacyName ? bundledImageFallbacks[legacyName] : value;
-};
+import { resolveSiteImage } from './utils/siteImages';
 
 const defaultHomeContent = {
   heroTitle: 'Fundación Creando Sonrisas',

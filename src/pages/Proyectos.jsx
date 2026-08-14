@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import fotoFestejo from '../Assets/creando-sonrisas-festejo.jpg';
 import fotoActividades from '../Assets/creando-sonrisas-actividades.jpg';
 import fotoInfancias from '../Assets/creando-sonrisas-infancias.jpg';
+import { resolveSiteImage } from '../utils/siteImages';
 
 const defaultProjects = [
   {
@@ -69,7 +70,7 @@ const Proyectos = ({ content = {} }) => {
   const visibleProjects = activeFilter === 'todos'
     ? projects
     : projects.filter((project) => getProjectCategory(project) === activeFilter);
-  const bannerImage = projects.find((project) => project.imagen)?.imagen || fotoFestejo;
+  const bannerImage = resolveSiteImage(projects.find((project) => project.imagen)?.imagen, fotoFestejo);
   const previousIntro = 'Transformamos necesidades concretas en oportunidades mediante educación, alimentación, acompañamiento y acciones comunitarias.';
   const introText = !content.introText || content.introText === previousIntro
     ? 'Garantizar la educación en contextos de alta vulnerabilidad requiere cubrir primero las necesidades más básicas. Por eso acompañamos desde la alimentación, la contención, la recreación y el trabajo comunitario.'
@@ -108,7 +109,7 @@ const Proyectos = ({ content = {} }) => {
           {visibleProjects.map((project, index) => (
             <article className="feature-card" key={project.id || project.titulo || index}>
               {project.imagen && (
-                <img src={project.imagen} alt={project.titulo} className="feature-card-img" loading="lazy" decoding="async" />
+                <img src={resolveSiteImage(project.imagen, defaultProjects[index % defaultProjects.length]?.imagen || fotoFestejo)} alt={project.titulo} className="feature-card-img" loading="lazy" decoding="async" />
               )}
               <div className="feature-card-content">
                 <h2>{project.titulo}</h2>

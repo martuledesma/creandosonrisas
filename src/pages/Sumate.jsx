@@ -4,6 +4,7 @@ import fotoFestejo from '../Assets/creando-sonrisas-festejo.jpg';
 import fotoActividades from '../Assets/creando-sonrisas-actividades.jpg';
 import fotoInfancias from '../Assets/creando-sonrisas-infancias.jpg';
 import iconoApadrinar from '../Assets/icono-apadrinar-transparente.png';
+import { resolveSiteImage } from '../utils/siteImages';
 
 const Sumate = ({ content = {} }) => {
   const galleryImages = [
@@ -15,13 +16,13 @@ const Sumate = ({ content = {} }) => {
   const editableCarouselImages = (content.carouselImages || [])
     .filter((image) => image?.url)
     .map((image, index) => ({
-      src: image.url,
+      src: resolveSiteImage(image.url, galleryImages[index % galleryImages.length]?.src || fotoComunidad),
       alt: image.alt || `Foto ${index + 1} de la fundación`,
     }));
   const visibleCarouselImages = editableCarouselImages.length ? editableCarouselImages : galleryImages;
 
-  const heroImage = content.heroImage || visibleCarouselImages[0]?.src || '';
-  const campaignImage = content.campaignImage || fotoComunidad;
+  const heroImage = resolveSiteImage(content.heroImage || visibleCarouselImages[0]?.src, fotoComunidad);
+  const campaignImage = resolveSiteImage(content.campaignImage, fotoComunidad);
   const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '5493816384353';
 
   return (

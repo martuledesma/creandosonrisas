@@ -3,6 +3,7 @@ import fotoComunidad from '../Assets/creando-sonrisas-comunidad.jpg';
 import fotoFestejo from '../Assets/creando-sonrisas-festejo.jpg';
 import fotoActividades from '../Assets/creando-sonrisas-actividades.jpg';
 import fotoInfancias from '../Assets/creando-sonrisas-infancias.jpg';
+import { resolveSiteImage } from '../utils/siteImages';
 
 const defaultValues = [
   { id: 1, titulo: 'Compromiso', descripcion: 'Sostenemos cada acción con responsabilidad, presencia y trabajo constante.' },
@@ -27,7 +28,7 @@ function Nosotros({ content = {} }) {
   const values = content.values || defaultValues;
   const professionals = content.professionals || defaultProfessionals;
   const gallery = (content.gallery || defaultGallery).filter((photo) => photo?.url);
-  const bannerImage = content.missionImage || gallery[0]?.url || fotoComunidad;
+  const bannerImage = resolveSiteImage(content.missionImage || gallery[0]?.url, fotoComunidad);
   const introPhotos = gallery.length ? gallery : defaultGallery;
 
   return (
@@ -39,8 +40,8 @@ function Nosotros({ content = {} }) {
 
         <section className="nosotros-intro-section" aria-labelledby="nosotros-intro-title">
           <div className="nosotros-intro-collage" aria-label="Comunidad de Creando Sonrisas">
-            <img src={introPhotos[0]?.url || fotoComunidad} alt={introPhotos[0]?.alt || 'Comunidad de Creando Sonrisas'} />
-            <img src={introPhotos[1]?.url || fotoActividades} alt={introPhotos[1]?.alt || 'Actividad de Creando Sonrisas'} />
+            <img src={resolveSiteImage(introPhotos[0]?.url, fotoComunidad)} alt={introPhotos[0]?.alt || 'Comunidad de Creando Sonrisas'} />
+            <img src={resolveSiteImage(introPhotos[1]?.url, fotoActividades)} alt={introPhotos[1]?.alt || 'Actividad de Creando Sonrisas'} />
             <strong><span>{content.impactValue || '+150'}</span> {content.impactLabel || 'niños acompañados'}</strong>
           </div>
           <article className="nosotros-intro-copy">
@@ -79,7 +80,7 @@ function Nosotros({ content = {} }) {
                 {professionals.map((professional, index) => (
                   <article className="nosotros-professional-card" key={professional.id || index}>
                     {professional.imagen ? (
-                      <img src={professional.imagen} alt={professional.nombre || `Profesional ${index + 1}`} loading="lazy" decoding="async" />
+                      <img src={resolveSiteImage(professional.imagen, fotoComunidad)} alt={professional.nombre || `Profesional ${index + 1}`} loading="lazy" decoding="async" />
                     ) : (
                       <div className="nosotros-professional-placeholder" aria-label="Fotografía pendiente">
                         <span>Foto</span>
@@ -105,7 +106,7 @@ function Nosotros({ content = {} }) {
               <div className={`nosotros-group-gallery gallery-count-${Math.min(gallery.length, 3)}`}>
                 {gallery.map((photo, index) => (
                   <figure key={photo.id || `${photo.url}-${index}`} className={`nosotros-group-photo photo-${(index % 3) + 1}`}>
-                    <img src={photo.url} alt={photo.alt || `Momento compartido ${index + 1}`} loading="lazy" decoding="async" />
+                    <img src={resolveSiteImage(photo.url, defaultGallery[index % defaultGallery.length]?.url || fotoComunidad)} alt={photo.alt || `Momento compartido ${index + 1}`} loading="lazy" decoding="async" />
                   </figure>
                 ))}
               </div>
